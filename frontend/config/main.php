@@ -44,6 +44,14 @@ return [
             'rules' => [
             ],
         ],
+        'assetManager' => [
+            // The asset manager will create a symbolic link to the source path of an asset bundle when it is being published
+            'linkAssets' => true,
+            // Cache Busting
+            'appendTimestamp' => true,
+            // Instead of harcoding the true/false, use YII_DEBUG constant, so it is turned off in production
+            'forceCopy' => YII_DEBUG,
+        ], 
         
     ],
     'params' => $params,
