@@ -14,6 +14,9 @@ return [
     'modules' => [],
     'components' => [
         'request' => [
+            'class' => 'common\components\Request',
+            'web'=> '/backend/web',
+            'adminUrl' => '/backend',
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
@@ -37,14 +40,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
