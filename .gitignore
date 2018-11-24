@@ -33,3 +33,9 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+
+# Ignore everything in sass-cache
+.sass-cache/**
+
+# Ignore every sass cached file
+.scssc
