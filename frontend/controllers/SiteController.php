@@ -13,6 +13,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
+use common\models\ContactMessage;
+
 /**
  * Site controller
  */
@@ -111,26 +113,30 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays contact page.
+     * Displays contact page and sends the email.
      *
      * @return mixed
      */
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+        $model = new ContactMessage();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+           // @todo Send the email funcionality
+            $flag = true;
+            
+            if ($flag) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
                 Yii::$app->session->setFlash('error', 'There was an error sending your message.');
             }
-
             return $this->refresh();
         } else {
-            return $this->render('contact', [
-                'model' => $model,
-            ]);
+            
         }
+        return $this->render('contact', [
+            'model' => $model,
+        ]);
     }
 
     /**
