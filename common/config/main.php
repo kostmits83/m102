@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'TradeStock - M102',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -8,6 +9,16 @@ return [
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
+        ],
+        'session' => [
+            'class' => 'yii\web\DbSession',
+            'timeout' => 60*60*24*14, // 2 weeks
+            // Store user_id also
+            'writeCallback' => function($session) {
+                return [
+                    'user_id' => Yii::$app->user->id,
+                ];
+            }
         ],
         'i18n' => [
             'translations' => [
