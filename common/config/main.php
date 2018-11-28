@@ -1,6 +1,8 @@
 <?php
 return [
     'name' => 'TradeStock - M102',
+    'language' => 'en-US',
+    'sourceLanguage' => 'en-US',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -19,6 +21,32 @@ return [
                     'user_id' => Yii::$app->user->id,
                 ];
             }
+        ],
+        'assetManager' => [
+            // override bundles to use CDN :
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => null,
+                    'baseUrl' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7',
+                    'css' => [
+                        'css/bootstrap.min.css'
+                    ],
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'sourcePath' => null,
+                    'baseUrl' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7',
+                    'js' => [
+                        'js/bootstrap.min.js'
+                    ],
+                ],
+                'yii\bootstrap\BootstrapThemeAsset' => [
+                    'sourcePath' => null,
+                    'baseUrl' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7',
+                    'css' => [
+                        'css/bootstrap-theme.min.css'
+                    ]
+                ],
+            ],
         ],
         'i18n' => [
             'translations' => [
@@ -43,6 +71,14 @@ return [
                     'forceTranslation' => true,
                 ],
             ],
+        ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'dateFormat' => 'Y-m-d',
+            'datetimeFormat' => 'Y-m-d H:i:s',
+            'timeFormat' => 'H:i:s',
+            'locale' => 'en-us', // Language locale
+            'defaultTimeZone' => 'Europe/Athens', // Timezone
         ],
     ],
 ];
