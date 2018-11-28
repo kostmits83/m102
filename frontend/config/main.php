@@ -6,10 +6,11 @@ $params = array_merge(
     require __DIR__ . '/params-local.php'
 );
 
+// Backend and frontend are two different apps sharing some common stuff
+
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -17,42 +18,15 @@ return [
             'web'=> '/frontend/web',
             'csrfParam' => '_csrf-frontend',
         ],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
-        ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
         ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
             'rules' => [
+                '<alias:index|signup|contact|logout|captcha|login|request-password-reset|reset-password|about>' => 'site/<alias>',
             ],
         ],
-        'assetManager' => [
-            // The asset manager will create a symbolic link to the source path of an asset bundle when it is being published
-            'linkAssets' => true,
-            // Cache Busting
-            'appendTimestamp' => true,
-            // Instead of harcoding the true/false, use YII_DEBUG constant, so it is turned off in production
-            'forceCopy' => YII_DEBUG,
-        ], 
-        
     ],
     'params' => $params,
 ];
