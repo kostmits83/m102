@@ -3,6 +3,8 @@ return [
     'name' => 'TradeStock - M102',
     'language' => 'en-US',
     'sourceLanguage' => 'en-US',
+    'bootstrap' => ['log'],
+    'modules' => [],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -22,7 +24,18 @@ return [
                 ];
             }
         ],
+        'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+        ],
         'assetManager' => [
+            // The asset manager will create a symbolic link to the source path of an asset bundle when it is being published
+            'linkAssets' => true,
+            // Cache Busting
+            'appendTimestamp' => true,
+            // Instead of harcoding the true/false, use YII_DEBUG constant, so it is turned off in production
+            'forceCopy' => YII_DEBUG,
             // override bundles to use CDN :
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => [
@@ -46,6 +59,12 @@ return [
                         'css/bootstrap-theme.min.css'
                     ]
                 ],
+            ],
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
             ],
         ],
         'i18n' => [
@@ -79,6 +98,18 @@ return [
             'timeFormat' => 'H:i:s',
             'locale' => 'en-us', // Language locale
             'defaultTimeZone' => 'Europe/Athens', // Timezone
+        ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning'],
+                ],
+            ],
+        ],
+        'errorHandler' => [
+            'errorAction' => 'site/error',
         ],
     ],
 ];
