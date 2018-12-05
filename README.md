@@ -337,7 +337,7 @@ The first is straight up HTTP requests to a server-rendered app. This is a syste
 
 <p>GitHub offers plans for both private repositories and free accounts which are commonly used to host open-source software projects.</p>
 
-<h3 id="1iexapihttpsgithubcomkostmits83m102wiki1iexapi"><a href="github.com/kostmits83/m102/wiki/6.-System-requirements">5. System requirements</a></h3>
+<h3 id="1iexapihttpsgithubcomkostmits83m102wiki1iexapi"><a href="github.com/kostmits83/m102/wiki/6.-System-requirements">5. System requirements & installation guide</a></h3>
 
 <p>The application runs on Apache, PHP, mySQL and is used by mentioned frameworks and technologies, see <a href="#heading">2) Technologies</a>.</p>
 
@@ -349,10 +349,49 @@ The first is straight up HTTP requests to a server-rendered app. This is a syste
 <li>Apache HTTP server, version 1.1.0c and above (It may also run on other Web servers and platforms provided PHP 5 is supported)</li>
 </ul>
 
-<h4 id="minimumrequirementsbysass">Minimum Requirements by SASS:</h4>
-
+<h1><span style="font-weight: 400;">Installation guide</span></h1>
+<h2><span style="font-weight: 400;">Server</span></h2>
+<p><span style="font-weight: 400;">You can install WAMP (</span><a href="http://www.wampserver.com/en/"><span style="font-weight: 400;">http://www.wampserver.com/en/</span></a><span style="font-weight: 400;">) or XAMPP (</span><a href="https://www.apachefriends.org/index.html"><span style="font-weight: 400;">https://www.apachefriends.org/index.html</span></a><span style="font-weight: 400;">) or you can use Vagrant.</span></p>
+<h2><span style="font-weight: 400;">Yii</span></h2>
+<p><span style="font-weight: 400;">The proposed way is using Vagrant. Vagrant will isolate dependencies and their configuration within a single disposable, consistent environment, without sacrificing any of the tools you are used to working with (editors, browsers, debuggers, etc.). </span></p>
+<p><span style="font-weight: 400;">Once you or someone else creates a single Vagrantfile, you just need to vagrant up and everything is installed and configured for you to work. Other members of your team create their development environments from the same configuration, </span></p>
+<p><span style="font-weight: 400;">so whether you are working on Linux, Mac OS X, or Windows, all your team members are running code in the same environment, against the same dependencies, all configured the same way.</span></p>
+<p><span style="font-weight: 400;">So, having set up a web server e.g. WAMP you have to follow the steps below:</span></p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Open a console terminal.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Go to your www folder.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Run the following command composer create-project --prefer-dist yiisoft/yii2-app-advanced your-project-name</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Execute the init command and select dev as environment.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Create a new database and adjust the components['db'] configuration in /path/to/your-project-name/common/config/main-local.php accordingly.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Apply migrations using terminal command /path/to/php-bin/php /path/to/your-project-name/yii migrate.</span></li>
+</ol>
+<p><span style="font-weight: 400;">All database changes and modifications will be handled using migrations. Because a database structure change often requires some source code changes, migration feature allows you to keep track of database changes in terms of database migrations which are version-controlled together with the source code.</span></p>
+<h2><span style="font-weight: 400;">SCSS</span></h2>
+<p><span style="font-weight: 400;">To install SCSS you can simply pick the way you like best from </span><a href="https://sass-lang.com/install"><span style="font-weight: 400;">https://sass-lang.com/install</span></a></p>
+<h2><span style="font-weight: 400;">Compass</span></h2>
+<p><span style="font-weight: 400;">We use a useful CSS Authoring Framework called Compass which requires Ruby ( </span><a href="https://rubyinstaller.org/downloads/"><span style="font-weight: 400;">https://rubyinstaller.org/downloads/).</span></a></p>
+<p><span style="font-weight: 400;">Then install Compass from </span><span style="font-weight: 400;"><a href="http://compass-style.org/install/">http://compass-style.org/install/</a>.</span></p>
+<p><span style="font-weight: 400;">When doing development on your project, you can run the compass watcher to keep your CSS files up to date as changes are made. Open terminal console, go to your CSS folder and execute the following:</span></p>
+<p><em><span style="font-weight: 400;">run watch /path/to/your-project-name/common/common/web/css/sass</span></em></p>
+<h1><span style="font-weight: 400;">Requirements</span></h1>
 <ul>
-<li>Composer.</li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Login/Logout</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Register</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Account activation</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Password restore</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Contact form</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">API Integration</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Query single stock</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Show logos</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Query Top 10 (gainers, losers)</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Show various charts</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Show collections</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Get market news</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Add to favorites</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Add for comparison</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Add user portfolio history</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Admin panel for user administration</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Add IP block functionality for admin panel</span></li>
 </ul>
 
 <h3 id="1iexapihttpsgithubcomkostmits83m102wiki1iexapi"><a href="github.com/kostmits83/m102/wiki/6.-Versioning">6. Versioning</a></h3>
