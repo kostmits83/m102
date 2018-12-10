@@ -69,7 +69,29 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p>&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        <div class="row">
+            <div class="col-md-4">
+                <p class="header-3">MSc in Web Intelligence</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam nobis necessitatibus, neque dolor distinctio totam.</p>
+            </div>
+            <div class="col-md-4">
+                <p class="header-3">Team</p>
+                <ul>
+                    <li><a href="https://www.linkedin.com/in/konstantinos-mitsarakis-a9768350/">Konstantinos Mitsarakis</a></li>
+                    <li><a href="https://www.linkedin.com/in/charalabos-vairlis/">Charalampos Vairlis</a></li>
+                    <li><a href="https://www.linkedin.com/">Dan Šilhavý</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <p class="header-3">More Links</p>
+                <ul>
+                    <li><a href="https://www.teithe.gr/">ATEI Thessalonikis</a></li>
+                    <li><a href="https://www.it.teithe.gr/">Department of Informatics</a></li>
+                    <li><a href="http://msc.it.teithe.gr/">MSc in Web Intelligence</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="copyright">&copy; <?= Html::encode(Yii::$app->name) ?>, Software Engineering of Web Applications, <?= date('Y') ?></p>
     </div>
 </footer>
 
