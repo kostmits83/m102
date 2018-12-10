@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 /* line 2, sass/sass/modules/_yii_default.scss */
-html,
-body {
+html, body {
   height: 100%;
 }
 
-/* line 7, sass/sass/modules/_yii_default.scss */
+/* line 6, sass/sass/modules/_yii_default.scss */
 .wrap {
   min-height: 100%;
   height: auto;
@@ -13,39 +12,31 @@ body {
   padding: 0 0 60px;
 }
 
-/* line 14, sass/sass/modules/_yii_default.scss */
+/* line 13, sass/sass/modules/_yii_default.scss */
 .wrap > .container {
   padding: 70px 15px 20px;
 }
 
-/* line 18, sass/sass/modules/_yii_default.scss */
-.footer {
-  height: 60px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  padding-top: 20px;
-}
-
-/* line 25, sass/sass/modules/_yii_default.scss */
+/* line 17, sass/sass/modules/_yii_default.scss */
 .jumbotron {
   text-align: center;
   background-color: transparent;
 }
 
-/* line 30, sass/sass/modules/_yii_default.scss */
+/* line 22, sass/sass/modules/_yii_default.scss */
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
 }
 
-/* line 35, sass/sass/modules/_yii_default.scss */
+/* line 27, sass/sass/modules/_yii_default.scss */
 .not-set {
   color: #c55;
   font-style: italic;
 }
 
 /* add sorting icons to gridview sort links */
-/* line 41, sass/sass/modules/_yii_default.scss */
+/* line 33, sass/sass/modules/_yii_default.scss */
 a.asc:after, a.desc:after {
   position: relative;
   top: 1px;
@@ -57,55 +48,55 @@ a.asc:after, a.desc:after {
   padding-left: 5px;
 }
 
-/* line 52, sass/sass/modules/_yii_default.scss */
+/* line 44, sass/sass/modules/_yii_default.scss */
 a.asc:after {
   content: "\e151";
 }
 
-/* line 56, sass/sass/modules/_yii_default.scss */
+/* line 48, sass/sass/modules/_yii_default.scss */
 a.desc:after {
   content: "\e152";
 }
 
-/* line 60, sass/sass/modules/_yii_default.scss */
+/* line 52, sass/sass/modules/_yii_default.scss */
 .sort-numerical a.asc:after {
   content: "\e153";
 }
 
-/* line 64, sass/sass/modules/_yii_default.scss */
+/* line 56, sass/sass/modules/_yii_default.scss */
 .sort-numerical a.desc:after {
   content: "\e154";
 }
 
-/* line 68, sass/sass/modules/_yii_default.scss */
+/* line 60, sass/sass/modules/_yii_default.scss */
 .sort-ordinal a.asc:after {
   content: "\e155";
 }
 
-/* line 72, sass/sass/modules/_yii_default.scss */
+/* line 64, sass/sass/modules/_yii_default.scss */
 .sort-ordinal a.desc:after {
   content: "\e156";
 }
 
-/* line 76, sass/sass/modules/_yii_default.scss */
+/* line 68, sass/sass/modules/_yii_default.scss */
 .grid-view td {
   white-space: nowrap;
 }
 
-/* line 80, sass/sass/modules/_yii_default.scss */
+/* line 72, sass/sass/modules/_yii_default.scss */
 .grid-view .filters input,
 .grid-view .filters select {
   min-width: 50px;
 }
 
-/* line 85, sass/sass/modules/_yii_default.scss */
+/* line 77, sass/sass/modules/_yii_default.scss */
 .hint-block {
   display: block;
   margin-top: 5px;
   color: #999;
 }
 
-/* line 91, sass/sass/modules/_yii_default.scss */
+/* line 83, sass/sass/modules/_yii_default.scss */
 .error-summary {
   color: #a94442;
   background: #fdf7f7;
@@ -115,14 +106,14 @@ a.desc:after {
 }
 
 /* align the logout "link" (button in form) of the navbar */
-/* line 100, sass/sass/modules/_yii_default.scss */
+/* line 92, sass/sass/modules/_yii_default.scss */
 .nav li > form > button.logout {
   padding: 15px;
   border: none;
 }
 
 @media (max-width: 767px) {
-  /* line 106, sass/sass/modules/_yii_default.scss */
+  /* line 98, sass/sass/modules/_yii_default.scss */
   .nav li > form > button.logout {
     display: block;
     text-align: left;
@@ -130,13 +121,13 @@ a.desc:after {
     padding: 10px 15px;
   }
 }
-/* line 114, sass/sass/modules/_yii_default.scss */
+/* line 106, sass/sass/modules/_yii_default.scss */
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
   text-decoration: none;
 }
 
-/* line 119, sass/sass/modules/_yii_default.scss */
+/* line 111, sass/sass/modules/_yii_default.scss */
 .nav > li > form > button.logout:focus {
   outline: none;
 }
@@ -199,6 +190,56 @@ a:hover {
   margin-bottom: 40px;
 }
 
+/* line 5, sass/sass/sections/_footer.scss */
+.page-footer {
+  height: auto;
+  padding: 40px 0 20px 0;
+  color: #BDBDBD;
+  border: 0 solid transparent;
+  background-image: url('../images/decorative/architecture.jpg?1544466850');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #333;
+}
+/* line 16, sass/sass/sections/_footer.scss */
+.page-footer__top {
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* line 20, sass/sass/sections/_footer.scss */
+.page-footer__header {
+  color: #FFF;
+}
+/* line 23, sass/sass/sections/_footer.scss */
+.page-footer__menu {
+  padding: 0;
+  list-style-type: none;
+}
+/* line 27, sass/sass/sections/_footer.scss */
+.page-footer__menu .menu__item {
+  margin-bottom: 10px;
+}
+/* line 30, sass/sass/sections/_footer.scss */
+.page-footer__menu .menu__link {
+  display: inline-block;
+  color: #BDBDBD;
+  border-bottom: 1px dotted;
+}
+/* line 34, sass/sass/sections/_footer.scss */
+.page-footer__menu .menu__link:hover {
+  border-bottom: 1px solid transparent;
+}
+/* line 40, sass/sass/sections/_footer.scss */
+.page-footer__menu .link:after {
+  background: #BDBDBD;
+}
+/* line 45, sass/sass/sections/_footer.scss */
+.page-footer__copyright {
+  margin: 0;
+  padding-top: 20px;
+  text-align: center;
+}
+
 /* line 2, sass/sass/sections/_banner.scss */
 .banner {
   padding: 140px 0 90px 0;
@@ -206,7 +247,7 @@ a:hover {
   white-space: pre-line;
   *white-space: pre;
   *word-wrap: break-word;
-  background-image: url('../images/decorative/laptop-coffee.jpg?1543516598');
+  background-image: url('../images/decorative/laptop-coffee.jpg?1544408815');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -493,7 +534,7 @@ a:hover {
 /* line 139, sass/sass/pages/_about.scss */
 .project-metrics {
   padding: 80px 0;
-  background-image: url('../images/decorative/keyboard.jpg?1544397267');
+  background-image: url('../images/decorative/keyboard.jpg?1544408815');
   background-repeat: no-repeat;
   background-size: cover;
 }
