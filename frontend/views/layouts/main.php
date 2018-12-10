@@ -24,7 +24,7 @@ AppAsset::register($this);
     <title><?= Html::encode(Yii::$app->name); ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body id="body">
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -67,31 +67,45 @@ AppAsset::register($this);
     </section>
 </div>
 
-<footer class="footer">
-    <div class="container">
+<footer class="page-footer">
+    <div class="container page-footer__top">
         <div class="row">
-            <div class="col-md-4">
-                <p class="header-3">MSc in Web Intelligence</p>
+            <div class="col-md-4 page-footer__group">
+                <p class="page-footer__header header-3">MSc in Web Intelligence</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam nobis necessitatibus, neque dolor distinctio totam.</p>
             </div>
-            <div class="col-md-4">
-                <p class="header-3">Team</p>
-                <ul>
-                    <li><a href="https://www.linkedin.com/in/konstantinos-mitsarakis-a9768350/">Konstantinos Mitsarakis</a></li>
-                    <li><a href="https://www.linkedin.com/in/charalabos-vairlis/">Charalampos Vairlis</a></li>
-                    <li><a href="https://www.linkedin.com/">Dan Šilhavý</a></li>
+            <div class="col-md-4 page-footer__group">
+                <p class="page-footer__header header-3">Team Members</p>
+                <ul class="page-footer__menu menu">
+                    <li class="menu__item">
+                        <a class="menu__link js-external" href="https://www.linkedin.com/in/konstantinos-mitsarakis-a9768350/"><span class="link link--state-1">Konstantinos Mitsarakis</span></a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link js-external" href="https://www.linkedin.com/in/charalabos-vairlis/"><span class="link link--state-1">Charalampos Vairlis</span></a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link js-external" href="https://www.linkedin.com/"><span class="link link--state-1">Dan Šilhavý</span></a>
+                    </li>
                 </ul>
             </div>
-            <div class="col-md-4">
-                <p class="header-3">More Links</p>
-                <ul>
-                    <li><a href="https://www.teithe.gr/">ATEI Thessalonikis</a></li>
-                    <li><a href="https://www.it.teithe.gr/">Department of Informatics</a></li>
-                    <li><a href="http://msc.it.teithe.gr/">MSc in Web Intelligence</a></li>
+            <div class="col-md-4 page-footer__group">
+                <p class="page-footer__header header-3">More Links</p>
+                <ul class="page-footer__menu menu">
+                    <li class="menu__item">
+                        <a class="menu__link js-external" href="https://www.teithe.gr/"><span class="link link--state-1">ATEI Thessalonikis</span></a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link js-external" href="https://www.it.teithe.gr/"><span class="link link--state-1">Department of Informatics</span></a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link js-external" href="http://msc.it.teithe.gr/"><span class="link link--state-1">MSc in Web Intelligence</span></a>
+                    </li>
                 </ul>
             </div>
         </div>
-        <p class="copyright">&copy; <?= Html::encode(Yii::$app->name) ?>, Software Engineering of Web Applications, <?= date('Y') ?></p>
+    </div>
+    <div class="page-footer__bottom">
+        <p class="page-footer__copyright">&copy; <?= Html::encode(Yii::$app->name) ?>, Mitsarakis, Vairlis, Šilhavý, <?= date('Y') ?></p>
     </div>
 </footer>
 

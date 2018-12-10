@@ -1,1 +1,50 @@
 
+// Namespaced temp variables
+$_footer-temp-color: #BDBDBD;
+
+.page-footer {
+	height: auto;
+	padding: 4*$unit 0 2*$unit 0;
+	color: $_footer-temp-color;
+	border: 0 solid transparent;
+	background: {
+		image: image-url("decorative/architecture.jpg");
+		repeat: no-repeat;
+		size: cover;
+		color: #333;
+	}
+	&__top {
+		padding-bottom: 2*$unit;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	&__header {
+		color: #FFF;
+	}
+	&__menu {
+		padding: 0;
+		list-style-type: none;
+		.menu {
+			&__item {
+				margin-bottom: $unit;
+			}
+			&__link {
+				display: inline-block;
+				color: $_footer-temp-color;
+				border-bottom: 1px dotted;
+				&:hover {
+					border-bottom: 1px solid transparent;
+				}
+			}
+		}
+		.link {
+			&:after {
+				background: $_footer-temp-color;
+			}
+		}
+	}
+	&__copyright {
+		margin: 0;
+		padding-top: 2*$unit;
+		text-align: center;
+	}
+}
