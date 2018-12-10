@@ -37,5 +37,7 @@ phpunit.phar
 # Ignore everything in sass-cache
 .sass-cache/**
 
+/common/web/css/.sass-cache/**
+
 # Ignore every sass cached file
 .scssc

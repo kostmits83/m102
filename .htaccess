@@ -2,7 +2,7 @@
 Options +FollowSymlinks
 RewriteEngine On
 
-# deal with backend first
+# Deal with backend first
 RewriteCond %{REQUEST_URI} ^/m102/(backend)
 RewriteRule ^backend/assets/(.*)$ backend/web/assets/$1 [L]
 RewriteRule ^backend/css/(.*)$ backend/web/css/$1 [L]
@@ -11,12 +11,18 @@ RewriteCond %{REQUEST_URI} !^/m102/backend/web/(assets|css)/
 RewriteCond %{REQUEST_URI} ^/m102/(backend)
 RewriteRule ^.*$ backend/web/index.php [L]
 
-
+# Deal with frontend
 RewriteCond %{REQUEST_URI} ^/m102/(assets|css)
 RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
 RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
 
-RewriteCond %{REQUEST_URI} !^/m102/(frontend|backend)/web/(assets|css)/
+# Deal with common
+RewriteCond %{REQUEST_URI} ^/m102/(assets|css|images)
+RewriteRule ^assets/(.*)$ common/web/assets/$1 [L]
+RewriteRule ^css/(.*)$ common/web/css/$1 [L]
+RewriteRule ^images/(.*)$ common/web/images/$1 [L]
+
+RewriteCond %{REQUEST_URI} !^/m102/(frontend|backend|common)/web/(assets|css|images)/
 RewriteCond %{REQUEST_URI} !index.php
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
 RewriteCond %{REQUEST_FILENAME} !-d

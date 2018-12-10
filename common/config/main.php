@@ -67,6 +67,18 @@ return [
             'rules' => [
             ],
         ],
+        'urlManagerBackend' => [
+                'class' => 'yii\web\urlManager',
+                'baseUrl' => '@appRoot/backend', //i.e. $_SERVER['DOCUMENT_ROOT'] . '/yiiapp/web/'
+                'enablePrettyUrl' => true,
+                'showScriptName' => false,
+        ],
+        'urlManagerFrontend' => [
+                'class' => 'yii\web\urlManager',
+                'baseUrl' => '@appRoot/frontend', //i.e. $_SERVER['DOCUMENT_ROOT'] . '/yiiapp/web/'
+                'enablePrettyUrl' => true,
+                'showScriptName' => false,
+        ],
         'i18n' => [
             'translations' => [
                 'app*' => [

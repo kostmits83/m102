@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-/* line 2, sass/sass/_yii_default.scss */
+/* line 2, sass/sass/modules/_yii_default.scss */
 html,
 body {
   height: 100%;
 }
 
-/* line 7, sass/sass/_yii_default.scss */
+/* line 7, sass/sass/modules/_yii_default.scss */
 .wrap {
   min-height: 100%;
   height: auto;
@@ -13,12 +13,12 @@ body {
   padding: 0 0 60px;
 }
 
-/* line 14, sass/sass/_yii_default.scss */
+/* line 14, sass/sass/modules/_yii_default.scss */
 .wrap > .container {
   padding: 70px 15px 20px;
 }
 
-/* line 18, sass/sass/_yii_default.scss */
+/* line 18, sass/sass/modules/_yii_default.scss */
 .footer {
   height: 60px;
   background-color: #f5f5f5;
@@ -26,26 +26,26 @@ body {
   padding-top: 20px;
 }
 
-/* line 25, sass/sass/_yii_default.scss */
+/* line 25, sass/sass/modules/_yii_default.scss */
 .jumbotron {
   text-align: center;
   background-color: transparent;
 }
 
-/* line 30, sass/sass/_yii_default.scss */
+/* line 30, sass/sass/modules/_yii_default.scss */
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
 }
 
-/* line 35, sass/sass/_yii_default.scss */
+/* line 35, sass/sass/modules/_yii_default.scss */
 .not-set {
   color: #c55;
   font-style: italic;
 }
 
 /* add sorting icons to gridview sort links */
-/* line 41, sass/sass/_yii_default.scss */
+/* line 41, sass/sass/modules/_yii_default.scss */
 a.asc:after, a.desc:after {
   position: relative;
   top: 1px;
@@ -57,55 +57,55 @@ a.asc:after, a.desc:after {
   padding-left: 5px;
 }
 
-/* line 52, sass/sass/_yii_default.scss */
+/* line 52, sass/sass/modules/_yii_default.scss */
 a.asc:after {
   content: "\e151";
 }
 
-/* line 56, sass/sass/_yii_default.scss */
+/* line 56, sass/sass/modules/_yii_default.scss */
 a.desc:after {
   content: "\e152";
 }
 
-/* line 60, sass/sass/_yii_default.scss */
+/* line 60, sass/sass/modules/_yii_default.scss */
 .sort-numerical a.asc:after {
   content: "\e153";
 }
 
-/* line 64, sass/sass/_yii_default.scss */
+/* line 64, sass/sass/modules/_yii_default.scss */
 .sort-numerical a.desc:after {
   content: "\e154";
 }
 
-/* line 68, sass/sass/_yii_default.scss */
+/* line 68, sass/sass/modules/_yii_default.scss */
 .sort-ordinal a.asc:after {
   content: "\e155";
 }
 
-/* line 72, sass/sass/_yii_default.scss */
+/* line 72, sass/sass/modules/_yii_default.scss */
 .sort-ordinal a.desc:after {
   content: "\e156";
 }
 
-/* line 76, sass/sass/_yii_default.scss */
+/* line 76, sass/sass/modules/_yii_default.scss */
 .grid-view td {
   white-space: nowrap;
 }
 
-/* line 80, sass/sass/_yii_default.scss */
+/* line 80, sass/sass/modules/_yii_default.scss */
 .grid-view .filters input,
 .grid-view .filters select {
   min-width: 50px;
 }
 
-/* line 85, sass/sass/_yii_default.scss */
+/* line 85, sass/sass/modules/_yii_default.scss */
 .hint-block {
   display: block;
   margin-top: 5px;
   color: #999;
 }
 
-/* line 91, sass/sass/_yii_default.scss */
+/* line 91, sass/sass/modules/_yii_default.scss */
 .error-summary {
   color: #a94442;
   background: #fdf7f7;
@@ -115,14 +115,14 @@ a.desc:after {
 }
 
 /* align the logout "link" (button in form) of the navbar */
-/* line 100, sass/sass/_yii_default.scss */
+/* line 100, sass/sass/modules/_yii_default.scss */
 .nav li > form > button.logout {
   padding: 15px;
   border: none;
 }
 
 @media (max-width: 767px) {
-  /* line 106, sass/sass/_yii_default.scss */
+  /* line 106, sass/sass/modules/_yii_default.scss */
   .nav li > form > button.logout {
     display: block;
     text-align: left;
@@ -130,18 +130,432 @@ a.desc:after {
     padding: 10px 15px;
   }
 }
-/* line 114, sass/sass/_yii_default.scss */
+/* line 114, sass/sass/modules/_yii_default.scss */
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
   text-decoration: none;
 }
 
-/* line 119, sass/sass/_yii_default.scss */
+/* line 119, sass/sass/modules/_yii_default.scss */
 .nav > li > form > button.logout:focus {
   outline: none;
 }
 
-/* line 6, sass/sass/common.scss */
+/* line 2, sass/sass/modules/_links.scss */
+a {
+  color: #4774B7;
+  text-decoration: none;
+}
+/* line 5, sass/sass/modules/_links.scss */
+a:hover {
+  color: #4774B7;
+  text-decoration: none;
+}
+
+/* line 12, sass/sass/modules/_links.scss */
+.link:after {
+  background: #4774B7;
+}
+/* line 16, sass/sass/modules/_links.scss */
+.link--state-1:after {
+  content: '';
+  display: block;
+  margin-top: 1px;
+  width: 0;
+  height: 2px;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+/* line 25, sass/sass/modules/_links.scss */
+.link--state-1:hover:after {
+  width: 100%;
+}
+
+/* line 2, sass/sass/modules/_headers.scss */
+.h1, .h2, .h3, h1, h2, h3 {
+  margin-top: 0;
+  font-weight: bold;
+}
+
+/* line 7, sass/sass/modules/_headers.scss */
+.header-1 {
+  font-size: 36px;
+}
+
+/* line 11, sass/sass/modules/_headers.scss */
+.header-2 {
+  font-size: 28px;
+}
+
+/* line 15, sass/sass/modules/_headers.scss */
+.header-3 {
+  font-size: 22px;
+}
+
+/* line 5, sass/sass/modules/_spacing.scss */
+.spacing-vertical-outer-main {
+  margin-bottom: 40px;
+}
+
+/* line 2, sass/sass/sections/_banner.scss */
+.banner {
+  padding: 140px 0 90px 0;
+  text-align: center;
+  white-space: pre-line;
+  *white-space: pre;
+  *word-wrap: break-word;
+  background-image: url('../images/decorative/laptop-coffee.jpg?1543516598');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* line 15, sass/sass/sections/_banner.scss */
+.banner__header, .banner__info {
+  margin: 10px;
+  padding: 10px 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+/* line 6, sass/sass/modules/_mixins.scss */
+.banner--light .banner__header, .banner--light .banner__info {
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+}
+/* line 10, sass/sass/modules/_mixins.scss */
+.banner--light .banner__header:after, .banner--light .banner__info:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  content: " ";
+  background-color: #FFF;
+  z-index: -1;
+  opacity: 0.75;
+}
+/* line 23, sass/sass/sections/_banner.scss */
+.banner__header {
+  font-size: 42px;
+}
+/* line 26, sass/sass/sections/_banner.scss */
+.banner__info {
+  font-size: 36px;
+}
+
+/* line 2, sass/sass/components/_breadcrumbs.scss */
+.breadcrumb {
+  margin-bottom: 40px;
+  padding: 20px 0;
+  text-align: center;
+  background-color: #F7F9FF;
+}
+
+/* line 3, sass/sass/components/_btn.scss */
+.buttons-row__button {
+  display: inline-block;
+  min-width: 150px;
+  margin-bottom: 10px;
+}
+/* line 7, sass/sass/components/_btn.scss */
+.buttons-row__button--first {
+  margin-right: 40px;
+}
+
+/* line 13, sass/sass/components/_btn.scss */
+.button {
+  display: inline-block;
+  padding: 15px 40px;
+  color: #FFF;
+  border: 0 none;
+  background-position: 100% 0;
+  background-size: 200% 100%;
+  -moz-transition: all 0.4s ease-in;
+  -o-transition: all 0.4s ease-in;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+/* line 22, sass/sass/components/_btn.scss */
+.button--default {
+  background-color: #4774B7;
+  background-image: -webkit-gradient(linear, left top, right top, from(#3E4455), color-stop(50%, #3E4455), color-stop(50%, transparent), to(transparent));
+  background-image: linear-gradient(to right, #3e4455, #3e4455 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0));
+}
+/* line 26, sass/sass/components/_btn.scss */
+.button--attention {
+  background-color: #D32F2F;
+  background-image: -webkit-gradient(linear, left top, right top, from(#9A0007), color-stop(50%, #9A0007), color-stop(50%, transparent), to(transparent));
+  background-image: linear-gradient(to right, #9a0007, #9a0007 50%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0));
+}
+/* line 30, sass/sass/components/_btn.scss */
+.button:hover {
+  text-decoration: none;
+  color: #FFF;
+  cursor: pointer;
+  background-position: 0 0;
+}
+/* line 35, sass/sass/components/_btn.scss */
+.button:hover:after {
+  width: 100%;
+}
+
+/* line 2, sass/sass/pages/_about.scss */
+.team-members {
+  padding: 40px 0;
+  background-color: #F7F9FF;
+}
+/* line 5, sass/sass/pages/_about.scss */
+.team-members__all {
+  display: flex;
+  justify-content: space-evenly;
+}
+@media only screen and (max-width: 768px) {
+  /* line 5, sass/sass/pages/_about.scss */
+  .team-members__all {
+    flex-direction: column;
+  }
+}
+/* line 12, sass/sass/pages/_about.scss */
+.team-members__header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+/* line 16, sass/sass/pages/_about.scss */
+.team-members__description {
+  max-width: 400px;
+  margin: 0 auto 20px auto;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* line 24, sass/sass/pages/_about.scss */
+.team-member {
+  flex-grow: 1;
+  flex-basis: 0;
+  margin: 0 20px 0 0;
+  margin-right: 20px;
+  padding: 10px;
+  border: 2px solid #DBE1F1;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+@media only screen and (max-width: 768px) {
+  /* line 24, sass/sass/pages/_about.scss */
+  .team-member {
+    margin: 0 0 20px 0;
+  }
+  /* line 34, sass/sass/pages/_about.scss */
+  .team-member:last-child {
+    margin-bottom: 0;
+  }
+}
+/* line 38, sass/sass/pages/_about.scss */
+.team-member__image {
+  margin: 10px auto;
+  text-align: center;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+/* line 43, sass/sass/pages/_about.scss */
+.team-member__name {
+  margin: 10px auto;
+  text-align: center;
+  font-weight: bold;
+}
+/* line 48, sass/sass/pages/_about.scss */
+.team-member__info {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+/* line 54, sass/sass/pages/_about.scss */
+.skills {
+  position: relative;
+  padding: 40px 0;
+}
+/* line 57, sass/sass/pages/_about.scss */
+.skills__header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* line 63, sass/sass/pages/_about.scss */
+.skill {
+  margin-bottom: 40px;
+}
+/* line 65, sass/sass/pages/_about.scss */
+.skill__name {
+  font-size: 20px;
+}
+/* line 67, sass/sass/pages/_about.scss */
+.skill__name:after {
+  display: block;
+  content: " ";
+  width: 100%;
+  height: 5px;
+  margin-top: 10px;
+  background-color: #3E4455;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+/* line 77, sass/sass/pages/_about.scss */
+.skill__percent {
+  float: right;
+}
+
+/* line 82, sass/sass/pages/_about.scss */
+.technologies {
+  padding: 40px 0;
+  background-color: #F7F9FF;
+}
+/* line 85, sass/sass/pages/_about.scss */
+.technologies__group {
+  margin-bottom: 20px;
+}
+@media only screen and (min-width: 768px) {
+  /* line 85, sass/sass/pages/_about.scss */
+  .technologies__group {
+    margin-bottom: 40px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  /* line 91, sass/sass/pages/_about.scss */
+  .technologies__all {
+    position: relative;
+    display: flex;
+  }
+  /* line 95, sass/sass/pages/_about.scss */
+  .technologies__all:after {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: block;
+    content: " ";
+    width: 1px;
+    height: 100%;
+    background-color: #DBE1F1;
+  }
+}
+/* line 107, sass/sass/pages/_about.scss */
+.technologies__header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+/* line 111, sass/sass/pages/_about.scss */
+.technologies__subheader {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* line 117, sass/sass/pages/_about.scss */
+.technology {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #EDF1FD;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+@media only screen and (min-width: 768px) {
+  /* line 117, sass/sass/pages/_about.scss */
+  .technology {
+    min-height: 260px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  /* line 117, sass/sass/pages/_about.scss */
+  .technology {
+    min-height: 210px;
+  }
+}
+/* line 129, sass/sass/pages/_about.scss */
+.technology__link {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+@media only screen and (min-width: 768px) {
+  /* line 129, sass/sass/pages/_about.scss */
+  .technology__link {
+    position: absolute;
+    bottom: 20px;
+  }
+}
+
+/* line 139, sass/sass/pages/_about.scss */
+.project-metrics {
+  padding: 80px 0;
+  background-image: url('../images/decorative/keyboard.jpg?1544397267');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* line 148, sass/sass/pages/_about.scss */
+.project-metric {
+  font-size: 26px;
+  text-align: center;
+  color: #FFF;
+}
+@media only screen and (max-width: 400px) {
+  /* line 150, sass/sass/pages/_about.scss */
+  .project-metric:last-child {
+    margin-bottom: 0;
+  }
+}
+@media only screen and (max-width: 992px) {
+  /* line 148, sass/sass/pages/_about.scss */
+  .project-metric {
+    margin-bottom: 20px;
+  }
+}
+/* line 160, sass/sass/pages/_about.scss */
+.project-metric__icon {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px auto;
+  padding: 40px 0;
+  font-size: 40px;
+  font-weight: bold;
+  line-height: 40px;
+  border: 1px solid #FFF;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+/* line 172, sass/sass/pages/_about.scss */
+.project-metric__header {
+  font-size: 20px;
+  line-height: 1;
+}
+/* line 176, sass/sass/pages/_about.scss */
+.project-metric__number {
+  margin-bottom: 0;
+  font-size: 40px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* line 8, sass/sass/common.scss */
 html, body {
   font-family: Raleway;
+  color: #3E4455;
+}
+
+/* line 13, sass/sass/common.scss */
+p {
+  line-height: 1.75;
+}
+
+/* line 17, sass/sass/common.scss */
+.bold {
+  font-weight: bold;
 }

@@ -27,6 +27,7 @@ return [
                 '<alias:index|signup|contact|logout|captcha|login|request-password-reset|reset-password|about>' => 'site/<alias>',
             ],
         ],
+        
     ],
     'params' => $params,
 ];
