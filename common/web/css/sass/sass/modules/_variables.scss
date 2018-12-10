@@ -1,0 +1,71 @@
+
+// Typography
+
+$unit: 10px;
+$font-family-sans-serif: "Raleway", sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Colors
+
+$color-main: #3E4455;
+
+$color-secondary: #F7F9FF;
+
+$color-third: #EDF1FD;
+
+$color-fourth: #DBE1F1;
+
+// Background Colors
+
+$color-background-main: #FFF;
+
+$color-background-secondary: $color-secondary;
+
+$color-background-third: $color-third;
+
+// Color Links and Buttons
+
+$color-link: #0076C9;
+
+$color-default: #4774B7;
+
+$color-default-light: #0288D1;
+
+$color-default-dark: #color-main;
+
+$color-success: #388E3C;
+
+$color-success-light: #6ABF69;
+
+$color-success-dark: #00600F;
+
+$color-attention: #D32F2F;
+
+$color-attention-light: #FF6659;
+
+$color-attention-dark: #9A0007;
+
+$color-info: #039BE5;
+
+$color-info-light: #63CCFF;
+
+$color-info-dark: #006DB3;
+
+$color-warning: #FF9100;
+
+$color-warning-light: #FFC246;
+
+$color-warning-dark: #C56200;
+
+// Spacing
+
+$spacing-vertical-outer-main: 4*$unit;
+
+// Border Rarius
+
+$border-radius-main: 0.5*$unit;
+
+// Transition
+
+$transition-time-main: 0.4s;

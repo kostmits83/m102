@@ -1,0 +1,29 @@
+
+.banner {
+	$parent: &;
+	padding: 14*$unit 0 9*$unit 0;
+	text-align: center;
+	// Clear the inline-block elements
+	white-space: pre-line /* Create new line for each DIV */;
+    *white-space: pre /*FixIE7*/;
+    *word-wrap: break-word /*FixIE7*/;
+	background: {
+		image: image-url("decorative/laptop-coffee.jpg");
+		repeat: no-repeat;
+		size: cover;
+	}
+	&__header, &__info {
+		$child: &;
+		margin: $unit;
+		padding: $unit $unit;
+		line-height: 1.2;
+		text-align: center;
+		@include inline--light($parent, $child);
+	}
+	&__header {
+		font-size: 4.2*$unit;
+	}
+	&__info {
+		font-size: 3.6*$unit;
+	}
+}

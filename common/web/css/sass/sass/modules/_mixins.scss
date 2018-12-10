@@ -1,0 +1,30 @@
+
+// This is the mixin to have a transparent background in a inline element
+@mixin inline--light($parent, $child) {
+	@at-root {
+		#{$parent}--light {
+			#{$child} {
+				position: relative;
+				display: inline-block;
+				z-index: 2;
+				&:after {
+					position: absolute;
+					top: 0;
+					left: 0;
+					display: block;
+					width: 100%;
+					height: 100%;
+					content: " ";
+					background-color: #FFF;
+					z-index: -1;
+					opacity: 0.75;
+				}
+			}
+		}
+	}
+}
+
+@mixin button-hover($color) {
+	background-image: -webkit-gradient(linear, left top, right top, from($color), color-stop(50%, $color), color-stop(50%, transparent), to(transparent));
+	background-image: linear-gradient(to right, $color, $color 50%, transparent 50%, transparent);
+}

@@ -1,0 +1,10 @@
+
+.spacing {
+	&-vertical {
+		&-outer {
+			&-main {
+				margin-bottom: $spacing-vertical-outer-main;
+			}
+		}
+	}
+}

@@ -1,0 +1,30 @@
+
+a {
+	color: $color-default;
+	text-decoration: none;
+	&:hover {
+		color: $color-default;
+		text-decoration: none;
+	}
+}
+
+.link {
+	&:after {
+		background: $color-default;
+	}
+	&--state-1 {
+		&:after {
+			content: '';
+			display: block;
+			margin-top: 1px;
+			width: 0;
+			height: 0.2*$unit;
+			@include transition(all $transition-time-main);
+		}
+		&:hover {
+			&:after {
+				width: 100%;
+			}
+		}
+	}
+}

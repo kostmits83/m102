@@ -3,6 +3,17 @@
 // Include the file with all the requirements
 @import "includes";
 
+// Custom code and overides
+
 html, body {
 	font-family: Raleway;
+	color: $color-main;
+}
+
+p {
+	line-height: 1.75;
+}
+
+.bold {
+	font-weight: bold;
 }

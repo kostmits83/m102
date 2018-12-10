@@ -1,0 +1,69 @@
+
+$xs: 40*$unit;
+$sm: 76.8*$unit;
+$md: 99.2*$unit;
+$lg: 120*$unit;
+$xl: 160*$unit;
+$xxl: 220*$unit;
+
+
+// Media query mixins
+@mixin mq($width) {
+	@if $width == xs {
+		@media only screen and (min-width: $xs) and (max-width: $sm - 1) { @content; }
+	}
+	@else if $width == sm {
+		@media only screen and (min-width: $sm) and (max-width: $md - 1) { @content; }
+	}
+	@else if $width == md {
+		@media only screen and (min-width: $md) and (max-width: $lg - 1) { @content; }
+	}
+	@else if $width == lg {
+		@media only screen and (min-width: $lg) and (max-width: $xl - .01) { @content; }
+	}
+	@else if $width == xl {
+		@media only screen and (min-width: $xl) and (max-width: $xxl - .01) { @content; }
+	}
+	@else if $width == xxl {
+		@media only screen and (min-width: $xxl) { @content; }
+	}
+	@else if $width == xs-plus {
+		@media only screen and (min-width: $xs) { @content; }
+	}
+	@else if $width == sm-plus {
+		@media only screen and (min-width: $sm) { @content; }
+	}
+	@else if $width == md-plus {
+		@media only screen and (min-width: $md) { @content; }
+	}
+	@else if $width == lg-plus {
+		@media only screen and (min-width: $lg) { @content; }
+	}
+	@else if $width == xl-plus {
+		@media only screen and (min-width: $xl) { @content; }
+	}
+	@else if $width == xxl-plus {
+		@media only screen and (min-width: $xxl) { @content; }
+	}
+	@else if $width == xs-neg {
+		@media only screen and (max-width: $xs) { @content; }
+	}
+	@else if $width == sm-neg {
+		@media only screen and (max-width: $sm) { @content; }
+	}
+	@else if $width == md-neg {
+		@media only screen and (max-width: $md) { @content; }
+	}
+	@else if $width == lg-neg {
+		@media only screen and (max-width: $lg) { @content; }
+	}
+	@else if $width == xl-neg {
+		@media only screen and (max-width: $xl) { @content; }
+	}
+	@else if $width == xxl-neg {
+		@media only screen and (max-width: $xxl) { @content; }
+	}
+	@else if $width == sm-to-lg {
+		@media only screen and (min-width: $sm) and (max-width: $lg - .01) { @content; }
+	}
+}

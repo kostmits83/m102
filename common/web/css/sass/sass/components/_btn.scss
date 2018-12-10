@@ -1,1 +1,39 @@
 
+.buttons-row {
+	&__button {
+		display: inline-block;
+		min-width: 15*$unit;
+		margin-bottom: $unit;
+		&--first {
+			margin-right: 4*$unit;
+		}
+	}
+}
+
+.button {
+	display: inline-block;
+	padding: 1.5*$unit 4*$unit;
+	color: #FFF;
+	border: 0 none;
+	background-position: 100% 0;
+	background-size: 200% 100%;
+	@include transition(all $transition-time-main ease-in);
+	@include border-radius(0);
+	&--default {
+		background-color: $color-default;
+		@include button-hover($color-main);
+	}
+	&--attention {
+		background-color: $color-attention;
+		@include button-hover($color-attention-dark);
+	}
+	&:hover {
+		text-decoration: none;
+		color: #FFF;
+		cursor: pointer;
+		background-position: 0 0;
+		&:after {
+			width: 100%;
+		}
+	}
+}
