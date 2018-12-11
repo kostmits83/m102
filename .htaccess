@@ -17,12 +17,12 @@ RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
 RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
 
 # Deal with common
-RewriteCond %{REQUEST_URI} ^/m102/(assets|css|images)
+RewriteCond %{REQUEST_URI} ^/m102/(assets|css|images|js)
 RewriteRule ^assets/(.*)$ common/web/assets/$1 [L]
 RewriteRule ^css/(.*)$ common/web/css/$1 [L]
 RewriteRule ^images/(.*)$ common/web/images/$1 [L]
 
-RewriteCond %{REQUEST_URI} !^/m102/(frontend|backend|common)/web/(assets|css|images)/
+RewriteCond %{REQUEST_URI} !^/m102/(frontend|backend|common)/web/(assets|css|images|js)/
 RewriteCond %{REQUEST_URI} !index.php
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
 RewriteCond %{REQUEST_FILENAME} !-d

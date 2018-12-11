@@ -48,3 +48,23 @@ $_footer-temp-color: #BDBDBD;
 		text-align: center;
 	}
 }
+
+.scroll-to-top {
+	position: fixed;
+	bottom: 5*$unit;
+	right: 5*$unit;
+	display: none;
+	padding: 2*$unit;
+	background-color: $color-attention;
+	color: #FFF;
+	line-height: 1;
+	@include border-radius(0.2*$unit);
+	&:hover {
+		background-color: $color-attention-dark;
+		@include transition(all $transition-time-main);
+	}
+	&__icon {
+		font-size: 2*$unit;
+		color: #FFF;
+	}
+}

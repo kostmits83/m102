@@ -196,7 +196,7 @@ a:hover {
   padding: 40px 0 20px 0;
   color: #BDBDBD;
   border: 0 solid transparent;
-  background-image: url('../images/decorative/architecture.jpg?1544466850');
+  background-image: url('../images/decorative/architecture.jpg?1544470887');
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #333;
@@ -238,6 +238,34 @@ a:hover {
   margin: 0;
   padding-top: 20px;
   text-align: center;
+}
+
+/* line 52, sass/sass/sections/_footer.scss */
+.scroll-to-top {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  display: none;
+  padding: 20px;
+  background-color: #D32F2F;
+  color: #FFF;
+  line-height: 1;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
+/* line 62, sass/sass/sections/_footer.scss */
+.scroll-to-top:hover {
+  background-color: #9A0007;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+/* line 66, sass/sass/sections/_footer.scss */
+.scroll-to-top__icon {
+  font-size: 20px;
+  color: #FFF;
 }
 
 /* line 2, sass/sass/sections/_banner.scss */
