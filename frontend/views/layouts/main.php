@@ -107,7 +107,10 @@ AppAsset::register($this);
     <div class="page-footer__bottom">
         <p class="page-footer__copyright">&copy; <?= Html::encode(Yii::$app->name) ?>, Mitsarakis, Vairlis, Šilhavý, <?= date('Y') ?></p>
     </div>
+    <a class="scroll-to-top" href="#top"><span class="scroll-to-top__icon"><i class="fa fa-chevron-up"></i></span></a>
 </footer>
+
+<?php $this->registerJsFile('@commonJs/main.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 
 <?php $this->endBody() ?>
 </body>
