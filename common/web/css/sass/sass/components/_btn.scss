@@ -36,4 +36,7 @@
 			width: 100%;
 		}
 	}
+	&:active, &:focus {
+		color: #FFF;
+	}
 }

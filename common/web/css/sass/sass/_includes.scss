@@ -26,12 +26,15 @@
 
 @import "sections/footer";
 
+@import "sections/breadcrumbs";
+
 @import "sections/banner";
 
 // Components
-@import "components/breadcrumbs";
 
 @import "components/btn";
+
+@import "components/inputs";
 
 // Pages
 @import "pages/home";
