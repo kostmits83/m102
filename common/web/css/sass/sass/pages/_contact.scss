@@ -1,1 +1,60 @@
 
+.banner {
+	&--contact {
+		background: {
+			image: image-url("decorative/keyboard.jpg");
+		}
+	}
+}
+
+.contact-message {
+	padding-bottom: 3*$unit;
+	@include mq(md-plus) {
+		margin: 6*$unit 0 4*$unit 0;
+	}
+	&__text {
+		font-size: 2.8*$unit;
+		line-height: 1.6;
+		color: $color-main;
+	}
+}
+
+.contact-form {
+	margin-bottom: 4*$unit;
+	padding: 4*$unit;
+	background-color: $color-secondary;
+	@include mq(md-plus) {
+		position: absolute;
+		right: $unit;
+		margin-bottom: 0;
+		@include box-shadow(rgba(113, 120, 150, 0.3) 0 $unit 3.5*$unit 0);
+	}
+	&__button {
+		margin: 2*$unit 0 0 0;
+		text-align: right;
+	}
+}
+
+.contact-info {
+	padding: 6*$unit 0 8*$unit 0;
+	background-color: $color-secondary;
+	&__link {
+		position: relative;
+		display: inline-block;
+		margin-bottom: 1.5*$unit;
+		padding-left: 3.5*$unit;
+		font-size: 2*$unit;
+		line-height: 1;
+		&:before {
+			display: block;
+			position: absolute;
+			left: 0;
+			top: $unit;
+			content: " ";
+			width: 2*$unit;
+			height: 0.2*$unit;
+			line-height: 1;
+			background-color: $color-link;
+		}
+	}
+}

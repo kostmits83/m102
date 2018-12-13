@@ -1,0 +1,19 @@
+
+.form-control {
+	padding-top: 0.5*$unit;
+	padding-bottom: 0.5*$unit;
+	height: 4*$unit;
+	border: 1px solid $color-fourth;
+	@include border-radius(0.2*$unit);
+	@include transition(all $transition-time-main);
+	&:hover {
+		color: $color-main;
+		background-color: #EAF1F7;
+		@include input-placeholder {
+			color: $color-main;
+		}
+	}
+	&:active, &:focus {
+		@include box-shadow(none);
+	}
+}

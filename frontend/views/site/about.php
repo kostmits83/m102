@@ -44,18 +44,18 @@ $this->params['breadcrumbs'][] = $this->title;
 					<div class="team-members__all">
 						<div class="team-member">
 							<?= Html::img('@commonImages/team-members/mitsarakis-konstantinos.jpg', ['alt' => 'Konstantinos Mitsarakis', 'class' => 'img-responsive team-member__image']); ?>
-							<p class="team-member__name header-3">Konstantinos Mitsarakis</p>
+							<p class="team-member__name header-3"><a class="js-external" href="https://www.linkedin.com/in/konstantinos-mitsarakis-a9768350/"><span class="team-member__link link link--state-1">Konstantinos Mitsarakis</span></a></p>
 							<p class="team-member__info">A disciplined self-motivated web developer with strong team spirit and well-rounded experience in both backend and frontend development.</p>
 						</div>
 						<div class="team-member">
-							<?= Html::img('@commonImages/team-members/silhavy-dan.jpg', ['alt' => 'Dan Šilhavý', 'class' => 'img-responsive team-member__image']); ?>
-							<p class="team-member__name header-3">Dan Šilhavý</p>
-							<p class="team-member__info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab hic harum quae officia in dolorum repudiandae assumenda eius. Quae aut nemo earum, eaque ut est?</p>
+							<?= Html::img('@commonImages/team-members/vairlis-charalampos.jpg', ['alt' => 'Charalampos Vairlis', 'class' => 'img-responsive team-member__image']); ?>
+							<p class="team-member__name header-3"><a class="js-external" href="https://www.linkedin.com/in/charalabos-vairlis/"><span class="team-member__link link link--state-1">Charalampos Vairlis</span></a></p>
+							<p class="team-member__info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, assumenda, dolorem. Corrupti perspiciatis eligendi nobis repellendus et neque.</p>
 						</div>
 						<div class="team-member">
-							<?= Html::img('@commonImages/team-members/vairlis-charalampos.jpg', ['alt' => 'Charalampos Vairlis', 'class' => 'img-responsive team-member__image']); ?>
-							<p class="team-member__name header-3">Charalampos Vairlis</p>
-							<p class="team-member__info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, assumenda, dolorem. Corrupti perspiciatis eligendi nobis repellendus et neque.</p>
+							<?= Html::img('@commonImages/team-members/silhavy-dan.jpg', ['alt' => 'Dan Šilhavý', 'class' => 'img-responsive team-member__image']); ?>
+							<p class="team-member__name header-3"><a class="js-external" href="https://www.linkedin.com/"><span class="team-member__link link link--state-1">Dan Šilhavý</span></a></p>
+							<p class="team-member__info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab hic harum quae officia in dolorum repudiandae assumenda eius. Quae aut nemo earum, eaque ut est?</p>
 						</div>
 					</div>
 				</div>
