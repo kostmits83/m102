@@ -1,1 +1,34 @@
 
+#body {
+	.navbar-brand {
+		color: $color-main;
+		&:hover {
+			color: $color-link;
+		}
+	}
+	.navbar-toggle {
+		background-color: $color-main;
+		border-color: $color-main;
+		&:hover {
+			background-color: $color-fourth;
+		}
+	}
+	.main-header {
+		padding: 1.5*$unit 0;
+		background-color: $color-background-secondary;
+		border-bottom: 1px solid $color-fourth;
+		&__item {
+			background-color: transparent;
+			.main-header__link {
+				background-color: transparent;
+			}
+		}
+		&__link {
+			font-size: 1.6*$unit;
+			color: $color-main;
+			&:hover {
+				color: $color-link;
+			}
+		}
+	}
+}
