@@ -29,6 +29,9 @@
 	padding: $unit;
 	border: 0.2*$unit solid $color-fourth;
 	@include border-radius($border-radius-main);
+	&:hover {
+		@include depth();
+	}
 	@include mq(sm-neg) {
 		margin: 0 0 2*$unit 0;
 		&:last-child {
@@ -123,6 +126,9 @@
 	padding: 2*$unit;
 	background-color: $color-third;
 	@include border-radius($border-radius-main);
+	&:hover {
+		@include depth();
+	}
 	@include mq(sm-plus) {
 		min-height: 26*$unit;
 	}

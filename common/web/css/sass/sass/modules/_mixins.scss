@@ -28,3 +28,8 @@
 	background-image: -webkit-gradient(linear, left top, right top, from($color), color-stop(50%, $color), color-stop(50%, transparent), to(transparent));
 	background-image: linear-gradient(to right, $color, $color 50%, transparent 50%, transparent);
 }
+
+@mixin depth($h: $unit, $v: 2.5*$unit, $transition-time: $transition-time-main) {
+	@include box-shadow(rgba(113, 120, 150, 0.3) 0 $h $v 0);
+	@include transition(all $transition-time ease-in);
+}

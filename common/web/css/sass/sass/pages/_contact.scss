@@ -27,7 +27,7 @@
 		position: absolute;
 		right: $unit;
 		margin-bottom: 0;
-		@include box-shadow(rgba(113, 120, 150, 0.3) 0 $unit 3.5*$unit 0);
+		@include depth($unit, 3.5*$unit);
 	}
 	&__button {
 		margin: 2*$unit 0 0 0;
