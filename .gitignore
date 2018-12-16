@@ -39,5 +39,10 @@ phpunit.phar
 
 /common/web/css/.sass-cache/**
 
+# Ignore common.css file until production to have a cleaner pr
+
+/common/web/css/common.css
+
 # Ignore every sass cached file
 .scssc
+
