@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
 
-    <div class="container relative">
+    <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-5 login-message">
                 <p class="login-message__text">Please fill out the following fields to login. If you don't have an account there you can <?= Html::a('register here', ['site/signup'], ['class' => 'link link--state-1']); ?>.</p>
