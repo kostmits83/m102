@@ -15,11 +15,9 @@
 	margin-bottom: 4*$unit;
 	padding: 4*$unit;
 	background-color: $color-secondary;
-	@include mq(md-plus) {
-		position: absolute;
-		right: $unit;
-		margin-bottom: 0;
-		@include depth($unit, 3.5*$unit);
+	@include depth($unit, 3.5*$unit);
+	&__header {
+		margin-bottom: 2*$unit;
 	}
 	&__button {
 		margin: 2*$unit 0 0 0;
