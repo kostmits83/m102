@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<p class="contact-message__text">If you really liked this project then don't hesitate to send us a message. We would be glad to hear from you!</p>
 			</div>
 			<div class="col-sm-12 col-md-5 col-md-offset-2 contact-form">
+				<h1 class="contact-form__header header-2">Contact Form</h1>
 				<?php $form = ActiveForm::begin(); ?>
 			    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Your Name']) ?>
 			    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
