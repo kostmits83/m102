@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 			<div class="col-sm-12 col-md-5 col-md-offset-2 contact-form">
 				<?php $form = ActiveForm::begin(); ?>
-			    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Your Name', 'class' => 'form-control']) ?>
+			    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Your Name']) ?>
 			    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
 			    <?= $form->field($model, 'message')->textarea(['rows' => 6, 'placeholder' => 'Your Message']) ?>
 			    <div class="contact-form__button">

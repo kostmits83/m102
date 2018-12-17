@@ -14,16 +14,21 @@
 	}
 	&__header, &__info {
 		$child: &;
-		margin: $unit;
+		margin: 0 auto $unit auto;
 		padding: $unit $unit;
-		line-height: 1.2;
+		line-height: 1.1;
 		text-align: center;
 		@include inline--light($parent, $child);
 	}
 	&__header {
-		font-size: 4.2*$unit;
+		font-size: 3.6*$unit;
 	}
 	&__info {
-		font-size: 3.6*$unit;
+		font-size: 2.8*$unit;
+	}
+	&--same {
+		background: {
+			image: image-url("decorative/keyboard.jpg");
+		}
 	}
 }

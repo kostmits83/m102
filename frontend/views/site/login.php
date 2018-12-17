@@ -12,36 +12,28 @@ $this->title = Yii::t('app', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <div class="banner banner--light banner--contact">
-        <p class="banner__header">Login</p>
+    <div class="banner banner--light banner--same">
+        <p class="banner__header">LOGIN</p>
         <p class="banner__info">Login to access the trading tools.</p>
     </div>
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
 
-    <div class="container">
-    
-
+    <div class="container relative">
         <div class="row">
-            <div class="col-lg-5">
-                <p>Please fill out the following fields to login:</p>
+            <div class="col-sm-12 col-md-5 login-message">
+                <p class="login-message__text">Please fill out the following fields to login. If you don't have an account there you can <?= Html::a('register here', ['site/signup'], ['class' => 'link link--state-1']); ?>.</p>
+            </div>
+            <div class="col-sm-12 col-md-5 col-md-offset-2 login-form">
                 <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                    <?= $form->field($model, 'password')->passwordInput() ?>
-
+                    <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'placeholder' => 'Your Username']) ?>
+                    <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                    <div style="color:#999;margin:1em 0">
-                        If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+                    <p>If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset'], ['class' => 'inline-block link link--state-1']) ?>.</p>
+                    <div class="login-form__button">
+                        <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn button--attention button buttons-row__button', 'name' => 'login-button']) ?>
                     </div>
-
-                    <div class="form-group">
-                        <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                    </div>
-
                 <?php ActiveForm::end(); ?>
             </div>
         </div>
