@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\Breadcrumbs;
 
-$this->title = 'Reset password';
+$this->title = Yii::t('app', 'Reset password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-reset-password">
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p class="reset-password-message__text">Please choose your new password to change it.</p>
             </div>
             <div class="col-sm-12 col-md-5 col-md-offset-2 reset-password-form">
-                <h1 class="reset-password__header header-2">Reset Password Form</h1>
+                <h1 class="reset-password-form__header header-2">Reset Password Form</h1>
                 <?php $form = ActiveForm::begin(['id' => 'form-reset-password']); ?>
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
                     <div class="reset-password-form__button">

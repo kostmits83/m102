@@ -37,14 +37,14 @@
 @import "components/inputs";
 
 // Pages
-@import "pages/home";
+@import "pages/site/home";
 
-@import "pages/contact";
+@import "pages/site/contact";
+
+@import "pages/site/login";
+
+@import "pages/site/signup";
+
+@import "pages/site/request_reset_password";
 
 @import "pages/about";
-
-@import "pages/login";
-
-@import "pages/signup";
-
-@import "pages/request_reset_password";
