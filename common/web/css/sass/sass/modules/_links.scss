@@ -13,6 +13,7 @@ a {
 		background: $color-default;
 	}
 	&--state-1 {
+		display: inline-block;
 		&:after {
 			content: '';
 			display: block;

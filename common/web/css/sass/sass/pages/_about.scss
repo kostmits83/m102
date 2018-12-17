@@ -29,6 +29,7 @@
 	padding: $unit;
 	border: 0.2*$unit solid $color-fourth;
 	@include border-radius($border-radius-main);
+	@include transition(all $transition-time-main ease-in);
 	&:hover {
 		@include depth();
 	}
@@ -126,6 +127,7 @@
 	padding: 2*$unit;
 	background-color: $color-third;
 	@include border-radius($border-radius-main);
+	@include transition(all $transition-time-main ease-in);
 	&:hover {
 		@include depth();
 	}
