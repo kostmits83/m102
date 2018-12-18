@@ -5,6 +5,8 @@ use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 
+use common\components\widgets\AlertMessages;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\ContactMessage */
 /* @var $form yii\widgets\ActiveForm */
@@ -20,6 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
+
+	<?= AlertMessages::widget(['params'=>[]]); ?>
 	
 	<div class="container relative">
 		<div class="row">
