@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\helpers\Html\HtmlPurifier;
 
 /**
  * This is the model class for table "contact_message".
@@ -16,6 +19,10 @@ use Yii;
  */
 class ContactMessage extends \yii\db\ActiveRecord
 {
+
+    // The email subject of the contact message form
+    const EMAIL_SUBJECT = 'Contact Form Email';
+
     /**
      * {@inheritdoc}
      */
@@ -30,11 +37,33 @@ class ContactMessage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name', 'email', 'message'], function ($attribute) {
+                $this->$attribute = HtmlPurifier::process($this->$attribute);
+            }],
+            [['name', 'email', 'message'], 'filter', 'filter'=>'trim'],
             [['name', 'email', 'message'], 'required'],
-            [['message'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
-            [['name'], 'string', 'max' => 100],
+            ['email', 'email'],
             [['email'], 'string', 'max' => 255],
+            [['message'], 'string', 'max'=>10000],
+            [['name'], 'string', 'min' => 4, 'max' => 100],
+            [['email'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => date('Y-m-d H:i:s'),
+            ],
         ];
     }
 
@@ -44,12 +73,12 @@ class ContactMessage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app/labels', 'ID'),
-            'name' => Yii::t('app/labels', 'Name'),
-            'email' => Yii::t('app/labels', 'Email'),
-            'message' => Yii::t('app/labels', 'Message'),
-            'created_at' => Yii::t('app/labels', 'Created At'),
-            'updated_at' => Yii::t('app/labels', 'Updated At'),
+            'id' => Yii::t('app/labels', 'id'),
+            'name' => Yii::t('app/labels', 'name'),
+            'email' => Yii::t('app/labels', 'email'),
+            'message' => Yii::t('app/labels', 'message'),
+            'created_at' => Yii::t('app/labels', 'created_at'),
+            'updated_at' => Yii::t('app/labels', 'updated_at'),
         ];
     }
 
@@ -60,5 +89,19 @@ class ContactMessage extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ContactMessageQuery(get_called_class());
+    }
+
+    /**
+     * Sends the contact form email
+     *
+     * @return boolean If the email has been sent or not
+     */
+    public function sendEmail()
+    {
+        return Yii::$app->mailer->compose('contact/html', ['model' => $this])
+            ->setFrom($this->email)
+            ->setTo(Yii::$app->params['siteEmail'])
+            ->setSubject(self::EMAIL_SUBJECT)
+            ->send();
     }
 }

@@ -121,18 +121,12 @@ class SiteController extends Controller
     {
         $model = new ContactMessage();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-           // @todo Send the email funcionality
-            $flag = true;
-            
-            if ($flag) {
+            if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                Yii::$app->session->setFlash('danger', 'Due to technical issues there was an error sending your message. Please try again later.');
             }
             return $this->refresh();
-        } else {
-            
         }
         return $this->render('contact', [
             'model' => $model,
@@ -184,7 +178,7 @@ class SiteController extends Controller
 
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+                Yii::$app->session->setFlash('danger', 'Sorry, we are unable to reset password for the provided email address.');
             }
         }
 
