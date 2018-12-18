@@ -37,7 +37,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+        ['label' => 'Home', 'url' => ['/'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
         ['label' => 'About', 'url' => ['/site/about'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
         ['label' => 'Contact', 'url' => ['/site/contact'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
     ];
