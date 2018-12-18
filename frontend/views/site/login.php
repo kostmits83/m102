@@ -28,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-12 col-md-5 col-md-offset-2 login-form">
                 <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                     <h1 class="login-form__header header-2">Login Form</h1>
-                    <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'placeholder' => 'Your Username']) ?>
+                    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
                     <p>If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset'], ['class' => 'inline-block link link--state-1']) ?>.</p>
                     <div class="login-form__button">
-                        <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn button--attention button buttons-row__button', 'name' => 'login-button']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn button--attention button', 'name' => 'login-button']) ?>
                     </div>
                 <?php ActiveForm::end(); ?>
             </div>

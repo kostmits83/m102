@@ -18,6 +18,11 @@ return [
             'web'=> '/frontend/web',
             'csrfParam' => '_csrf-frontend',
         ],
+        'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+        ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
@@ -27,7 +32,10 @@ return [
                 '<alias:index|signup|contact|logout|captcha|login|request-password-reset|reset-password|about>' => 'site/<alias>',
             ],
         ],
-        
+        // This cannot moved to common because of console
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
     ],
     'params' => $params,
 ];

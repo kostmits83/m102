@@ -12,7 +12,7 @@ $this->title = Yii::t('app', 'Request password reset');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-request-password-reset">
-    <div class="banner banner--light banner--main">
+    <div class="banner banner--light banner--same">
         <p class="banner__header">REQUEST PASSWORD RESET</p>
         <p class="banner__info">Locked out? Request to reset your password.</p>
     </div>
@@ -28,9 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-12 col-md-5 col-md-offset-2 request-password-reset-form">
                 <h1 class="request-password-reset-form__header header-2">Request Password Reset Form</h1>
                 <?php $form = ActiveForm::begin(['id' => 'form-request-password-reset']); ?>
-                    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Password']) ?>
+                    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
                     <div class="request-password-reset-form__button">
-                        <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn button--attention button buttons-row__button']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn button button--attention']) ?>
                     </div>
                 <?php ActiveForm::end(); ?>
             </div>

@@ -12,9 +12,9 @@ $this->title = Yii::t('app', 'Reset password');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-reset-password">
-    <div class="banner banner--light banner--main">
+    <div class="banner banner--light banner--same">
         <p class="banner__header">RESET PASSWORD</p>
-        <p class="banner__info">Reset your password.</p>
+        <p class="banner__info">Reset your password to be able to login.</p>
     </div>
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php $form = ActiveForm::begin(['id' => 'form-reset-password']); ?>
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
                     <div class="reset-password-form__button">
-                        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn button--attention button buttons-row__button']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn button button--attention']) ?>
                     </div>
                 <?php ActiveForm::end(); ?>
             </div>

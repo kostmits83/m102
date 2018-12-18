@@ -24,11 +24,6 @@ return [
                 ];
             }
         ],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
-        ],
         'assetManager' => [
             // The asset manager will create a symbolic link to the source path of an asset bundle when it is being published
             'linkAssets' => true,
@@ -119,9 +114,6 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
         ],
     ],
 ];

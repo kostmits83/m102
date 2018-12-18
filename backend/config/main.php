@@ -19,6 +19,11 @@ return [
             'adminUrl' => '/backend',
             'csrfParam' => '_csrf-backend',
         ],
+        'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+        ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
@@ -27,6 +32,10 @@ return [
             'rules' => [
                 '<alias:index|logout|login>' => 'site/<alias>',
             ],
+        ],
+        // This cannot moved to common because of console
+        'errorHandler' => [
+            'errorAction' => 'site/error',
         ],
     ],
     'params' => $params,
