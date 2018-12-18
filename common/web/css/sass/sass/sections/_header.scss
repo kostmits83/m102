@@ -30,5 +30,11 @@
 				color: $color-link;
 			}
 		}
+		.button--logout {
+			margin-left: 2*$unit;
+			margin-top: 0.8*$unit;
+			padding-top: 0.7*$unit;
+			padding-bottom: 0.7*$unit;
+		}
 	}
 }

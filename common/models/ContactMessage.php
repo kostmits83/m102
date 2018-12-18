@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\helpers\Html\HtmlPurifier;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "contact_message".
@@ -38,7 +38,7 @@ class ContactMessage extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'email', 'message'], function ($attribute) {
-                $this->$attribute = HtmlPurifier::process($this->$attribute);
+                $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
             }],
             [['name', 'email', 'message'], 'filter', 'filter'=>'trim'],
             [['name', 'email', 'message'], 'required'],

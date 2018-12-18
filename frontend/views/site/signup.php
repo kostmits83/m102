@@ -12,7 +12,7 @@ $this->title = Yii::t('app', 'Signup');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
-    <div class="banner banner--light banner--main">
+    <div class="banner banner--light banner--same">
         <p class="banner__header">SIGNUP</p>
         <p class="banner__info">Signup to access the trading tools.</p>
     </div>
@@ -28,11 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-12 col-md-5 col-md-offset-2 signup-form">
                 <h1 class="signup-form__header header-2">Sign Up Form</h1>
                 <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-                    <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'placeholder' => 'Your Username']) ?>
                     <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
                     <div class="signup-form__button">
-                        <?= Html::submitButton(Yii::t('app', 'Signup'), ['class' => 'btn button--attention button buttons-row__button', 'name' => 'signup-button']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Signup'), ['class' => 'btn button--attention button', 'name' => 'signup-button']) ?>
                     </div>
                 <?php ActiveForm::end(); ?>
             </div>

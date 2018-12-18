@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
 			    <?= $form->field($model, 'message')->textarea(['rows' => 6, 'placeholder' => 'Your Message']) ?>
 			    <div class="contact-form__button">
-			        <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn button--attention button buttons-row__button']) ?>
+			        <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn button--attention button']) ?>
 			    </div>
 			    <?php ActiveForm::end(); ?>
 			</div>
