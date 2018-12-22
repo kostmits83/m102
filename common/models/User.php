@@ -16,6 +16,11 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $auth_key
  * @property integer $status
+ * @property string $account_activation_token
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $birthdate
+ * @property string $last_login
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
@@ -25,6 +30,8 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
     const STATUS_NOT_ACTIVE = 1;
+
+    const LAST_LOGIN_FORMAT = 'Y-m-d H:i:s';
 
     /**
      * {@inheritdoc}
@@ -50,8 +57,36 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['email', 'firstname', 'lastname'], function ($attribute) {
+                $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
+            }],
+            [['email', 'firstname', 'lastname'], 'filter', 'filter' => 'trim'],
+            [['email'], 'required'],
+            ['email', 'email'],
+            [['email'], 'string', 'max' => 255],
+
+            [['firstname', 'lastname'], 'string', 'max' => 255],
+
+            [['birthdate'], 'date'],
+
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED, self::STATUS_NOT_ACTIVE]],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app/labels', 'id'),
+            'firstname' => Yii::t('app/labels', 'firstname'),
+            'lastname' => Yii::t('app/labels', 'lastname'),
+            'birthdate' => Yii::t('app/labels', 'birthdate'),
+            'last_login' => Yii::t('app/labels', 'last_login'),
+            'created_at' => Yii::t('app/labels', 'created_at'),
+            'updated_at' => Yii::t('app/labels', 'updated_at'),
         ];
     }
 
@@ -214,6 +249,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * Sets the last_login field
+     */
+    public function setLastLogin()
+    {
+        $this->last_login = date(self::LAST_LOGIN_FORMAT);
     }
 
 }

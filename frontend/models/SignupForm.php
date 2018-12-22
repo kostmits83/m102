@@ -31,7 +31,6 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-
             [['email', 'password', 'confirm_password'], function ($attribute) {
                 $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
             }],

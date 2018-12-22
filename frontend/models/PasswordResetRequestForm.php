@@ -19,6 +19,9 @@ class PasswordResetRequestForm extends Model
     public function rules()
     {
         return [
+            [['email'], function ($attribute) {
+                $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
+            }],
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],

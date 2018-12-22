@@ -42,13 +42,12 @@ class ContactMessage extends \yii\db\ActiveRecord
             [['name', 'email', 'message'], function ($attribute) {
                 $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
             }],
-            [['name', 'email', 'message'], 'filter', 'filter'=>'trim'],
+            [['name', 'email', 'message'], 'filter', 'filter' => 'trim'],
             [['name', 'email', 'message'], 'required'],
             ['email', 'email'],
             [['email'], 'string', 'max' => 255],
             [['message'], 'string', 'max'=>10000],
             [['name'], 'string', 'min' => 4, 'max' => 100],
-            [['email'], 'string', 'max' => 255],
             ['verifyCode', 'captcha'],
         ];
     }
