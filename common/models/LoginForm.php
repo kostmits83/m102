@@ -25,7 +25,7 @@ class LoginForm extends Model
             [['email', 'password'], function ($attribute) {
                 $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
             }],
-            [['email', 'password'], 'filter', 'filter'=>'trim'],
+            [['email', 'password'], 'filter', 'filter' => 'trim'],
             
             // email and password are both required
             [['email', 'password'], 'required'],
@@ -61,6 +61,9 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
+            $user = $this->getUser();
+            $user->setLastLogin();
+            $user->save();
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         

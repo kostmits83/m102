@@ -45,6 +45,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
     } else {
+        $menuItems[] = ['label' => 'Profile', 'url' => ['/user/profile'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

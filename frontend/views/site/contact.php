@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
 
-	<?= AlertMessages::widget(['params'=>[]]); ?>
+	<?= AlertMessages::widget(['params' => []]); ?>
 	
 	<div class="container relative">
 		<div class="row">
