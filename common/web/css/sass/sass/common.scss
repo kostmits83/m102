@@ -25,3 +25,12 @@ p {
 .inline-block {
 	display: inline-block;
 }
+
+$class: mb-;
+
+// loops through 4 times
+@for $i from 1 through 4 {
+	.#{$class}#{$i} {
+		margin-bottom: $i * $unit;
+	}
+}

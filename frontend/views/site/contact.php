@@ -6,6 +6,7 @@ use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 
 use common\components\widgets\AlertMessages;
+use yii\captcha\Captcha;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ContactMessage */
@@ -36,6 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
 			    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Your Name']) ?>
 			    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
 			    <?= $form->field($model, 'message')->textarea(['rows' => 6, 'placeholder' => 'Your Message']) ?>
+				<?= $form->field($model, 'verifyCode', [
+                    'labelOptions' => [
+                        'class' => 'sr-only',
+                    ]])->label()->widget(Captcha::className(), [
+	                    'template' => '<div class="row"><div class="col-xs-12 col-sm-4">{image}</div><div class="col-xs-12 col-sm-8">{input}</div></div>',
+	                    'options' => ['class' => 'form-control', 'placeholder' => 'Write the characters of the image'],
+	             ]) ?>
 			    <div class="contact-form__button">
 			        <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn button--attention button']) ?>
 			    </div>

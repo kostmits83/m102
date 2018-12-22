@@ -19,6 +19,7 @@ use yii\helpers\Html;
  */
 class ContactMessage extends \yii\db\ActiveRecord
 {
+    public $verifyCode;
 
     // The email subject of the contact message form
     const EMAIL_SUBJECT = 'Contact Form Email';
@@ -47,6 +48,7 @@ class ContactMessage extends \yii\db\ActiveRecord
             [['message'], 'string', 'max'=>10000],
             [['name'], 'string', 'min' => 4, 'max' => 100],
             [['email'], 'string', 'max' => 255],
+            ['verifyCode', 'captcha'],
         ];
     }
 
