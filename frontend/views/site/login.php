@@ -8,6 +8,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\Breadcrumbs;
 
+use common\components\widgets\AlertMessages;
+
 $this->title = Yii::t('app', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -19,6 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
+
+    <?= AlertMessages::widget(['params'=>[]]); ?>
 
     <div class="container">
         <div class="row">

@@ -24,7 +24,7 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-
+    const STATUS_NOT_ACTIVE = 1;
 
     /**
      * {@inheritdoc}
@@ -51,7 +51,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED, self::STATUS_NOT_ACTIVE]],
         ];
     }
 
@@ -69,6 +69,36 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null)
     {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+    }
+
+    /**
+     * Generates new account activation token.
+     */
+    public function generateAccountActivationToken()
+    {
+        $this->account_activation_token = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+    /**
+     * Finds user by account activation token.
+     *
+     * @param  string $token Account activation token.
+     * @return static|null
+     */
+    public static function findByAccountActivationToken($token)
+    {
+        return static::findOne([
+            'account_activation_token' => $token,
+            'status' => User::STATUS_NOT_ACTIVE,
+        ]);
+    }
+
+    /**
+     * Removes account activation token.
+     */
+    public function removeAccountActivationToken()
+    {
+        $this->account_activation_token = null;
     }
 
     /**
@@ -185,4 +215,5 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
 }
