@@ -19,6 +19,7 @@ use yii\helpers\Html;
  */
 class ContactMessage extends \yii\db\ActiveRecord
 {
+    // The captcha code
     public $verifyCode;
 
     // The email subject of the contact message form

@@ -7,6 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\Breadcrumbs;
+use yii\captcha\Captcha;
 
 $this->title = Yii::t('app', 'Signup');
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,6 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
                     <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
+                    <?= $form->field($model, 'verifyCode', [
+                        'labelOptions' => [
+                            'class' => 'sr-only',
+                        ]])->label()->widget(Captcha::className(), [
+                            'template' => '<div class="row"><div class="col-xs-12 col-sm-4">{image}</div><div class="col-xs-12 col-sm-8">{input}</div></div>',
+                            'options' => ['class' => 'form-control', 'placeholder' => 'Write the characters of the image'],
+                     ]) ?>
                     <div class="signup-form__button">
                         <?= Html::submitButton(Yii::t('app', 'Signup'), ['class' => 'btn button--attention button', 'name' => 'signup-button']) ?>
                     </div>
