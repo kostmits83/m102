@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1 class="reset-password-form__header header-2">Reset Password Form</h1>
                 <?php $form = ActiveForm::begin(['id' => 'form-reset-password']); ?>
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
+                    <?= $form->field($model, 'confirm_password')->passwordInput(['placeholder' => 'Retype Your Password']) ?>
                     <div class="reset-password-form__button">
                         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn button button--attention']) ?>
                     </div>
