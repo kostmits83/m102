@@ -11,7 +11,7 @@ use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+use frontend\models\AccountActivation;
 
 use common\models\ContactMessage;
 
@@ -144,18 +144,28 @@ class SiteController extends Controller
     }
 
     /**
-     * Signs user up.
+     * Signs up the user.
+     * User needs to activate his account via email, display a
+     * message with instructions and send an account activation email
+     * (with link containing account activation token).
      *
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionSignup()
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
+                $this->signupWithActivation($model, $user);
+                return $this->refresh();
+            } else {    // User could not be saved in database
+                // Display error message to user
+                Yii::$app->session->setFlash('danger', "We couldn't sign you up, please contact us.");
+
+                // log this error, so we can debug possible problem easier.
+                Yii::error('Signup failed! User could not sign up. Something strange happened while saving user in database.');
+
+                return $this->refresh();
             }
         }
 
@@ -164,8 +174,55 @@ class SiteController extends Controller
         ]);
     }
 
+        /**
+     * Sign up user with activation.
+     * User will have to activate his account using activation link that we will
+     * send him via email.
+     *
+     * @param $model
+     * @param $user
+     */
+    private function signupWithActivation($model, $user)
+    {
+        // try to send account activation email
+        if ($model->sendAccountActivationEmail($user)) {
+            Yii::$app->session->setFlash('success', 'To be able to log in, you need to confirm your registration. Please check your email, we have sent you a message.');
+        } else {  // Email could not be sent
+            // Display error message to user
+            Yii::$app->session->setFlash('danger', "We couldn't send you account activation email, please contact us.");
+
+            // Log this error, so we can debug possible problem easier.
+            Yii::error('Signup failed! Possible causes: verification email could not be sent.');
+        }
+    }
+
     /**
-     * Requests password reset.
+     * Activates the user account so he can log in into system.
+     *
+     * @param  string $token
+     * @return \yii\web\Response
+     *
+     * @throws BadRequestHttpException
+     */
+    public function actionActivateAccount($token)
+    {
+        try {
+            $user = new AccountActivation($token);
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+
+        if ($user->activateAccount()) {
+            Yii::$app->session->setFlash('success', 'Success! You can now log in. Thank you for joining us!');
+        } else {
+            Yii::$app->session->setFlash('danger', 'Your account could not be activated, please contact us!');
+        }
+
+        return $this->redirect('login');
+    }
+
+    /**
+     * Sends email that contains link for password reset action.
      *
      * @return mixed
      */
