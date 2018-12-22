@@ -4,6 +4,7 @@ namespace frontend\models;
 use yii\base\Model;
 use yii\base\InvalidParamException;
 use common\models\User;
+use kartik\password\StrengthValidator;
 
 /**
  * Password reset form
@@ -11,6 +12,9 @@ use common\models\User;
 class ResetPasswordForm extends Model
 {
     public $password;
+
+    // The confirm password field
+    public $confirm_password;
 
     /**
      * @var \common\models\User
@@ -43,8 +47,15 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required'],
+            [['password', 'confirm_password'], function ($attribute) {
+                $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
+            }],
+            [['password', 'confirm_password'], 'filter', 'filter'=>'trim'],
+            [['password'], StrengthValidator::className(), 'preset' => StrengthValidator::NORMAL],
+
+            ['password', 'confirm_password', 'required'],
             ['password', 'string', 'min' => 6],
+            ['confirm_password', 'compare', 'compareAttribute' => 'password', 'message' => 'Passwords does not match.'],
         ];
     }
 
