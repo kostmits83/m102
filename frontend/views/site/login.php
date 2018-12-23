@@ -26,20 +26,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-5 login-message">
-                <p class="login-message__text">Please fill out the following fields to login. If you don't have an account there you can <?= Html::a('register here', ['site/signup'], ['class' => 'link link--state-1']); ?>.</p>
+            <div class="col-sm-12 col-md-5">
+                <div class="login-message">
+                    <p class="login-message__text">Please fill out the following fields to login. If you don't have an account there you can <?= Html::a('register here', ['site/signup'], ['class' => 'link link--state-1']); ?>.</p>
+                </div>
             </div>
-            <div class="col-sm-12 col-md-5 col-md-offset-2 login-form">
-                <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                    <h1 class="login-form__header header-2">Login Form</h1>
-                    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
-                    <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
-                    <?= $form->field($model, 'rememberMe')->checkbox() ?>
-                    <p>If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset'], ['class' => 'inline-block link link--state-1']) ?>.</p>
-                    <div class="login-form__button">
-                        <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn button--attention button', 'name' => 'login-button']) ?>
-                    </div>
-                <?php ActiveForm::end(); ?>
+            <div class="col-sm-12 col-md-5 col-md-offset-2">
+                <div class="login-form">
+                    <?php $form = ActiveForm::begin(['id' => 'form-login']); ?>
+                        <h1 class="login-form__header header-2">Login Form</h1>
+                        <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
+                        <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
+                        <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                        <p>If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset'], ['class' => 'inline-block link link--state-1']) ?>.</p>
+                        <div class="login-form__button">
+                            <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn button--attention button', 'name' => 'login-button']) ?>
+                        </div>
+                    <?php ActiveForm::end(); ?>
+                </div>
             </div>
         </div>
     </div>
