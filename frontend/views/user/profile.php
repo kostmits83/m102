@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]); ?>
                         <div class="profile-form__button">
-                            <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn button button--default', 'name' => 'profile-button']) ?>
+                            <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn button button--default', 'name' => 'update-profile-button']) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                 </div>
@@ -70,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="change-password-form">
                     <h1 class="change-password-form__header header-2">Change Password</h1>
                     <?php $form = ActiveForm::begin(['id' => 'form-change-password']); ?>
-                        <?= $form->field($model, 'oldPassword')->passwordInput(['placeholder' => 'Your current password']) ?>
+                        <?= $form->field($model, 'currentPassword')->passwordInput(['placeholder' => 'Your current password']) ?>
                         <?= $form->field($model, 'newPassword')->passwordInput(['placeholder' => 'Your new password']) ?>
                         <?= $form->field($model, 'confirmPassword')->passwordInput(['placeholder' => 'Retype your password']) ?>
                         <div class="change-password-form__button">
@@ -79,9 +79,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php ActiveForm::end(); ?>
                 </div>
             </div>
-            
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-4 delete-account-message-wrapper">
+                <div class="delete-account-message">
+                    <p class="delete-account-message__text">If you want to delete your account and all your data from our system then this is the place. We will miss you!</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-7 delete-account-form-wrapper">
+                <div class="delete-account-form">
+                    <h1 class="delete-account-form__header header-2">Delete Account</h1>
+                    <?php $form = ActiveForm::begin(['id' => 'form-delete-account']); ?>
+                        <?= $form->field($model, 'confirmPasswordToDelete')->passwordInput(['placeholder' => 'Your password']) ?>
+                        <div class="delete-account-form__button">
+                            <?= Html::submitButton(Yii::t('app', 'Delete'), ['class' => 'btn button button--attention', 'name' => 'delete-account-button']) ?>
+                        </div>
+                    <?php ActiveForm::end(); ?>
+                </div>
+            </div>
+        </div>
 
     </div>
+
 </div>

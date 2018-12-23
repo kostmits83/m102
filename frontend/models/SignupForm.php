@@ -37,7 +37,7 @@ class SignupForm extends Model
             [['email', 'password', 'confirmPassword'], 'filter', 'filter'=>'trim'],
 
             [['email', 'password', 'confirmPassword'], 'required'],
-            [['password'], StrengthValidator::className(), 'preset' => StrengthValidator::NORMAL],
+            [['password'], StrengthValidator::className(), 'preset' => StrengthValidator::SIMPLE],
 
             ['email', 'email'],
             ['email', 'string', 'min' => 4, 'max' => 255],
