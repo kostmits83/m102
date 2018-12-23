@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use kartik\password\StrengthValidator;
 
 /**
  * User model
@@ -36,6 +37,15 @@ class User extends ActiveRecord implements IdentityInterface
 
     const LAST_LOGIN_FORMAT = 'Y-m-d H:i:s';
 
+    // The old password field
+    public $oldPassword;
+
+    // The new password field
+    public $newPassword;
+
+    // The confirm password field
+    public $confirmPassword;
+
     /**
      * {@inheritdoc}
      */
@@ -60,10 +70,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'firstname', 'lastname'], function ($attribute) {
+            [['email', 'firstname', 'lastname', 'oldPassword', 'newPassword', 'confirmPassword'], function ($attribute) {
                 $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
             }],
-            [['email', 'firstname', 'lastname'], 'filter', 'filter' => 'trim'],
+            [['email', 'firstname', 'lastname', 'oldPassword', 'newPassword', 'confirmPassword'], 'filter', 'filter' => 'trim'],
             [['email'], 'required'],
             ['email', 'email'],
             [['email'], 'string', 'max' => 255],
@@ -77,7 +87,30 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['country_id'], 'integer'],
             ['country_id', 'exist', 'targetAttribute' => 'id', 'targetClass' => '\common\models\Country', 'skipOnEmpty' => true, 'skipOnError' => false],
+
+            [['oldPassword', 'newPassword', 'confirmPassword'], 'required', 'on' => 'changePassword'],
+            [['oldPassword', 'newPassword', 'confirmPassword'], 'string', 'min' => 6, 'max' => 40, 'on' => 'changePassword'],
+            ['confirmPassword', 'compare', 'compareAttribute' => 'newPassword', 'message' => 'Passwords does not match.', 'on' => 'changePassword'],
+            ['oldPassword', 'validateCurrentPassword', 'on' => 'changePassword'],
+            [['newPassword'], StrengthValidator::className(), 'preset' => StrengthValidator::NORMAL, 'userAttribute' => 'email', 'on' => 'changePassword'],
+
         ];
+    }
+
+    /**
+     * Validates the current password.
+     * This method serves as the inline validation for password.
+     *
+     * @param string $attribute the attribute currently being validated
+     * @param array $params the additional name-value pairs given in the rule
+     */
+    public function validateCurrentPassword($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            if (!$this || !$this->validatePassword($this->oldPassword)) {
+                $this->addError($attribute, 'Incorrect password.');
+            }
+        }
     }
 
     /**
@@ -281,6 +314,19 @@ class User extends ActiveRecord implements IdentityInterface
     public function saveProfile()
     {
         return $this->save(true, ['firstname', 'lastname', 'birthdate', 'country_id']);
+    }
+
+    /**
+     * Changes the password to a new one
+     * @return bool If password has been changed or not
+     */
+    public function changePassword()
+    {
+        if ($this->validate()) {
+            $this->setPassword($this->newPassword);
+            return $this->save(true, ['password_hash']);
+        }
+        return false;
     }
 
 }

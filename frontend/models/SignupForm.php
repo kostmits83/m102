@@ -23,7 +23,7 @@ class SignupForm extends Model
     public $verifyCode;
 
     // The confirm password field
-    public $confirm_password;
+    public $confirmPassword;
 
     /**
      * {@inheritdoc}
@@ -31,12 +31,12 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            [['email', 'password', 'confirm_password'], function ($attribute) {
+            [['email', 'password', 'confirmPassword'], function ($attribute) {
                 $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
             }],
-            [['email', 'password', 'confirm_password'], 'filter', 'filter'=>'trim'],
+            [['email', 'password', 'confirmPassword'], 'filter', 'filter'=>'trim'],
 
-            [['email', 'password', 'confirm_password'], 'required'],
+            [['email', 'password', 'confirmPassword'], 'required'],
             [['password'], StrengthValidator::className(), 'preset' => StrengthValidator::NORMAL],
 
             ['email', 'email'],
@@ -44,7 +44,7 @@ class SignupForm extends Model
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'string', 'min' => 6, 'max' => 40],
-            ['confirm_password', 'compare', 'compareAttribute' => 'password', 'message' => 'Passwords does not match.'],
+            ['confirmPassword', 'compare', 'compareAttribute' => 'password', 'message' => 'Passwords does not match.'],
             ['verifyCode', 'captcha'],
 
             // Status has to be integer value in the given range. Check User model.

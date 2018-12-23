@@ -26,31 +26,62 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= AlertMessages::widget(['params' => []]); ?>
 
-    <div class="container mb-4">
+    <div class="container">
         <div class="row">
-            <div class="col-sm-12 profile-form">
-                <h1 class="profile-form__header header-2">Update your profile</h1>
-                <?php $form = ActiveForm::begin(['id' => 'form-profile']); ?>
-                    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email', 'disabled' => true]) ?>
-                    <?= $form->field($model, 'firstname')->textInput(['maxlength' => true, 'placeholder' => 'Your Firstname']) ?>
-                    <?= $form->field($model, 'lastname')->textInput(['maxlength' => true, 'placeholder' => 'Your Lastname']) ?>
-                    <?= $form->field($model, 'country_id', [
-                        'options' => [],
-                        ])->label()->dropDownList(
-                            ArrayHelper::map(Country::find()->all(), 'id', 'name'),  ['prompt' => 'Select']);
-                    ?>
-                    <?= $form->field($model, 'birthdate')->widget(DatePicker::classname(), [
-                        'options' => ['placeholder' => 'Enter birth date...'],
-                        'pluginOptions' => [
-                            'autoclose' => true,
-                            'format' => 'yyyy-mm-dd',
-                        ],
-                    ]); ?>
-                    <div class="profile-form__button">
-                        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn button button--attention', 'name' => 'profile-button']) ?>
-                    </div>
-                <?php ActiveForm::end(); ?>
+            <div class="col-xs-12 col-md-4 profile-message-wrapper">
+                <div class="profile-message">
+                    <p class="profile-message__text">From here you can update your profile providing more information about you.</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-7 profile-form-wrapper">
+                <div class="profile-form">
+                    <h1 class="profile-form__header header-2">Profile</h1>
+                    <?php $form = ActiveForm::begin(['id' => 'form-profile']); ?>
+                        <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email', 'disabled' => true]) ?>
+                        <?= $form->field($model, 'firstname')->textInput(['maxlength' => true, 'placeholder' => 'Your Firstname']) ?>
+                        <?= $form->field($model, 'lastname')->textInput(['maxlength' => true, 'placeholder' => 'Your Lastname']) ?>
+                        <?= $form->field($model, 'country_id', [
+                            'options' => [],
+                            ])->label()->dropDownList(
+                                ArrayHelper::map(Country::find()->all(), 'id', 'name'),  ['prompt' => 'Select']);
+                        ?>
+                        <?= $form->field($model, 'birthdate')->widget(DatePicker::classname(), [
+                            'options' => ['placeholder' => 'Enter birth date'],
+                            'pluginOptions' => [
+                                'autoclose' => true,
+                                'format' => 'yyyy-mm-dd',
+                            ],
+                        ]); ?>
+                        <div class="profile-form__button">
+                            <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn button button--default', 'name' => 'profile-button']) ?>
+                        </div>
+                    <?php ActiveForm::end(); ?>
+                </div>
             </div>
         </div>
+        
+        <div class="row">
+            <div class="col-sm-12 col-md-5">
+                <div class="change-password-message">
+                    <p class="change-password-message__text">From here you can change your password to a new one.</p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-5 col-md-offset-2">
+                <div class="change-password-form">
+                    <h1 class="change-password-form__header header-2">Change Password</h1>
+                    <?php $form = ActiveForm::begin(['id' => 'form-change-password']); ?>
+                        <?= $form->field($model, 'oldPassword')->passwordInput(['placeholder' => 'Your current password']) ?>
+                        <?= $form->field($model, 'newPassword')->passwordInput(['placeholder' => 'Your new password']) ?>
+                        <?= $form->field($model, 'confirmPassword')->passwordInput(['placeholder' => 'Retype your password']) ?>
+                        <div class="change-password-form__button">
+                            <?= Html::submitButton(Yii::t('app', 'Change Password'), ['class' => 'btn button button--default', 'name' => 'change-password-button']) ?>
+                        </div>
+                    <?php ActiveForm::end(); ?>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
     </div>
 </div>

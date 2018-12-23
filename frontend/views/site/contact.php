@@ -28,26 +28,30 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<div class="container relative">
 		<div class="row">
-			<div class="col-sm-12 col-md-5 contact-message">
-				<p class="contact-message__text">If you really liked this project then don't hesitate to send us a message. We would be glad to hear from you!</p>
+			<div class="col-sm-12 col-md-5">
+				<div class="contact-message">
+					<p class="contact-message__text">If you really liked this project then don't hesitate to send us a message. We would be glad to hear from you!</p>
+				</div>
 			</div>
-			<div class="col-sm-12 col-md-5 col-md-offset-2 contact-form">
-				<h1 class="contact-form__header header-2">Contact Form</h1>
-				<?php $form = ActiveForm::begin(); ?>
-			    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Your Name']) ?>
-			    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
-			    <?= $form->field($model, 'message')->textarea(['rows' => 6, 'placeholder' => 'Your Message']) ?>
-				<?= $form->field($model, 'verifyCode', [
-                    'labelOptions' => [
-                        'class' => 'sr-only',
-                    ]])->label()->widget(Captcha::className(), [
-	                    'template' => '<div class="row"><div class="col-xs-12 col-sm-4">{image}</div><div class="col-xs-12 col-sm-8">{input}</div></div>',
-	                    'options' => ['class' => 'form-control', 'placeholder' => 'Write the characters of the image'],
-	             ]) ?>
-			    <div class="contact-form__button">
-			        <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn button--attention button']) ?>
-			    </div>
-			    <?php ActiveForm::end(); ?>
+			<div class="col-sm-12 col-md-5 col-md-offset-2">
+				<div class="contact-form">
+					<h1 class="contact-form__header header-2">Contact Form</h1>
+					<?php $form = ActiveForm::begin('id' => 'form-contact'); ?>
+				    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Your Name']) ?>
+				    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
+				    <?= $form->field($model, 'message')->textarea(['rows' => 6, 'placeholder' => 'Your Message']) ?>
+					<?= $form->field($model, 'verifyCode', [
+	                    'labelOptions' => [
+	                        'class' => 'sr-only',
+	                    ]])->label()->widget(Captcha::className(), [
+		                    'template' => '<div class="row"><div class="col-xs-12 col-sm-4">{image}</div><div class="col-xs-12 col-sm-8">{input}</div></div>',
+		                    'options' => ['class' => 'form-control', 'placeholder' => 'Write the characters of the image'],
+		             ]) ?>
+				    <div class="contact-form__button">
+				        <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn button--attention button']) ?>
+				    </div>
+				    <?php ActiveForm::end(); ?>
+				</div>
 			</div>
 		</div>
 	</div>

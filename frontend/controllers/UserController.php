@@ -37,9 +37,27 @@ class UserController extends Controller
     public function actionProfile()
     {
         $model = $this->findModel(Yii::$app->user->id);
+        $success = false;
 
-        if ($model->load(Yii::$app->request->post()) && $model->saveProfile()) {
-            return $this->redirect(['profile']);
+        if ($model->load(Yii::$app->request->post())) {
+            if (isset($_POST['profile-button'])) {
+                if ($model->saveProfile()) {
+                    $success = true;
+                }
+            }
+            if (isset($_POST['change-password-button'])) {
+                $model->scenario = 'changePassword';
+                if ($model->changePassword()) {
+                    $success = true;
+                }
+            }
+
+            if ($success) {
+                Yii::$app->session->setFlash('success', 'Data have been saved successfully!');
+                return $this->redirect(['profile']);
+            } else {
+                Yii::$app->session->setFlash('danger', 'Data could not been saved. Please check your input values.');
+            }
         }
 
         return $this->render('profile', [

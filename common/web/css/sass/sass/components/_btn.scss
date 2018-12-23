@@ -27,6 +27,14 @@
 		background-color: $color-attention;
 		@include button-hover($color-attention-dark);
 	}
+	&--info {
+		background-color: $color-info;
+		@include button-hover($color-info-dark);
+	}
+	&--warning {
+		background-color: $color-warning;
+		@include button-hover($color-warning-dark);
+	}
 	&:hover {
 		text-decoration: none;
 		color: #FFF;

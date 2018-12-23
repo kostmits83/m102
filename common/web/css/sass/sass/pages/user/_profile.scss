@@ -1,1 +1,38 @@
 
+.profile-message, .change-password-message {
+	padding-bottom: 3*$unit;
+	@include mq(md-plus) {
+		margin: 6*$unit 0 4*$unit 0;
+	}
+	&__text {
+		font-size: 2.8*$unit;
+		line-height: 1.6;
+		color: $color-main;
+	}
+}
+
+.profile-form, .change-password-form {
+	margin-bottom: 4*$unit;
+	padding: 4*$unit;
+	background-color: $color-secondary;
+	@include depth($unit, 3.5*$unit);
+	&__header {
+		margin-bottom: 2*$unit;
+	}
+	&__button {
+		margin: 2*$unit 0 0 0;
+		text-align: right;
+	}
+}
+
+.profile-form-wrapper {
+	@include mq(md-plus) {
+		float: left;
+	}
+}
+
+.profile-message-wrapper {
+	@include mq(md-plus) {
+		float: right;
+	}
+}
