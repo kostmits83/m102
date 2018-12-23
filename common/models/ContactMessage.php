@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
+use common\models\activeQuery\ContactMessageQuery;
 
 /**
  * This is the model class for table "contact_message".

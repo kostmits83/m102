@@ -38,7 +38,7 @@ class UserController extends Controller
     {
         $model = $this->findModel(Yii::$app->user->id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->saveProfile()) {
             return $this->redirect(['profile']);
         }
 

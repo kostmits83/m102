@@ -11,6 +11,7 @@ use yii\web\IdentityInterface;
  * User model
  *
  * @property integer $id
+ * @property integer $country_id
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
@@ -24,6 +25,8 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property Country $country
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -71,6 +74,9 @@ class User extends ActiveRecord implements IdentityInterface
 
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED, self::STATUS_NOT_ACTIVE]],
+
+            [['country_id'], 'integer'],
+            ['country_id', 'exist', 'targetAttribute' => 'id', 'targetClass' => '\common\models\Country', 'skipOnEmpty' => true, 'skipOnError' => false],
         ];
     }
 
@@ -81,6 +87,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => Yii::t('app/labels', 'id'),
+            'country_id' => Yii::t('app/labels', 'country_id'),
             'firstname' => Yii::t('app/labels', 'firstname'),
             'lastname' => Yii::t('app/labels', 'lastname'),
             'birthdate' => Yii::t('app/labels', 'birthdate'),
@@ -88,6 +95,14 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at' => Yii::t('app/labels', 'created_at'),
             'updated_at' => Yii::t('app/labels', 'updated_at'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCountry()
+    {
+        return $this->hasOne(Country::className(), ['id' => 'country_id']);
     }
 
     /**
@@ -257,6 +272,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function setLastLogin()
     {
         $this->last_login = date(self::LAST_LOGIN_FORMAT);
+    }
+
+    /**
+     * Sets the last_login field
+     * @return bool If profile has been saved or not
+     */
+    public function saveProfile()
+    {
+        return $this->save(true, ['firstname', 'lastname', 'birthdate', 'country_id']);
     }
 
 }
