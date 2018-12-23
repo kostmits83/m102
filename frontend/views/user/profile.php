@@ -9,6 +9,8 @@ use yii\bootstrap\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use common\components\widgets\AlertMessages;
 use kartik\date\DatePicker;
+use yii\helpers\ArrayHelper;
+use common\models\Country;
 
 $this->title = Yii::t('app', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
@@ -24,16 +26,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= AlertMessages::widget(['params' => []]); ?>
 
-    <div class="container">
+    <div class="container mb-4">
         <div class="row">
             <div class="col-sm-12 profile-form">
                 <h1 class="profile-form__header header-2">Update your profile</h1>
                 <?php $form = ActiveForm::begin(['id' => 'form-profile']); ?>
-                    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
+                    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email', 'disabled' => true]) ?>
                     <?= $form->field($model, 'firstname')->textInput(['maxlength' => true, 'placeholder' => 'Your Firstname']) ?>
                     <?= $form->field($model, 'lastname')->textInput(['maxlength' => true, 'placeholder' => 'Your Lastname']) ?>
+                    <?= $form->field($model, 'country_id', [
+                        'options' => [],
+                        ])->label()->dropDownList(
+                            ArrayHelper::map(Country::find()->all(), 'id', 'name'),  ['prompt' => 'Select']);
+                    ?>
                     <?= $form->field($model, 'birthdate')->widget(DatePicker::classname(), [
-                        'options' => ['placeholder' => 'Enter birth date ...'],
+                        'options' => ['placeholder' => 'Enter birth date...'],
                         'pluginOptions' => [
                             'autoclose' => true,
                             'format' => 'yyyy-mm-dd',
