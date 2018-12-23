@@ -1,5 +1,5 @@
 
-.profile-message, .change-password-message {
+.profile-message, .change-password-message, .delete-account-message {
 	padding-bottom: 3*$unit;
 	@include mq(md-plus) {
 		margin: 6*$unit 0 4*$unit 0;
@@ -11,7 +11,7 @@
 	}
 }
 
-.profile-form, .change-password-form {
+.profile-form, .change-password-form, .delete-account-form {
 	margin-bottom: 4*$unit;
 	padding: 4*$unit;
 	background-color: $color-secondary;
@@ -25,13 +25,13 @@
 	}
 }
 
-.profile-form-wrapper {
+.profile-form-wrapper, .delete-account-wrapper {
 	@include mq(md-plus) {
 		float: left;
 	}
 }
 
-.profile-message-wrapper {
+.profile-message-wrapper, .delete-account-message-wrapper {
 	@include mq(md-plus) {
 		float: right;
 	}

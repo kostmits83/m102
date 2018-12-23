@@ -37,27 +37,42 @@ class UserController extends Controller
     public function actionProfile()
     {
         $model = $this->findModel(Yii::$app->user->id);
-        $success = false;
 
-        if ($model->load(Yii::$app->request->post())) {
-            if (isset($_POST['profile-button'])) {
-                if ($model->saveProfile()) {
-                    $success = true;
-                }
-            }
-            if (isset($_POST['change-password-button'])) {
-                $model->scenario = 'changePassword';
-                if ($model->changePassword()) {
-                    $success = true;
-                }
-            }
+        if (isset($_POST['update-profile-button'])) {
 
-            if ($success) {
+            // This is the default scenario
+            $model->load(Yii::$app->request->post());
+            if ($model->saveProfile()) {
+                Yii::$app->session->setFlash('success', 'Data have been saved successfully!');
+                return Yii::$app->getResponse()->redirect(['user/profile']);
+            } else {
+                Yii::$app->session->setFlash('danger', 'Data could not been saved. Please check your input values.');
+            }
+            
+        } elseif (isset($_POST['change-password-button'])) {
+
+            $model->scenario = 'changePassword';
+            // Load only the attributes for the specific scenario
+            $model->load(Yii::$app->request->post());
+            if ($model->changePassword()) {
                 Yii::$app->session->setFlash('success', 'Data have been saved successfully!');
                 return $this->redirect(['profile']);
             } else {
                 Yii::$app->session->setFlash('danger', 'Data could not been saved. Please check your input values.');
             }
+
+        } elseif (isset($_POST['delete-account-button'])) {
+
+            $model->scenario = 'deleteAccount';
+            // Load only the attributes for the specific scenario
+            $model->load(Yii::$app->request->post());
+            if ($model->deleteAccount()) {
+                Yii::$app->user->logout();
+                return $this->goHome();
+            } else {
+                Yii::$app->session->setFlash('danger', 'Data could not been saved. Please check your input values.');
+            }
+
         }
 
         return $this->render('profile', [

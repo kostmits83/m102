@@ -37,14 +37,17 @@ class User extends ActiveRecord implements IdentityInterface
 
     const LAST_LOGIN_FORMAT = 'Y-m-d H:i:s';
 
-    // The old password field
-    public $oldPassword;
+    // The current password field
+    public $currentPassword;
 
     // The new password field
     public $newPassword;
 
     // The confirm password field
     public $confirmPassword;
+
+    // The confirm password field to delete account
+    public $confirmPasswordToDelete;
 
     /**
      * {@inheritdoc}
@@ -70,10 +73,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'firstname', 'lastname', 'oldPassword', 'newPassword', 'confirmPassword'], function ($attribute) {
+            [['email', 'firstname', 'lastname', 'currentPassword', 'newPassword', 'confirmPassword'], function ($attribute) {
                 $this->$attribute = \yii\helpers\HtmlPurifier::process($this->$attribute);
             }],
-            [['email', 'firstname', 'lastname', 'oldPassword', 'newPassword', 'confirmPassword'], 'filter', 'filter' => 'trim'],
+            [['email', 'firstname', 'lastname', 'currentPassword', 'newPassword', 'confirmPassword'], 'filter', 'filter' => 'trim'],
             [['email'], 'required'],
             ['email', 'email'],
             [['email'], 'string', 'max' => 255],
@@ -88,12 +91,15 @@ class User extends ActiveRecord implements IdentityInterface
             [['country_id'], 'integer'],
             ['country_id', 'exist', 'targetAttribute' => 'id', 'targetClass' => '\common\models\Country', 'skipOnEmpty' => true, 'skipOnError' => false],
 
-            [['oldPassword', 'newPassword', 'confirmPassword'], 'required', 'on' => 'changePassword'],
-            [['oldPassword', 'newPassword', 'confirmPassword'], 'string', 'min' => 6, 'max' => 40, 'on' => 'changePassword'],
+            [['currentPassword', 'newPassword', 'confirmPassword'], 'required', 'on' => 'changePassword'],
+            [['currentPassword', 'newPassword', 'confirmPassword'], 'string', 'min' => 6, 'max' => 40, 'on' => 'changePassword'],
             ['confirmPassword', 'compare', 'compareAttribute' => 'newPassword', 'message' => 'Passwords does not match.', 'on' => 'changePassword'],
-            ['oldPassword', 'validateCurrentPassword', 'on' => 'changePassword'],
-            [['newPassword'], StrengthValidator::className(), 'preset' => StrengthValidator::NORMAL, 'userAttribute' => 'email', 'on' => 'changePassword'],
+            ['currentPassword', 'validateCurrentPassword', 'on' => 'changePassword'],
+            [['newPassword'], StrengthValidator::className(), 'preset' => StrengthValidator::SIMPLE, 'userAttribute' => 'email', 'on' => 'changePassword'],
 
+            ['confirmPasswordToDelete', 'required', 'on' => 'deleteAccount'],
+            ['confirmPasswordToDelete', 'string', 'min' => 6, 'max' => 40, 'on' => 'deleteAccount'],
+            ['confirmPasswordToDelete', 'validateCurrentPassword', 'on' => 'deleteAccount'],
         ];
     }
 
@@ -107,7 +113,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateCurrentPassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            if (!$this || !$this->validatePassword($this->oldPassword)) {
+            if (!$this || !$this->validatePassword($this->{$attribute})) {
                 $this->addError($attribute, 'Incorrect password.');
             }
         }
@@ -325,6 +331,18 @@ class User extends ActiveRecord implements IdentityInterface
         if ($this->validate()) {
             $this->setPassword($this->newPassword);
             return $this->save(true, ['password_hash']);
+        }
+        return false;
+    }
+
+    /**
+     * Delete the user account and all the related data
+     * @return bool|int If account has been deleted or not
+     */
+    public function deleteAccount()
+    {
+        if ($this->validate()) {
+            return $this->delete();
         }
         return false;
     }
