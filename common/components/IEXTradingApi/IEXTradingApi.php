@@ -10,6 +10,11 @@ use GuzzleHttp\Exception\ClientException;
 
 use \Psr\Http\Message\ResponseInterface AS Response;
 
+use common\components\IEXTradingApi\Responses\Markets\Markets;
+use common\components\IEXTradingApi\Responses\Markets\Market;
+
+use common\components\IEXTradingApi\Exceptions\UnknownSymbolException;
+
 /**
  * IEXTrading API Integration
  * It relies on Guzzle
@@ -55,6 +60,11 @@ class IEXTradingApi extends Component
      */
     private $headers;
 
+    /**
+     * Component constructor
+     *
+     * @param $response
+     */
     public function __construct(string $apiUrl = self::API_URL, bool $verify = false, array $headers = ['Content-Type' => 'application/json'])
     {
         $this->client = new GuzzleHttpClient([
@@ -117,7 +127,7 @@ class IEXTradingApi extends Component
      * @param array $options Various options for the call
      *
      * @return mixed|Response The response of the call
-     * @throws \DPRMC\IEXTrading\Exceptions\UnknownSymbol
+     * @throws UnknownSymbolException
      * @throws \Exception
      */
     public function makeRequest(string $method = 'get', array $endpointParts = ['/'], array $options = [])
@@ -126,7 +136,7 @@ class IEXTradingApi extends Component
             return $this->client->{$method}(self::getFullUrl($endpointParts), $options);
         } catch (ClientException $clientException) {
             if ($clientException->getResponse()->getBody() === 'Unknown symbol') {
-                throw new UnknownSymbol('IEXTrading.com replied with: ' . $clientException->getResponse()->getBody());
+                throw new UnknownSymbolException('IEXTrading.com replied with: ' . $clientException->getResponse()->getBody());
             }
             throw $clientException;
         } catch (\Exception $exception) {
@@ -186,6 +196,33 @@ class IEXTradingApi extends Component
             return \GuzzleHttp\json_decode($jsonString, true);
         }
         return null;
+    }
+
+    /**
+     * From here start the call requests methods for each endpoint
+     */
+
+    /**
+     * Returns an array consisting of Market objects
+     *
+     * @return array An array of Market objects
+     */
+    public function getMarkets(): array
+    {
+        $requestCall = $this->makeRequest('get', [IEXTradingAPI::ENDPOINT_MARKET], []);
+        $response = Yii::$app->IEXTradingAPI->getResponse($requestCall);
+        
+        return (new Markets($response))->getMarkets();
+    }
+
+    /**
+     * Returns a specific Market
+     *
+     * @return Market|null The market for the specific market id or null if this does not exist
+     */
+    public function getMarket(string $market): ?Market
+    {
+        return $this->getMarkets()[$market] ?? null;
     }
 
 }
