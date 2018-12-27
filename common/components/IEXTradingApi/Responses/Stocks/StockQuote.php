@@ -53,17 +53,7 @@ class StockQuote extends IEXTradingApiResponse
      */
     public function __construct($response)
     {
-        // Use reflection to get all public properties of the class
-        $reflect = new \ReflectionClass(self::class);
-        $properties = $reflect->getProperties(\ReflectionProperty::IS_PUBLIC);
-
-        foreach ($properties as $property) {
-            $propertyName = $property->getName();
-            // Interesect with only those properties that are in the call response
-            if (array_key_exists($propertyName, $response)) {
-                $this->{$propertyName} = $response[$propertyName];
-            }
-        }
+        parent::__construct($response);
     }
 
 }

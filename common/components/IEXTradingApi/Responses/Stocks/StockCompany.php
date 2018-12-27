@@ -30,22 +30,13 @@ class StockCompany extends IEXTradingApiResponse
     ];
 
     /**
-    * @static array The class attributes
-    */
-    public static $attributes = [
-        'symbol', 'companyName', 'exchange', 'industry', 'website', 'description', 'CEO', 'issueType', 'sector', 'tags',
-    ];
-
-    /**
      * StockCompany constructor
      *
      * @param $response
      */
     public function __construct($response)
     {
-        foreach (self::$attributes as $attribute) {
-            $this->{$attribute} = $response[$attribute];
-        }
+        parent::__construct($response);
     }
 
     /**
