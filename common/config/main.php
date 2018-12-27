@@ -115,8 +115,8 @@ return [
                 ],
             ],
         ],
-        'IEXTradingAPI' => [
-            'class' => 'common\components\IEXTradingAPI\IEXTradingAPI',
+        'IEXTradingApi' => [
+            'class' => 'common\components\IEXTradingApi\IEXTradingApi',
         ],
     ],
 ];
