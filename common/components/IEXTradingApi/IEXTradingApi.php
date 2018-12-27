@@ -45,6 +45,8 @@ class IEXTradingApi extends Component
     // Company logo
     const ENDPOINT_LOGO = 'logo';
 
+    const ENDPOINT_PRICE = 'price';
+
    /**
      * @var GuzzleHttpClient
     */
@@ -241,6 +243,18 @@ class IEXTradingApi extends Component
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StockLogo($response)) ?? null;
+    }
+
+    /**
+     * Returns the price for a specific ticker
+     *
+     * @return float|null The price for the specific ticker or null if this does not exist
+     */
+    public function getStockPrice(string $ticker): ?float
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_PRICE], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+        return $response[0] ?? null;
     }
 
 }
