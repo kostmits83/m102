@@ -25,7 +25,11 @@ use common\components\IEXTradingApi\Responses\Stocks\
     SectorPerformance
 };
 
-use common\components\IEXTradingApi\Responses\Stats\StatsIntraday;
+use common\components\IEXTradingApi\Responses\Stats\
+{
+    StatsIntraday,
+    StatsRecent
+};
 
 use common\components\IEXTradingApi\Exceptions\
 {
@@ -75,6 +79,7 @@ class IEXTradingApi extends Component
     const ENDPOINT_SECTOR_PERFORMANCE = 'sector-performance';
 
     const ENDPOINT_INTRADAY = 'intraday';
+    const ENDPOINT_RECENT = 'recent';
 
    /**
      * @var GuzzleHttpClient
@@ -427,6 +432,19 @@ class IEXTradingApi extends Component
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StatsIntraday($response));
+    }
+
+    /**
+     * This call will return a minimum of the last five trading days up to all trading days of the current month
+     *
+     * @return array The recent stats list
+     */
+    public function getStatsRecent(): array
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STATS, self::ENDPOINT_RECENT], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        return (new StatsRecent($response))->getData();
     }
 
 }
