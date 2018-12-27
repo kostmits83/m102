@@ -16,8 +16,10 @@ use common\components\IEXTradingApi\Responses\Markets\Market;
 use common\components\IEXTradingApi\Responses\Stocks\StockLogo;
 use common\components\IEXTradingApi\Responses\Stocks\StockQuote;
 use common\components\IEXTradingApi\Responses\Stocks\StockCompany;
+use common\components\IEXTradingApi\Responses\Stocks\StockNews;
 
 use common\components\IEXTradingApi\Exceptions\UnknownSymbolException;
+use common\components\IEXTradingApi\Exceptions\ItemCountPassedToStockNewsOutOfRangeException;
 
 /**
  * IEXTrading API Integration
@@ -50,6 +52,7 @@ class IEXTradingApi extends Component
     const ENDPOINT_PRICE = 'price';
     const ENDPOINT_QUOTE = 'quote';
     const ENDPOINT_COMPANY = 'company';
+    const ENDPOINT_NEWS = 'news';
 
    /**
      * @var GuzzleHttpClient
@@ -220,14 +223,14 @@ class IEXTradingApi extends Component
     /**
      * Returns an array consisting of Market objects
      *
-     * @return array An array of Market objects
+     * @return array An array of Market objects or null if nothing exists
      */
-    public function getMarkets(): array
+    public function getMarkets(): ?array
     {
         $requestCall = $this->makeRequest('get', [self::ENDPOINT_MARKET], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
         
-        return (new Markets($response))->getMarkets();
+        return (new Markets($response))->getMarkets() ?? null;
     }
 
     /**
@@ -291,6 +294,45 @@ class IEXTradingApi extends Component
         $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_QUOTE], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
         return (new StockQuote($response)) ?? null;
+    }
+
+    /**
+     * @param string $ticker The market to get market-wide news or the company ticker for a specific company
+     * @param null|int $items The number of the itemn news to get. Number between 1 and 50. Default is 10
+     *
+     * @return array The news for the specific market or ticker or null if nothing exists
+     * @throws ItemCountPassedToStockNewsOutOfRangeException
+     * @throws UnknownSymbolException
+     * @throws \Exception
+     */
+    public function getStockNews(string $ticker = 'market', ?int $items = null): ?array
+    {
+        if (isset($items) && ($items < 1 || $items > 50)) {
+            throw new ItemCountPassedToStockNewsOutOfRangeException('Items number should be a number between 1 and 50. You passed in: ' . $items);
+        }
+
+        $data = [];
+
+        $urlParts = [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_NEWS];
+
+        if (isset($items) && $items !== null) {
+            $urlParts = array_merge($urlParts, ['last', $items]);
+        }
+
+        // If the response contains data the they will be in array format and they should be iterated
+        $requestCall = $this->makeRequest('get', $urlParts, []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        if (is_array($response)) {
+            // Create each StockNews that is in $response
+            foreach ($response as $key => $value) {
+                $data[] = new StockNews($value);
+            }
+
+            return $data;
+        }
+
+        return null;
     }
 
 }
