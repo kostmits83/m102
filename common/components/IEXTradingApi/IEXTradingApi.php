@@ -25,6 +25,8 @@ use common\components\IEXTradingApi\Responses\Stocks\
     SectorPerformance
 };
 
+use common\components\IEXTradingApi\Responses\Stats\StatsIntraday;
+
 use common\components\IEXTradingApi\Exceptions\
 {
     UnknownSymbolException,
@@ -71,6 +73,8 @@ class IEXTradingApi extends Component
     const ENDPOINT_LIST = 'list';
     const ENDPOINT_PEERS = 'peers';
     const ENDPOINT_SECTOR_PERFORMANCE = 'sector-performance';
+
+    const ENDPOINT_INTRADAY = 'intraday';
 
    /**
      * @var GuzzleHttpClient
@@ -410,6 +414,19 @@ class IEXTradingApi extends Component
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new SectorPerformance($response))->getData();
+    }
+
+    /**
+     * Returns the intraday stats
+     *
+     * @return StatsIntraday The intraday stats
+     */
+    public function getStatsIntraday(): StatsIntraday
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STATS, self::ENDPOINT_INTRADAY], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        return (new StatsIntraday($response));
     }
 
 }
