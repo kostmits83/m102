@@ -41,7 +41,7 @@ class StockNews extends IEXTradingApiResponse
     public $image;
 
     /**
-     * StockCompany constructor
+     * StockNews constructor
      *
      * @param $response
      */

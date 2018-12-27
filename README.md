@@ -385,7 +385,7 @@ The first is straight up HTTP requests to a server-rendered app. This is a syste
 <li style="font-weight: 400;"><span style="font-weight: 400;">Show logos</span></li>
 <li style="font-weight: 400;"><span style="font-weight: 400;">Query Top 10 (gainers, losers)</span></li>
 <li style="font-weight: 400;"><span style="font-weight: 400;">Show various charts</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Show collections</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Show lists</span></li>
 <li style="font-weight: 400;"><span style="font-weight: 400;">Get market news</span></li>
 <li style="font-weight: 400;"><span style="font-weight: 400;">Add to favorites</span></li>
 <li style="font-weight: 400;"><span style="font-weight: 400;">Add for comparison</span></li>
