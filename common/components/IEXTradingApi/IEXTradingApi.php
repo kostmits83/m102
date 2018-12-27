@@ -46,7 +46,7 @@ class IEXTradingApi extends Component
 
     // Company logo
     const ENDPOINT_LOGO = 'logo';
-
+    
     const ENDPOINT_PRICE = 'price';
     const ENDPOINT_QUOTE = 'quote';
     const ENDPOINT_COMPANY = 'company';
@@ -210,7 +210,11 @@ class IEXTradingApi extends Component
     }
 
     /**
-     * From here start the call requests methods for each endpoint
+     * ************************************************** From here start the call requests methods for each endpoint **************************************************
+     */
+
+    /**
+     * *************************** Markets ***************************
      */
 
     /**
@@ -235,6 +239,10 @@ class IEXTradingApi extends Component
     {
         return $this->getMarkets()[$market] ?? null;
     }
+
+    /**
+     * *************************** Stocks ***************************
+     */
 
     /**
      * Returns the logo for a specific ticker
@@ -266,7 +274,7 @@ class IEXTradingApi extends Component
      *
      * @return StockCompany|null The company for the specific ticker or null if this does not exist
      */
-    public function getCompany(string $ticker): ?StockCompany
+    public function getStockCompany(string $ticker): ?StockCompany
     {
         $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_COMPANY], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);

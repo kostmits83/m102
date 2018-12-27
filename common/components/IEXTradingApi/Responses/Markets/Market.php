@@ -52,14 +52,6 @@ class Market extends IEXTradingApiResponse
      */
     public $lastUpdated;
 
-    // The class attributes
-    /**
-    * @static array The class attributes
-    */
-    public static $attributes = [
-    	'mic', 'tapeId', 'venueName', 'volume', 'tapeA', 'tapeB', 'tapeC', 'marketPercent', 'lastUpdated',
-    ];
-
     /**
      * Market constructor
      *
@@ -67,9 +59,7 @@ class Market extends IEXTradingApiResponse
      */
     public function __construct($response)
     {
-    	foreach (self::$attributes as $attribute) {
-			$this->{$attribute} = $response[$attribute];
-    	}
+    	parent::__construct($response);
     }
 
 }

@@ -9,13 +9,6 @@ class StockLogo extends IEXTradingApiResponse
      * @var string Refers to url of the company's logo
      */
     public $url;
-    
-    /**
-    * @static array The class attributes
-    */
-    public static $attributes = [
-        'url',
-    ];
 
     /**
      * StockLogo constructor
@@ -24,9 +17,7 @@ class StockLogo extends IEXTradingApiResponse
      */
     public function __construct($response)
     {
-        foreach (self::$attributes as $attribute) {
-            $this->{$attribute} = $response[$attribute];
-        }
+        parent::__construct($response);
     }
 
 } 
