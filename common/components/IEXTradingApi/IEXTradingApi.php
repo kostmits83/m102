@@ -13,6 +13,10 @@ use \Psr\Http\Message\ResponseInterface AS Response;
 use common\components\IEXTradingApi\Responses\Markets\Markets;
 use common\components\IEXTradingApi\Responses\Markets\Market;
 
+use common\components\IEXTradingApi\Responses\Stocks\StockLogo;
+use common\components\IEXTradingApi\Responses\Stocks\StockQuote;
+use common\components\IEXTradingApi\Responses\Stocks\StockCompany;
+
 use common\components\IEXTradingApi\Exceptions\UnknownSymbolException;
 
 /**
@@ -39,6 +43,16 @@ class IEXTradingApi extends Component
 
     // This call returns an array of symbols IEX supports for trading. This list is updated daily as of 7:45 a.m. ET
     const ENDPOINT_REF_DATA = 'ref-data';
+
+    // Ticker logo
+    const ENDPOINT_LOGO = 'logo';
+
+    const ENDPOINT_NEWS = 'news';
+
+    const ENDPOINT_COMPANY = 'company';
+
+    const ENDPOINT_PRICE = 'price';
+    const ENDPOINT_QUOTE = 'quote';
 
    /**
      * @var GuzzleHttpClient
@@ -193,7 +207,7 @@ class IEXTradingApi extends Component
     {
         if ($this->isResponseSuccessful($response)) {
             $jsonString = (string) $response->getBody();
-            return \GuzzleHttp\json_decode($jsonString, true);
+            return (array)\GuzzleHttp\json_decode($jsonString, true);
         }
         return null;
     }
@@ -209,8 +223,8 @@ class IEXTradingApi extends Component
      */
     public function getMarkets(): array
     {
-        $requestCall = $this->makeRequest('get', [IEXTradingAPI::ENDPOINT_MARKET], []);
-        $response = Yii::$app->IEXTradingAPI->getResponse($requestCall);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_MARKET], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
         
         return (new Markets($response))->getMarkets();
     }
@@ -223,6 +237,56 @@ class IEXTradingApi extends Component
     public function getMarket(string $market): ?Market
     {
         return $this->getMarkets()[$market] ?? null;
+    }
+
+    /**
+     * Returns the logo for a specific ticker
+     *
+     * @return StockLogo|null The logo for the specific ticker or null if this does not exist
+     */
+    public function getStockLogo(string $ticker): ?StockLogo
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_LOGO], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        return (new StockLogo($response)) ?? null;
+    }
+
+    /**
+     * Returns the company for a specific ticker
+     *
+     * @return StockCompany|null The company for the specific ticker or null if this does not exist
+     */
+    public function getCompany(string $ticker): ?StockCompany
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_COMPANY], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        return (new StockCompany($response)) ?? null;
+    }
+
+    /**
+     * Returns the price for a specific ticker
+     *
+     * @return float|null The price for the specific ticker or null if this does not exist
+     */
+    public function getStockPrice(string $ticker): ?float
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_PRICE], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+        return $response[0] ?? null;
+    }
+
+    /**
+     * Returns the quote for a specific ticker
+     *
+     * @return StockQuote|null The quote for the specific ticker or null if this does not exist
+     */
+    public function getStockQuote(string $ticker): ?StockQuote
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_QUOTE], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+        return (new StockQuote($response)) ?? null;
     }
 
 }
