@@ -21,7 +21,8 @@ use common\components\IEXTradingApi\Responses\Stocks\
     StockQuote,
     StockCompany,
     StockNews,
-    StockList
+    StockList,
+    SectorPerformance
 };
 
 use common\components\IEXTradingApi\Exceptions\
@@ -69,6 +70,7 @@ class IEXTradingApi extends Component
     const ENDPOINT_NEWS = 'news';
     const ENDPOINT_LIST = 'list';
     const ENDPOINT_PEERS = 'peers';
+    const ENDPOINT_SECTOR_PERFORMANCE = 'sector-performance';
 
    /**
      * @var GuzzleHttpClient
@@ -395,6 +397,19 @@ class IEXTradingApi extends Component
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return $response;
+    }
+
+    /**
+     * Returns an array containing all the sectors and their performance
+     *
+     * @return array The sector performance array
+     */
+    public function getSectorPerformance(): array
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, self::ENDPOINT_MARKET, self::ENDPOINT_SECTOR_PERFORMANCE], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        return (new SectorPerformance($response))->getData();
     }
 
 }
