@@ -14,6 +14,7 @@ use common\components\IEXTradingApi\Responses\Markets\Markets;
 use common\components\IEXTradingApi\Responses\Markets\Market;
 
 use common\components\IEXTradingApi\Responses\Stocks\StockLogo;
+use common\components\IEXTradingApi\Responses\Stocks\StockQuote;
 use common\components\IEXTradingApi\Responses\Stocks\StockCompany;
 
 use common\components\IEXTradingApi\Exceptions\UnknownSymbolException;
@@ -47,7 +48,7 @@ class IEXTradingApi extends Component
     const ENDPOINT_LOGO = 'logo';
 
     const ENDPOINT_PRICE = 'price';
-
+    const ENDPOINT_QUOTE = 'quote';
     const ENDPOINT_COMPANY = 'company';
 
    /**
@@ -270,6 +271,18 @@ class IEXTradingApi extends Component
         $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_COMPANY], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
         return (new StockCompany($response)) ?? null;
+    }
+
+    /**
+     * Returns the quote for a specific ticker
+     *
+     * @return StockQuote|null The quote for the specific ticker or null if this does not exist
+     */
+    public function getStockQuote(string $ticker): ?StockQuote
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_QUOTE], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+        return (new StockQuote($response)) ?? null;
     }
 
 }
