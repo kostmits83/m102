@@ -2,24 +2,38 @@
 namespace common\components\IEXTradingApi;
 
 use Yii;
-use yii\base\Component;
-use yii\base\InvalidConfigException;
+
+use yii\base\
+{
+    Component,
+    InvalidConfigException
+};
+
+use common\components\IEXTradingApi\Responses\Markets\
+{
+    Markets,
+    Market
+};
+
+use common\components\IEXTradingApi\Responses\Stocks\
+{
+    StockLogo,
+    StockQuote,
+    StockCompany,
+    StockNews,
+    StockList
+};
+
+use common\components\IEXTradingApi\Exceptions\
+{
+    UnknownSymbolException,
+    ItemCountPassedToStockNewsOutOfRangeException
+};
 
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\ClientException;
 
-use \Psr\Http\Message\ResponseInterface AS Response;
-
-use common\components\IEXTradingApi\Responses\Markets\Markets;
-use common\components\IEXTradingApi\Responses\Markets\Market;
-
-use common\components\IEXTradingApi\Responses\Stocks\StockLogo;
-use common\components\IEXTradingApi\Responses\Stocks\StockQuote;
-use common\components\IEXTradingApi\Responses\Stocks\StockCompany;
-use common\components\IEXTradingApi\Responses\Stocks\StockNews;
-
-use common\components\IEXTradingApi\Exceptions\UnknownSymbolException;
-use common\components\IEXTradingApi\Exceptions\ItemCountPassedToStockNewsOutOfRangeException;
+use \Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * IEXTrading API Integration
@@ -53,6 +67,7 @@ class IEXTradingApi extends Component
     const ENDPOINT_QUOTE = 'quote';
     const ENDPOINT_COMPANY = 'company';
     const ENDPOINT_NEWS = 'news';
+    const ENDPOINT_LIST = 'list';
 
    /**
      * @var GuzzleHttpClient
@@ -209,6 +224,7 @@ class IEXTradingApi extends Component
             $jsonString = (string) $response->getBody();
             return (array)\GuzzleHttp\json_decode($jsonString, true);
         }
+
         return null;
     }
 
@@ -236,6 +252,8 @@ class IEXTradingApi extends Component
     /**
      * Returns a specific Market
      *
+     * @param string $market The market to get the info
+     *
      * @return Market|null The market for the specific market id or null if this does not exist
      */
     public function getMarket(string $market): ?Market
@@ -250,6 +268,8 @@ class IEXTradingApi extends Component
     /**
      * Returns the logo for a specific ticker
      *
+     * @param string $ticker The ticker to get the logo
+     *
      * @return StockLogo|null The logo for the specific ticker or null if this does not exist
      */
     public function getStockLogo(string $ticker): ?StockLogo
@@ -263,17 +283,22 @@ class IEXTradingApi extends Component
     /**
      * Returns the price for a specific ticker
      *
+     * @param string $ticker The ticker to get the stock price
+     *
      * @return float|null The price for the specific ticker or null if this does not exist
      */
     public function getStockPrice(string $ticker): ?float
     {
         $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_PRICE], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
         return $response[0] ?? null;
     }
 
     /**
      * Returns the company for a specific ticker
+     *
+     * @param string $ticker The ticker to get the company info
      *
      * @return StockCompany|null The company for the specific ticker or null if this does not exist
      */
@@ -281,18 +306,23 @@ class IEXTradingApi extends Component
     {
         $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_COMPANY], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
         return (new StockCompany($response)) ?? null;
     }
 
     /**
      * Returns the quote for a specific ticker
      *
+     * @param string $ticker The ticker to get the stock quote
+     * @param bool $displayPercent If set to true, all percentage values will be multiplied by a factor of 100 (Ex: /stock/aapl/quote?displayPercent=true)
+     *
      * @return StockQuote|null The quote for the specific ticker or null if this does not exist
      */
-    public function getStockQuote(string $ticker): ?StockQuote
+    public function getStockQuote(string $ticker, bool $displayPercent = false): ?StockQuote
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_QUOTE], []);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_QUOTE], ['displayPercent' => $displayPercent]);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
         return (new StockQuote($response)) ?? null;
     }
 
@@ -333,6 +363,22 @@ class IEXTradingApi extends Component
         }
 
         return null;
+    }
+
+    /**
+     * Returns the quote list for a specific list type
+     *
+     * @param string $listType The list type to get the related quotes
+     * @param bool $displayPercent If set to true, all percentage values will be multiplied by a factor of 100 (Ex: /stock/aapl/quote?displayPercent=true)
+     *
+     * @return array|null An array of quotes of the specific list or null if nothing exists
+     */
+    public function getStockList(string $listType, bool $displayPercent = false): ?array
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, self::ENDPOINT_MARKET, self::ENDPOINT_LIST, $listType], ['displayPercent' => $displayPercent]);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        return (new StockList($response))->getData() ?? null;
     }
 
 }
