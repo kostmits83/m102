@@ -68,6 +68,7 @@ class IEXTradingApi extends Component
     const ENDPOINT_COMPANY = 'company';
     const ENDPOINT_NEWS = 'news';
     const ENDPOINT_LIST = 'list';
+    const ENDPOINT_PEERS = 'peers';
 
    /**
      * @var GuzzleHttpClient
@@ -379,6 +380,21 @@ class IEXTradingApi extends Component
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StockList($response))->getData() ?? null;
+    }
+
+    /**
+     * Returns the peers for a specific ticker
+     *
+     * @param string $ticker The ticker to get the peers
+     *
+     * @return array An array of the peers for the specific ticker or null if nothing exists
+     */
+    public function getStockPeers(string $ticker): array
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_PEERS], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        return $response;
     }
 
 }
