@@ -14,6 +14,7 @@ use common\components\IEXTradingApi\Responses\Markets\Markets;
 use common\components\IEXTradingApi\Responses\Markets\Market;
 
 use common\components\IEXTradingApi\Responses\Stocks\StockLogo;
+use common\components\IEXTradingApi\Responses\Stocks\StockCompany;
 
 use common\components\IEXTradingApi\Exceptions\UnknownSymbolException;
 
@@ -46,6 +47,8 @@ class IEXTradingApi extends Component
     const ENDPOINT_LOGO = 'logo';
 
     const ENDPOINT_PRICE = 'price';
+
+    const ENDPOINT_COMPANY = 'company';
 
    /**
      * @var GuzzleHttpClient
@@ -255,6 +258,18 @@ class IEXTradingApi extends Component
         $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_PRICE], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
         return $response[0] ?? null;
+    }
+
+    /**
+     * Returns the company for a specific ticker
+     *
+     * @return StockCompany|null The company for the specific ticker or null if this does not exist
+     */
+    public function getCompany(string $ticker): ?StockCompany
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_COMPANY], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+        return (new StockCompany($response)) ?? null;
     }
 
 }
