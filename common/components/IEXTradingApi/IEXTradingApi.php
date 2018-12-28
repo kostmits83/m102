@@ -37,6 +37,8 @@ use common\components\IEXTradingApi\Exceptions\
     ItemCountPassedToStockNewsOutOfRangeException
 };
 
+use common\components\IEXTradingApi\Responses\ReferenceData\ReferenceDataSymbol;
+
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\ClientException;
 
@@ -65,7 +67,7 @@ class IEXTradingApi extends Component
     const ENDPOINT_TOPS = 'tops';
 
     // This call returns an array of symbols IEX supports for trading. This list is updated daily as of 7:45 a.m. ET
-    const ENDPOINT_REF_DATA = 'ref-data';
+    const ENDPOINT_REFERENCE_DATA = 'ref-data';
 
     // Company logo
     const ENDPOINT_STOCK_LOGO = 'logo';
@@ -80,6 +82,8 @@ class IEXTradingApi extends Component
 
     const ENDPOINT_STATS_INTRADAY = 'intraday';
     const ENDPOINT_STATS_RECENT = 'recent';
+
+    const ENDPOINT_REFERENCE_DATA_SYMBOLS = 'symbols';
 
    /**
      * @var GuzzleHttpClient
@@ -437,6 +441,19 @@ class IEXTradingApi extends Component
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StatsRecent($response))->getData();
+    }
+
+    /**
+     * Returns the logo for a specific ticker
+     *
+     * @return array|null The logo for the specific ticker or null if this does not exist
+     */
+    public function getReferenceDataSymbols(): ?array
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_REFERENCE_DATA, self::ENDPOINT_REFERENCE_DATA_SYMBOLS], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        return (new ReferenceDataSymbol($response))->getData() ?? null;
     }
 
 }
