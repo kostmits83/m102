@@ -20,7 +20,7 @@ class StockList extends IEXTradingApiResponse
             $this->data = [];
             // Create each StockQuote that exists in $response
             foreach ($response as $key => $value) {
-                $this->data[] = new StockQuote($value);
+                $this->data[] = new self($value);
             }
         } else {
             $this->data = null;
