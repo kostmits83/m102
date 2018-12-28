@@ -3,7 +3,7 @@ namespace common\components\IEXTradingApi\Responses\Stocks;
 
 use common\components\IEXTradingApi\Responses\IEXTradingApiResponse;
 
-class SectorPerformance extends IEXTradingApiResponse
+class StockSectorPerformance extends IEXTradingApiResponse
 {
     // The data list to be returned as a result
     private $data;
@@ -29,7 +29,7 @@ class SectorPerformance extends IEXTradingApiResponse
     public $lastUpdated;
 
     /**
-     * SectorPerformance constructor
+     * StockSectorPerformance constructor
      *
      * @param $response
      */

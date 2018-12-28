@@ -22,7 +22,7 @@ use common\components\IEXTradingApi\Responses\Stocks\
     StockCompany,
     StockNews,
     StockList,
-    SectorPerformance
+    StockSectorPerformance
 };
 
 use common\components\IEXTradingApi\Responses\Stats\
@@ -68,18 +68,18 @@ class IEXTradingApi extends Component
     const ENDPOINT_REF_DATA = 'ref-data';
 
     // Company logo
-    const ENDPOINT_LOGO = 'logo';
+    const ENDPOINT_STOCK_LOGO = 'logo';
     
-    const ENDPOINT_PRICE = 'price';
-    const ENDPOINT_QUOTE = 'quote';
-    const ENDPOINT_COMPANY = 'company';
-    const ENDPOINT_NEWS = 'news';
-    const ENDPOINT_LIST = 'list';
-    const ENDPOINT_PEERS = 'peers';
-    const ENDPOINT_SECTOR_PERFORMANCE = 'sector-performance';
+    const ENDPOINT_STOCK_PRICE = 'price';
+    const ENDPOINT_STOCK_QUOTE = 'quote';
+    const ENDPOINT_STOCK_COMPANY = 'company';
+    const ENDPOINT_STOCK_NEWS = 'news';
+    const ENDPOINT_STOCK_LIST = 'list';
+    const ENDPOINT_STOCK_PEERS = 'peers';
+    const ENDPOINT_STOCK_SECTOR_PERFORMANCE = 'sector-performance';
 
-    const ENDPOINT_INTRADAY = 'intraday';
-    const ENDPOINT_RECENT = 'recent';
+    const ENDPOINT_STATS_INTRADAY = 'intraday';
+    const ENDPOINT_STATS_RECENT = 'recent';
 
    /**
      * @var GuzzleHttpClient
@@ -139,24 +139,27 @@ class IEXTradingApi extends Component
      * Creates the full url of the endpoint
      *
      * @param array $endpointParts The parts that consists the url. The position of the given values in the array is IMPORTANT
+     * @param array $urlParams The parameters of the url query
      *
      * @return string The endpoint url
      */
-    protected static function getEndpointFullUrl(array $endpointParts): string
+    protected static function getEndpointFullUrl(array $endpointParts, array $urlParams = []): string
     {
-        return implode('/', $endpointParts);
+        $urlParamsStr = empty($urlParams) ? '' : '?' . http_build_query($urlParams);
+        return implode('/', $endpointParts) . $urlParamsStr;
     }
 
     /**
      * Creates the full url of the call
      *
      * @param array $endpointParts The parts that consists the url
+     * @param array $urlParams The parameters of the url query
      *
      * @return string The full url
      */
-    protected static function getFullUrl(array $endpointParts): string
+    protected static function getFullUrl(array $endpointParts, array $urlParams = []): string
     {
-        return self::API_URL . '/' . self::getEndpointFullUrl($endpointParts);
+        return self::API_URL . '/' . self::getEndpointFullUrl($endpointParts, $urlParams);
     }
 
     /**
@@ -165,7 +168,7 @@ class IEXTradingApi extends Component
      *
      * @param string $method The method of the call
      * @param array $endpointParts The parts of the endpoint to be called
-     * @param array $options Various options for the call
+     * @param array $options Various options for the call. The key 'urlParams' is about the parameters of the url query
      *
      * @return mixed|Response The response of the call
      * @throws UnknownSymbolException
@@ -173,8 +176,10 @@ class IEXTradingApi extends Component
      */
     public function makeRequest(string $method = 'get', array $endpointParts = ['/'], array $options = [])
     {
+        // Get the url parameters
+        $urlParams = empty($options['urlParams']) ? [] : $options['urlParams'];
         try {
-            return $this->client->{$method}(self::getFullUrl($endpointParts), $options);
+            return $this->client->{$method}(self::getFullUrl($endpointParts, $urlParams), $options);
         } catch (ClientException $clientException) {
             if ($clientException->getResponse()->getBody() === 'Unknown symbol') {
                 throw new UnknownSymbolException('IEXTrading.com replied with: ' . $clientException->getResponse()->getBody());
@@ -194,19 +199,6 @@ class IEXTradingApi extends Component
      * @return mixed
      */
     private function get(string $endpoint = '', array $options = []): Response 
-    {
-        return $this->client->{__FUNCTION__}($endpoint, $options);
-    }
-
-    /**
-     * Sends the POST call request
-     *
-     * @param string $endpoint The endpoint of the call
-     * @param array $options Additional options for the call
-     *
-     * @return mixed
-     */
-    private function post(string $endpoint = '', array $options = []): Response 
     {
         return $this->client->{__FUNCTION__}($endpoint, $options);
     }
@@ -286,7 +278,7 @@ class IEXTradingApi extends Component
      */
     public function getStockLogo(string $ticker): ?StockLogo
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_LOGO], []);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_STOCK_LOGO], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StockLogo($response)) ?? null;
@@ -301,7 +293,7 @@ class IEXTradingApi extends Component
      */
     public function getStockPrice(string $ticker): ?float
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_PRICE], []);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_STOCK_PRICE], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return $response[0] ?? null;
@@ -316,7 +308,7 @@ class IEXTradingApi extends Component
      */
     public function getStockCompany(string $ticker): ?StockCompany
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_COMPANY], []);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_STOCK_COMPANY], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StockCompany($response)) ?? null;
@@ -326,13 +318,13 @@ class IEXTradingApi extends Component
      * Returns the quote for a specific ticker
      *
      * @param string $ticker The ticker to get the stock quote
-     * @param bool $displayPercent If set to true, all percentage values will be multiplied by a factor of 100 (Ex: /stock/aapl/quote?displayPercent=true)
+     * @param string $displayPercent If set to 'true', all percentage values will be multiplied by a factor of 100 (Ex: /stock/aapl/quote?displayPercent=true)
      *
      * @return StockQuote|null The quote for the specific ticker or null if this does not exist
      */
-    public function getStockQuote(string $ticker, bool $displayPercent = false): ?StockQuote
+    public function getStockQuote(string $ticker, string $displayPercent = 'false'): ?StockQuote
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_QUOTE], ['displayPercent' => $displayPercent]);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_STOCK_QUOTE], ['urlParams' => ['displayPercent' => $displayPercent]]);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StockQuote($response)) ?? null;
@@ -355,7 +347,7 @@ class IEXTradingApi extends Component
 
         $data = [];
 
-        $urlParts = [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_NEWS];
+        $urlParts = [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_STOCK_NEWS];
 
         if (isset($items) && $items !== null) {
             $urlParts = array_merge($urlParts, ['last', $items]);
@@ -381,13 +373,13 @@ class IEXTradingApi extends Component
      * Returns the quote list for a specific list type
      *
      * @param string $listType The list type to get the related quotes
-     * @param bool $displayPercent If set to true, all percentage values will be multiplied by a factor of 100 (Ex: /stock/aapl/quote?displayPercent=true)
+     * @param string $displayPercent If set to 'true', all percentage values will be multiplied by a factor of 100 (Ex: /stock/aapl/quote?displayPercent=true)
      *
      * @return array|null An array of quotes of the specific list or null if nothing exists
      */
-    public function getStockList(string $listType, bool $displayPercent = false): ?array
+    public function getStockList(string $listType, string $displayPercent = 'false'): ?array
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, self::ENDPOINT_MARKET, self::ENDPOINT_LIST, $listType], ['displayPercent' => $displayPercent]);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, self::ENDPOINT_MARKET, self::ENDPOINT_STOCK_LIST, $listType], ['urlParams' => ['displayPercent' => $displayPercent]]);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StockList($response))->getData() ?? null;
@@ -402,7 +394,7 @@ class IEXTradingApi extends Component
      */
     public function getStockPeers(string $ticker): array
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_PEERS], []);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_STOCK_PEERS], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return $response;
@@ -413,12 +405,12 @@ class IEXTradingApi extends Component
      *
      * @return array The sector performance array
      */
-    public function getSectorPerformance(): array
+    public function getStockSectorPerformance(): array
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, self::ENDPOINT_MARKET, self::ENDPOINT_SECTOR_PERFORMANCE], []);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, self::ENDPOINT_MARKET, self::ENDPOINT_STOCK_SECTOR_PERFORMANCE], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
-        return (new SectorPerformance($response))->getData();
+        return (new StockSectorPerformance($response))->getData();
     }
 
     /**
@@ -428,7 +420,7 @@ class IEXTradingApi extends Component
      */
     public function getStatsIntraday(): StatsIntraday
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STATS, self::ENDPOINT_INTRADAY], []);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STATS, self::ENDPOINT_STATS_INTRADAY], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StatsIntraday($response));
@@ -441,7 +433,7 @@ class IEXTradingApi extends Component
      */
     public function getStatsRecent(): array
     {
-        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STATS, self::ENDPOINT_RECENT], []);
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STATS, self::ENDPOINT_STATS_RECENT], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new StatsRecent($response))->getData();
