@@ -1,4 +1,3 @@
-
 <?php if (!empty(Yii::$app->session->getAllFlashes())): ?>
 <div class="container">
 	<div class="row">
