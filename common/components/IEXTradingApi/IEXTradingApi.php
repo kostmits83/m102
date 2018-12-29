@@ -23,6 +23,7 @@ use common\components\IEXTradingApi\Responses\Stocks\
     StockNews,
     StockList,
     StockChart,
+    StockMarketBatch,
     StockSectorPerformance
 };
 
@@ -80,6 +81,7 @@ class IEXTradingApi extends Component
     const ENDPOINT_STOCK_LIST = 'list';
     const ENDPOINT_STOCK_PEERS = 'peers';
     const ENDPOINT_STOCK_CHART = 'chart';
+    const ENDPOINT_STOCK_BATCH = 'batch';
     const ENDPOINT_STOCK_SECTOR_PERFORMANCE = 'sector-performance';
 
     const ENDPOINT_STATS_INTRADAY = 'intraday';
@@ -476,6 +478,31 @@ class IEXTradingApi extends Component
         }
 
         return (new StockChart($response))->getData() ?? null;
+    }
+
+    /**
+     * Returns info for multiple symbols
+     *
+     * @param array $symbols The symbols to get the various info
+     * @param array $types The types of the info
+     * @param string $range The range of the data to get
+     * @param int $lastItems The number of last items to get for the news type
+     *
+     * @return array|null The logo for the specific ticker or null if this does not exist
+     */
+    public function getStockMarketBatch(array $symbols, array $types, string $range = '1m', $lastItems = 5)
+    {
+        $urlParams = [
+            'symbols' => implode(',', $symbols),
+            'types' => implode(',', $types),
+            'range' => $range,
+            'last' => $lastItems,
+        ];
+
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, self::ENDPOINT_MARKET, self::ENDPOINT_STOCK_BATCH], ['urlParams' => $urlParams]);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        return (new StockMarketBatch($response, $types))->getData() ?? null;
     }
 
 }
