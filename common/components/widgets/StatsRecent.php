@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 use yii\helpers\Url;
 
-class Markets extends Widget
+class StatsRecent extends Widget
 {
     public $params;
 
@@ -19,7 +19,7 @@ class Markets extends Widget
 
     public function run()
     {
-        $this->params['response'] = Yii::$app->IEXTradingApi->getMarkets();
-        return $this->render('marketsView', ['params' => $this->params]);
+        $this->params['response'] = Yii::$app->IEXTradingApi->getStatsRecent();
+        return $this->render('statsRecentView', ['params' => $this->params]);
     }
 }
