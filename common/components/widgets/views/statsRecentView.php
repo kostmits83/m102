@@ -10,7 +10,7 @@ use common\components\IEXTradingApi\Responses\Stats\StatsRecent;
 	<table class="table table-responsive table-striped table-bordered table-hover">
 		<tr>
 			<?php foreach (StatsRecent::getPropertiesForTable() as $key): ?>
-			<th><?= StatsRecent::getPropertyLabel($key); ?></th>
+			<th title="<?= StatsRecent::getPropertyTitle($key); ?>"><?= StatsRecent::getPropertyLabel($key); ?></th>
 			<?php endforeach; ?>
 		</tr>
 	<?php foreach ($params['response'] as $key => $model): ?>

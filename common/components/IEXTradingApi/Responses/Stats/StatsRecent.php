@@ -74,4 +74,20 @@ class StatsRecent extends IEXTradingApiResponse
         ];
     }
 
+    /**
+     * Returns the property titles for the attributes
+     *
+     * @return array An array containing the titles of the properties
+     */
+    public static function getPropertyTitles(): array
+    {
+        return [
+            'date' => 'Refers to the trading day',
+            'volume' => 'Refers to single counted shares matched from executions on IEX',
+            'routedVolume' => 'Refers to single counted shares matched from executions on IEX',
+            'marketShare' => 'Refers to IEX’s percentage of total US Equity market volume',
+            'litVolume' => 'Refers to the number of lit shares traded on IEX (single-counted)',
+        ];
+    }
+
 }

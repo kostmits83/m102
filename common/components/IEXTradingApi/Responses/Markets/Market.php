@@ -74,4 +74,21 @@ class Market extends IEXTradingApiResponse
         ];
     }
 
+    /**
+     * Returns the property titles for the attributes
+     *
+     * @return array An array containing the titles of the properties
+     */
+    public static function getPropertyTitles(): array
+    {
+        return [
+            'mic' => 'Refers to the Market Identifier Code (MIC)',
+            'volume' => 'Refers to the amount of traded shares reported by the venue',
+            'tapeA' => 'Refers to the amount of Tape A traded shares reported by the venue',
+            'tapeB' => 'Refers to the amount of Tape B traded shares reported by the venue',
+            'tapeC' => 'Refers to the amount of Tape C traded shares reported by the venue',
+            'marketPercent' => 'Refers to the venue’s percentage of shares traded in the market',
+        ];
+    }
+
 }
