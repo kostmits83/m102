@@ -22,6 +22,7 @@ use common\components\IEXTradingApi\Responses\Stocks\
     StockCompany,
     StockNews,
     StockList,
+    StockChart,
     StockSectorPerformance
 };
 
@@ -78,6 +79,7 @@ class IEXTradingApi extends Component
     const ENDPOINT_STOCK_NEWS = 'news';
     const ENDPOINT_STOCK_LIST = 'list';
     const ENDPOINT_STOCK_PEERS = 'peers';
+    const ENDPOINT_STOCK_CHART = 'chart';
     const ENDPOINT_STOCK_SECTOR_PERFORMANCE = 'sector-performance';
 
     const ENDPOINT_STATS_INTRADAY = 'intraday';
@@ -454,6 +456,26 @@ class IEXTradingApi extends Component
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
         return (new ReferenceDataSymbol($response))->getData() ?? null;
+    }
+
+    /**
+     * Returns the chart data for a specific ticker
+     *
+     * @param string $ticker The ticker to get the stock chart
+     * @param string $range The range period of the stock chart
+     *
+     * @return array|null The logo for the specific ticker or null if this does not exist
+     */
+    public function getStockChart(string $ticker, string $range = '1m'): ?array
+    {
+        $requestCall = $this->makeRequest('get', [self::ENDPOINT_STOCK, $ticker, self::ENDPOINT_STOCK_CHART, $range], []);
+        $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
+
+        if (!in_array($range, StockChart::$supportedRanges)) {
+            return null;
+        }
+
+        return (new StockChart($response))->getData() ?? null;
     }
 
 }
