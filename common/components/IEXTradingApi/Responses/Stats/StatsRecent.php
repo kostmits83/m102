@@ -62,4 +62,16 @@ class StatsRecent extends IEXTradingApiResponse
         return $this->data;
     }
 
+    /**
+     * Returns only the properties that supposed to be shown at the tables
+     *
+     * @return array An array containing the properties to be shown at the table
+     */
+    public static function getPropertiesForTable(): array
+    {
+        return [
+            'date', 'volume', 'routedVolume', 'marketShare', 'litVolume',
+        ];
+    }
+
 }

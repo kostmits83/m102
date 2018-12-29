@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 use yii\helpers\Url;
 
-class SidebarStockNews extends Widget
+class StockNews extends Widget
 {
     public $params;
 
@@ -24,6 +24,6 @@ class SidebarStockNews extends Widget
         ], $this->params);
         
         $this->params['response'] = Yii::$app->IEXTradingApi->getStockNews($params['ticker'], $params['items']);
-        return $this->render('sidebarStockNewsView', ['params' => $this->params]);
+        return $this->render('stockNewsView', ['params' => $this->params]);
     }
 }

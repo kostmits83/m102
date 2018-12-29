@@ -13,18 +13,18 @@ use common\components\IEXTradingApi\Responses\Markets\Market;
 			<th><?= Market::getPropertyLabel($key); ?></th>
 			<?php endforeach; ?>
 		</tr>
-	<?php foreach ($params['response'] as $key => $market): ?>
+	<?php foreach ($params['response'] as $key => $model): ?>
 		<tr>
-			<td><?= $market->mic; ?></td>
-			<td><?= VariousHelper::getEuropeanNumber($market->volume); ?></td>
-			<td><?= VariousHelper::getEuropeanNumber($market->tapeA); ?></td>
-			<td><?= VariousHelper::getEuropeanNumber($market->tapeB); ?></td>
-			<td><?= VariousHelper::getEuropeanNumber($market->tapeC); ?></td>
-			<td><?= VariousHelper::getEuropeanNumber($market->marketPercent); ?></td>
+			<td><?= $model->mic; ?></td>
+			<td><?= VariousHelper::getEuropeanNumber($model->volume); ?></td>
+			<td><?= VariousHelper::getEuropeanNumber($model->tapeA); ?></td>
+			<td><?= VariousHelper::getEuropeanNumber($model->tapeB); ?></td>
+			<td><?= VariousHelper::getEuropeanNumber($model->tapeC); ?></td>
+			<td><?= VariousHelper::getEuropeanNumber($model->marketPercent * 100); ?></td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php else: ?>
-	<p>Current there are no available markets info.</p>
+	<p>Currently there are no available markets info.</p>
 <?php endif; ?>
 </div>
