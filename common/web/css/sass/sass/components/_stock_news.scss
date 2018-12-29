@@ -1,0 +1,33 @@
+
+.stock {
+	&-news {
+		&__header {
+			padding: 0.5*$unit 0;
+			text-align: center;
+			background-color: $color-fourth;
+		}
+	}
+	&-article {
+		margin-bottom: 2*$unit;
+		border-bottom: 1px solid $color-fourth;
+		&__header {
+			margin-bottom: 0.5*$unit;
+		}
+		&__summary {
+			margin-bottom: $unit;
+			line-height: 1.5;
+		}
+		&__source, &__datetime {
+			font-size: 1.3*$unit;
+			font-weight: bold;
+			line-height: 1;
+		}
+		&__datetime {
+			margin-bottom: 0.5*$unit;
+		}
+		&__source {
+			margin-bottom: 1.5*$unit;
+			text-align: right;
+		}
+	}
+}

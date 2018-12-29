@@ -1,0 +1,6 @@
+
+.sidebar {
+	padding: $unit;
+	background-color: $color-secondary;
+	@include border-radius(0.5*$unit);
+}
