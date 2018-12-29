@@ -21,4 +21,9 @@ class VariousHelper
         return (new \DateTime)::createFromFormat($formatFrom, $datetime)->format($formatTo) ?? '';
     }
 
+    public static function getEuropeanNumber($value, int $decimals = 2, string $decPoint = ',', string $thousandSeperator = '.')
+    {
+        return number_format($value, $decimals, $decPoint, $thousandSeperator);
+    }
+
 }

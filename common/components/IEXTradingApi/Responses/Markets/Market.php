@@ -62,4 +62,16 @@ class Market extends IEXTradingApiResponse
     	parent::__construct($response);
     }
 
+    /**
+     * Returns only the properties that supposed to be shown at the tables
+     *
+     * @return array An array containing the properties to be shown at the table
+     */
+    public static function getPropertiesForTable(): array
+    {
+        return [
+            'mic', 'volume', 'tapeA', 'tapeB', 'tapeC', 'marketPercent',
+        ];
+    }
+
 }
