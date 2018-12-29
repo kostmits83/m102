@@ -73,4 +73,15 @@ abstract class IEXTradingApiResponse
         return static::$propertyLabels[$propertyName] ?? '';
     }
 
+    /**
+     * Returns the title for the specific property
+     *
+     * @param string $property The property to get the title
+     * @return string The title of the property or an empty string if the property has not been set
+     */
+    public static function getPropertyTitle(string $property): string
+    {
+        return static::getPropertyTitles()[$property] ?? '';
+    }
+
 }
