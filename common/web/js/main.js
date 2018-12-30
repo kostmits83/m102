@@ -10,7 +10,7 @@ $(window).scroll(function() {
 
 // Animate the scroll duration
 $('.scroll-to-top').click(function() {
-	$('"body, html').animate({
+	$('body, html').animate({
 		scrollTop: 0
 	}, 800);
 	return false;
