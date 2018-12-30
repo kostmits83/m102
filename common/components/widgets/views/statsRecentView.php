@@ -4,7 +4,7 @@ use common\helpers\VariousHelper;
 use common\components\IEXTradingApi\Responses\Stats\StatsRecent;
 ?>
 
-<div class="markets">
+<div class="stats-recent">
 	<h1 class="header-3 stats-recent__header">Recents Stats</h1>
 <?php if (!empty($params['response'])): ?>
 	<table class="table table-responsive table-striped table-bordered table-hover">

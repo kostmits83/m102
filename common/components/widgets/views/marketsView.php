@@ -25,6 +25,6 @@ use common\components\IEXTradingApi\Responses\Markets\Market;
 	<?php endforeach; ?>
 	</table>
 <?php else: ?>
-	<p>Currently there are no available markets info.</p>
+	<p>Currently there are no available Markets info.</p>
 <?php endif; ?>
 </div>

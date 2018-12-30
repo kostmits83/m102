@@ -1,6 +1,7 @@
 <?php
 use common\components\widgets\StockNews;
 use common\components\widgets\StockList;
+use common\components\widgets\StockSectorPerformance;
 use common\components\widgets\Markets;
 use common\components\widgets\StatsRecent;
 
@@ -19,6 +20,7 @@ use common\components\widgets\StatsRecent;
     			<?= StockList::widget(['params' => ['listType' => 'gainers', 'header' => 'Top Gainers']]); ?>
     			<?= StockList::widget(['params' => ['listType' => 'losers', 'header' => 'Top Losers']]); ?>
     			<?= StockList::widget(['params' => ['listType' => 'infocus', 'header' => 'Top In Focus']]); ?>
+    			<?= StockSectorPerformance::widget(['params' => []]); ?>
 				
 			</div>
 	    	<aside class="col-xs-12 col-lg-3 sidebar sidebar--stock-news">
