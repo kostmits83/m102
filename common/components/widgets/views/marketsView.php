@@ -10,7 +10,7 @@ use common\components\IEXTradingApi\Responses\Markets\Market;
 	<table class="table table-responsive table-striped table-bordered table-hover">
 		<tr>
 			<?php foreach (Market::getPropertiesForTable() as $key): ?>
-			<th title="<?= Market::getPropertyTitle($key); ?>"><?= Market::getPropertyLabel($key); ?></th>
+			<th data-toggle="tooltip" data-container="body" title="<?= Market::getPropertyTitle($key); ?>"><?= Market::getPropertyLabel($key); ?></th>
 			<?php endforeach; ?>
 		</tr>
 	<?php foreach ($params['response'] as $key => $model): ?>
