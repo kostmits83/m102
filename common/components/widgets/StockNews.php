@@ -2,10 +2,8 @@
 namespace common\components\widgets;
 
 use Yii;
-
 use yii\base\Widget;
 use yii\helpers\Html;
-
 use yii\helpers\Url;
 
 class StockNews extends Widget
@@ -26,4 +24,5 @@ class StockNews extends Widget
         $this->params['response'] = Yii::$app->IEXTradingApi->getStockNews($params['ticker'], $params['items']);
         return $this->render('stockNewsView', ['params' => $this->params]);
     }
+    
 }

@@ -24,4 +24,5 @@ class AlertMessages extends Widget
     {
         return $this->render('alertMessagesView', array('params'=>$this->params));
     }
+
 }

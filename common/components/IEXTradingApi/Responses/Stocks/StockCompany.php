@@ -43,7 +43,6 @@ class StockCompany extends IEXTradingApiResponse
      * @static Returns the issue type of the company
      * 
      * @param string $type The type of the issue
-     *
      * @return string|null The issue type or null if does not exist
      */
     public static function getIssueType(?string $type): ?string
