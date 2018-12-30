@@ -4,8 +4,8 @@ use common\helpers\VariousHelper;
 use common\components\IEXTradingApi\Responses\Stocks\StockList;
 ?>
 
-<div class="markets">
-	<h1 class="header-3 stats-recent__header"><?= $params['header']; ?></h1>
+<div class="stock-list">
+	<h1 class="header-3 stock-list__header"><?= $params['header']; ?></h1>
 <?php if (!empty($params['response'])): ?>
 	<table class="table table-responsive table-striped table-bordered table-hover">
 		<tr>
@@ -28,6 +28,6 @@ use common\components\IEXTradingApi\Responses\Stocks\StockList;
 	<?php endforeach; ?>
 	</table>
 <?php else: ?>
-	<p>Currently there are no available recents stats info.</p>
+	<p>Currently there are no available recents Stocks Lists info.</p>
 <?php endif; ?>
 </div>

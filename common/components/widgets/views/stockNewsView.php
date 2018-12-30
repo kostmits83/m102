@@ -17,6 +17,6 @@ use common\helpers\VariousHelper;
 	</div>
 	<?php endforeach; ?>
 <?php else: ?>
-	<p>Current there are no available stock news.</p>
+	<p>Current there are no available Stock News.</p>
 <?php endif; ?>
 </div>
