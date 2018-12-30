@@ -475,7 +475,7 @@ class IEXTradingApi extends Component
      * @param int $lastItems The number of last items to get for the news type
      * @return array|null The logo for the specific ticker or null if this does not exist
      */
-    public function getStockMarketBatch(array $symbols, array $types, string $range = '1m', $lastItems = 5)
+    public function getStockMarketBatch(array $symbols, array $types, string $range = '1m', $lastItems = 5): array
     {
         $urlParams = [
             'symbols' => implode(',', $symbols),
