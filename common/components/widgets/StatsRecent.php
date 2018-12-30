@@ -2,10 +2,8 @@
 namespace common\components\widgets;
 
 use Yii;
-
 use yii\base\Widget;
 use yii\helpers\Html;
-
 use yii\helpers\Url;
 
 class StatsRecent extends Widget
@@ -22,4 +20,5 @@ class StatsRecent extends Widget
         $this->params['response'] = Yii::$app->IEXTradingApi->getStatsRecent();
         return $this->render('statsRecentView', ['params' => $this->params]);
     }
+    
 }

@@ -71,9 +71,7 @@ class IEXTradingApi extends Component
     // This call returns an array of symbols IEX supports for trading. This list is updated daily as of 7:45 a.m. ET
     const ENDPOINT_REFERENCE_DATA = 'ref-data';
 
-    // Company logo
     const ENDPOINT_STOCK_LOGO = 'logo';
-    
     const ENDPOINT_STOCK_PRICE = 'price';
     const ENDPOINT_STOCK_QUOTE = 'quote';
     const ENDPOINT_STOCK_COMPANY = 'company';
@@ -112,7 +110,9 @@ class IEXTradingApi extends Component
     /**
      * Component constructor
      *
-     * @param $response
+     * @param string $apiUrl The URL of the API
+     * @param string $verify If the call needs verification or not
+     * @param string $headers The headers of the call request
      */
     public function __construct(string $apiUrl = self::API_URL, bool $verify = false, array $headers = ['Content-Type' => 'application/json'])
     {
@@ -132,10 +132,9 @@ class IEXTradingApi extends Component
     }
 
     /**
-     * Creates the base url of the call
+     * @static Creates the base url of the call
      *
      * @param string $endpoint The endpoint of the call
-     *
      * @return string The base url
      */
     protected static function getEndpointBaseUrl(string $endpoint = ''): string
@@ -144,11 +143,10 @@ class IEXTradingApi extends Component
     }
 
     /**
-     * Creates the full url of the endpoint
+     * @static Creates the full url of the endpoint
      *
      * @param array $endpointParts The parts that consists the url. The position of the given values in the array is IMPORTANT
      * @param array $urlParams The parameters of the url query
-     *
      * @return string The endpoint url
      */
     protected static function getEndpointFullUrl(array $endpointParts, array $urlParams = []): string
@@ -158,11 +156,10 @@ class IEXTradingApi extends Component
     }
 
     /**
-     * Creates the full url of the call
+     * @static Creates the full url of the call
      *
      * @param array $endpointParts The parts that consists the url
      * @param array $urlParams The parameters of the url query
-     *
      * @return string The full url
      */
     protected static function getFullUrl(array $endpointParts, array $urlParams = []): string
@@ -203,7 +200,6 @@ class IEXTradingApi extends Component
      *
      * @param string $endpoint The endpoint of the call
      * @param array $options Additional options for the call
-     *
      * @return mixed
      */
     private function get(string $endpoint = '', array $options = []): Response 
@@ -215,7 +211,6 @@ class IEXTradingApi extends Component
      * Checks if the call has been sent successfully
      *
      * @param Response|null $response The request response
-     *
      * @return bool If the response is successful or not
      */
     private function isResponseSuccessful(?Response $response): bool
@@ -227,7 +222,6 @@ class IEXTradingApi extends Component
      * Gets the response of the call
      *
      * @param Response|null $response The request response
-     *
      * @return array|null The response as an array or null if response is not available
      */
     public function getResponse(?Response $response): ?array
@@ -265,7 +259,6 @@ class IEXTradingApi extends Component
      * Returns a specific Market
      *
      * @param string $market The market to get the info
-     *
      * @return Market|null The market for the specific market id or null if this does not exist
      */
     public function getMarket(string $market): ?Market
@@ -281,7 +274,6 @@ class IEXTradingApi extends Component
      * Returns the logo for a specific ticker
      *
      * @param string $ticker The ticker to get the logo
-     *
      * @return StockLogo|null The logo for the specific ticker or null if this does not exist
      */
     public function getStockLogo(string $ticker): ?StockLogo
@@ -296,7 +288,6 @@ class IEXTradingApi extends Component
      * Returns the price for a specific ticker
      *
      * @param string $ticker The ticker to get the stock price
-     *
      * @return float|null The price for the specific ticker or null if this does not exist
      */
     public function getStockPrice(string $ticker): ?float
@@ -311,7 +302,6 @@ class IEXTradingApi extends Component
      * Returns the company for a specific ticker
      *
      * @param string $ticker The ticker to get the company info
-     *
      * @return StockCompany|null The company for the specific ticker or null if this does not exist
      */
     public function getStockCompany(string $ticker): ?StockCompany
@@ -327,7 +317,6 @@ class IEXTradingApi extends Component
      *
      * @param string $ticker The ticker to get the stock quote
      * @param string $displayPercent If set to 'true', all percentage values will be multiplied by a factor of 100 (Ex: /stock/aapl/quote?displayPercent=true)
-     *
      * @return StockQuote|null The quote for the specific ticker or null if this does not exist
      */
     public function getStockQuote(string $ticker, string $displayPercent = 'false'): ?StockQuote
@@ -382,7 +371,6 @@ class IEXTradingApi extends Component
      *
      * @param string $listType The list type to get the related quotes
      * @param string $displayPercent If set to 'true', all percentage values will be multiplied by a factor of 100 (Ex: /stock/aapl/quote?displayPercent=true)
-     *
      * @return array|null An array of quotes of the specific list or null if nothing exists
      */
     public function getStockList(string $listType, string $displayPercent = 'false'): ?array
@@ -397,7 +385,6 @@ class IEXTradingApi extends Component
      * Returns the peers for a specific ticker
      *
      * @param string $ticker The ticker to get the peers
-     *
      * @return array An array of the peers for the specific ticker or null if nothing exists
      */
     public function getStockPeers(string $ticker): array
@@ -465,7 +452,6 @@ class IEXTradingApi extends Component
      *
      * @param string $ticker The ticker to get the stock chart
      * @param string $range The range period of the stock chart
-     *
      * @return array|null The logo for the specific ticker or null if this does not exist
      */
     public function getStockChart(string $ticker, string $range = '1m'): ?array
@@ -487,7 +473,6 @@ class IEXTradingApi extends Component
      * @param array $types The types of the info
      * @param string $range The range of the data to get
      * @param int $lastItems The number of last items to get for the news type
-     *
      * @return array|null The logo for the specific ticker or null if this does not exist
      */
     public function getStockMarketBatch(array $symbols, array $types, string $range = '1m', $lastItems = 5)

@@ -59,10 +59,9 @@ class StockMarketBatch extends IEXTradingApiResponse
     }
 
     /**
-     * Returns the type from the supported types map
+     * @static Returns the type from the supported types map
      *
      * @param string $type The specific type to get its value
-     *
      * @return string|null The specific type or null if it is not supported
      */
     public static function getSupportedTypesMap(string $type = ''): ?string

@@ -26,7 +26,7 @@ abstract class IEXTradingApiResponse
     }
 
     /**
-     * Get the response model properties using reflection to get all public properties of the class which called
+     * @static Get the response model properties using reflection to get all public properties of the class which called
      *
      * @param int $option The modifier indicator option
      * @return array The properties of the reponse model
@@ -38,7 +38,7 @@ abstract class IEXTradingApiResponse
     }
 
     /**
-     * Converts a CamelCase name into space-separated words
+     * @static Converts a CamelCase name into space-separated words
      *
      * @param string $string The string to get formatted
      * @return string The formatted string
@@ -49,7 +49,7 @@ abstract class IEXTradingApiResponse
     }
 
     /**
-     * Set and gett all the public properties labels
+     * @static Set and gett all the public properties labels
      *
      * @return array The labels of the properties
      */
@@ -63,7 +63,7 @@ abstract class IEXTradingApiResponse
     }
 
     /**
-     * Get a property label by its property name
+     * @static Get a property label by its property name
      *
      * @return string The property label
      */
@@ -74,7 +74,7 @@ abstract class IEXTradingApiResponse
     }
 
     /**
-     * Returns the title for the specific property
+     * @static Returns the title for the specific property
      *
      * @param string $property The property to get the title
      * @return string The title of the property or an empty string if the property has not been set

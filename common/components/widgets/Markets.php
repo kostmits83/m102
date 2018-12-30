@@ -2,10 +2,8 @@
 namespace common\components\widgets;
 
 use Yii;
-
 use yii\base\Widget;
 use yii\helpers\Html;
-
 use yii\helpers\Url;
 
 class Markets extends Widget
@@ -22,4 +20,5 @@ class Markets extends Widget
         $this->params['response'] = Yii::$app->IEXTradingApi->getMarkets();
         return $this->render('marketsView', ['params' => $this->params]);
     }
+    
 }
