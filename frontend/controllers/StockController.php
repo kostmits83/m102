@@ -36,8 +36,7 @@ class StockController extends Controller
     public function actionCopyToDatabase($token)
     {
         if ($token !== 'mys3cr3tt0ken') {
-            echo 5;
-            return;
+            return $this->redirect(['/site/index']);
         }
         ini_set('max_execution_time', 3600);
         $response = Yii::$app->IEXTradingApi->getReferenceDataSymbols();
