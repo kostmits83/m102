@@ -1,0 +1,9 @@
+
+.table .column {
+	vertical-align: middle;
+	&--logo-url {
+		max-width: 5*$unit;
+	}
+}
+
+
