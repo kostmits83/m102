@@ -45,10 +45,12 @@ class StatsRecent extends IEXTradingApiResponse
      */
     public function __construct($response)
     {
-        parent::__construct($response);
+        if (!empty($response)) {
+            parent::__construct($response);
 
-        foreach ($response as $key => $value) {
-            $this->data[] = $value;
+            foreach ($response as $key => $value) {
+                $this->data[] = $value;
+            }
         }
     }
 
