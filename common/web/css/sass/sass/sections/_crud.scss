@@ -1,0 +1,47 @@
+
+// This file needs to override a lot of CSS so it will not be a pure BEM one
+
+$temp-color-success: #D6E9C6;
+
+.crud {
+	&-panel {
+		&__header {
+			padding: 2*$unit;
+			background-color: $temp-color-success;
+			.summary {
+				padding-top: 0.5*$unit;
+				font-size: 1.6*$unit;
+			}
+		}
+		&__summary {
+			&--footer {
+				.summary {
+					margin-top: 2*$unit;
+				}
+			}
+		}
+	}
+}
+
+.grid-search {
+	&__before {
+		margin: 1.5*$unit 0;
+		padding: 0 2*$unit;
+	}
+	.button {
+		padding: 0.7*$unit 2*$unit;
+	}
+}
+
+// This is needed to be overriden
+#body .kv-grid-container {
+	border-top: 1px solid $temp-color-success;
+	.column {
+		&__action {
+			margin-right: 0.5*$unit;
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+}

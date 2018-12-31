@@ -22,15 +22,88 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider'=> $dataProvider,
                 'filterModel' => $searchModel,
                 'options' => [],
+
+                'responsive' => true,
+                'responsiveWrap' => true,
+                'hover' => true,
+
+                'pjax' => true,
+                'pjaxSettings' => [
+                    'neverTimeout' => true,
+                ],
+                'showPageSummary' => false,
+
+                'toolbar' => [
+                    [
+                        'content' => Html::a('<i class="fas fa-redo-alt"></i> Reset Grid', ['index'], ['class' => 'btn button button--info']),
+                    ],
+                    '{export}',
+                    '{toggleData}',
+                ],
+                'export' => [
+                    'fontAwesome' => true,
+                ],
+                'toggleDataOptions' => [
+                    'minCount' => 10,
+                ],
+
+                'panelHeadingTemplate' => '<h3 class="crud-panel__title"><span class="heading-2"><i class="fas fa-th-list"></i> Stocks</span> {summary}</h3>',
+
+                'panel' => [
+                    'type' => GridView::TYPE_SUCCESS,
+                    'headingOptions' => [
+                        'class' => 'crud-panel__header',
+                    ],
+                    'showFooter' => false,
+                    'footerOptions' => ['class' => 'panel-footer crud-panel__footer'],
+                    'beforeOptions' => ['class' => 'grid-search__before'],
+                    'afterOptions' => ['class' => 'grid-search__after'],
+                ],
+
+                'panelTemplate' => '
+                    <div class="grid-search">
+                        {panelHeading}
+                        {panelBefore}
+                        {items}
+                        {panelAfter}
+                        {panelFooter}
+                    </div>',
+
+                'panelFooterTemplate' => '
+                    <div class="grid-search__pager">
+                        <div class="crud-panel__summary crud-panel__summary--footer">{summary}</div>
+                        {pager}
+                    </div>
+                    {footer}',
+
+                'pager' => [
+                    'options' => ['class' => 'pagination'],   // set class name used in ui list of pagination
+                    'prevPageLabel' => '<i class="fa fa-angle-left"></i>',   // Set the label for the "previous" page button
+                    'nextPageLabel' => '<i class="fa fa-angle-right"></i>',   // Set the label for the "next" page button
+                    'firstPageLabel' => '<i class="fa fa-angle-double-left"></i>',   // Set the label for the "first" page button
+                    'lastPageLabel' => '<i class="fa fa-angle-double-right"></i>',    // Set the label for the "last" page button
+                    'nextPageCssClass' => 'next',    // Set CSS class for the "next" page button
+                    'prevPageCssClass' => 'prev',    // Set CSS class for the "previous" page button
+                    'firstPageCssClass' => 'first',    // Set CSS class for the "first" page button
+                    'lastPageCssClass' => 'last',    // Set CSS class for the "last" page button
+                    'maxButtonCount' => 10,    // Set maximum number of page buttons that can be displayed
+                    'linkOptions' => [
+                        'class' => 'page-link',
+                    ],
+                ],
+
                 'columns' => [
                     [
                         'attribute' => 'logo_url',
+                        'label' => 'Logo',
                         'contentOptions' => ['class' => 'column column--logo-url'],
                         'headerOptions' => ['class' => 'column column--logo-url', 'style' => 'width:5%'],
                         'format' => 'raw',
                         'value' => function ($data) {
                             return Html::img($data->logo_url, ['alt' => ' ', 'class' => 'column--logo-url']);
                         },
+                        'filter' => false,
+                        'enableSorting' => false,
                     ],
                     [
                         'attribute' => 'symbol',
@@ -64,32 +137,32 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'CEO',
                         'contentOptions' => ['class' => 'column column--ceo'],
-                        'headerOptions' => ['class' => 'column column--ceo', 'style' => 'width:10%'],
+                        'headerOptions' => ['class' => 'column column--ceo', 'style' => 'width:9%'],
                     ],
                     [
                         'attribute' => 'sector',
                         'contentOptions' => ['class' => 'column column--sector'],
-                        'headerOptions' => ['class' => 'column column--sector', 'style' => 'width:10%'],
+                        'headerOptions' => ['class' => 'column column--sector', 'style' => 'width:9%'],
                     ],
                     [
                         'class' => 'kartik\grid\ActionColumn',
-                        'headerOptions' => ['class' => 'column column--actions', 'style' => 'width:10%'],
+                        'headerOptions' => ['class' => 'column column--actions', 'style' => 'width:12%'],
+                        'template' => '{stats} {favorites} {compare} {view}',
+                        'buttons' => [
+                            'stats' => function ($url, $model, $key) {
+                                return Html::a('<i class="fas fa-chart-bar"></i>', ['stats', 'id' => $model->id], ['title' => 'View Stats', 'class' => 'column__action', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
+                            },
+                            'favorites' => function ($url, $model, $key) {
+                                return Html::a('<i class="fas fa-heart"></i>', ['favorites', 'id' => $model->id], ['title' => 'Add to Favorites', 'class' => 'column__action', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
+                            },
+                            'compare' => function ($url, $model, $key) {
+                                return Html::a('<i class="fas fa-list-ol"></i>', ['compare', 'id' => $model->id], ['title' => 'Add to Compare List', 'class' => 'column__action', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
+                            },
+                            'view' => function ($url, $model, $key) {
+                                return Html::a('<i class="far fa-eye"></i>', ['view', 'id' => $model->id], ['title' => 'View', 'class' => 'column__action', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
+                            },
+                        ],    
                     ],
-
-                ],
-                'responsive' => true,
-                'responsiveWrap' => true,
-                'hover' => true,
-
-                'pjax' => true,
-                'pjaxSettings' => [
-                    'neverTimeout' => true,
-                ],
-                'panel' => [
-                    'heading' => '<h1 class="panel-title header-1"><i class="fas fa-chart-area"></i> Stocks</h1>',
-                    'type' => 'success',
-                    'before' => Html::a('<i class="fas fa-redo-alt"></i> Reset Grid', ['index'], ['class' => 'btn button button--info']),
-                    'footer' => true,
                 ],
             ]); ?>
         </div>
