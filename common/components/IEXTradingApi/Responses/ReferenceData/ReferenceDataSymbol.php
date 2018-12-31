@@ -5,8 +5,10 @@ use common\components\IEXTradingApi\Responses\IEXTradingApiResponse;
 
 class ReferenceDataSymbol extends IEXTradingApiResponse
 {
-    // The data list to be returned as a result or null on failure
-    private $data;
+    /**
+     * @static The data list to be returned as a result or null on failure
+     */
+    private static $data;
 
     /**
      * @var string Refers to the symbol represented in Nasdaq Integrated symbology (INET)
@@ -34,6 +36,11 @@ class ReferenceDataSymbol extends IEXTradingApiResponse
     public $type;
 
     /**
+     * @var string Unique ID applied by IEX to track securities through symbol changes
+     */
+    public $iex;
+
+    /**
     * @static array Refers to the common issue type
     */
     private static $issueTypes = [
@@ -53,22 +60,28 @@ class ReferenceDataSymbol extends IEXTradingApiResponse
      */
     public function __construct($response)
     {
-        if (is_array($response)) {
-            $this->data = [];
-            // Create each ReferenceDataSymbol that exists in $response
-            foreach ($response as $key => $value) {
-                $this->data[] = new self($value);
+        parent::__construct($response);
+    }
+
+    /**
+     * @static Initialize all the objects from the call request
+     * @param $response
+     * @return void
+     */
+    public static function initializeModels($response)
+    {
+        foreach ($response as $key => $value) {
+            $newResponse = [];
+            foreach ($value as $propertyName => $propertyValue) {
+                $newResponse[$propertyName] = $propertyValue;
             }
-        } else {
-            $this->data = null;
+            static::$data[] = new self($newResponse);
         }
     }
 
     /**
      * @static Returns the issue type
-     * 
      * @param string $type The type of the issue
-     *
      * @return string|null The issue type or null if does not exist
      */
     public static function getIssueType(?string $type): ?string
@@ -78,12 +91,11 @@ class ReferenceDataSymbol extends IEXTradingApiResponse
 
     /**
      * Returns the reference data symbols
-     *
      * @return array|null An array of symbols of the specific list or null if nothing exists
      */
-    public function getData(): ?array
+    public static function getData(): ?array
     {
-        return is_array($this->data) ? $this->data : null;
+        return is_array(self::$data) ? self::$data : null;
     }
 
 }

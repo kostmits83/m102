@@ -19,7 +19,7 @@ class StockSearch extends Stock
     {
         return [
             [['id', 'isEnabled'], 'integer'],
-            [['symbol', 'name', 'date', 'type', 'iexId', 'exchange', 'industry', 'website', 'description', 'CEO', 'issueType', 'sector', 'tags', 'logo_url', 'record_hash', 'created_at', 'updated_at'], 'safe'],
+            [['symbol', 'name', 'date', 'type', 'iexId', 'exchange', 'industry', 'website', 'description', 'CEO', 'issueType', 'sector', 'tags', 'logo_url', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -78,8 +78,7 @@ class StockSearch extends Stock
             ->andFilterWhere(['like', 'issueType', $this->issueType])
             ->andFilterWhere(['like', 'sector', $this->sector])
             ->andFilterWhere(['like', 'tags', $this->tags])
-            ->andFilterWhere(['like', 'logo_url', $this->logo_url])
-            ->andFilterWhere(['like', 'record_hash', $this->record_hash]);
+            ->andFilterWhere(['like', 'logo_url', $this->logo_url]);
 
         return $dataProvider;
     }
