@@ -15,12 +15,14 @@ abstract class IEXTradingApiResponse
      */
     public function __construct($response)
     {
-        static::$properties = static::getResponseProperties();
-        foreach (static::$properties as $property) {
-            $propertyName = $property->getName();
-            // Interesect with only those properties that are in the call response
-            if (array_key_exists($propertyName, $response)) {
-                $this->{$propertyName} = $response[$propertyName];
+        if (!empty($response)) {
+            static::$properties = static::getResponseProperties();
+            foreach (static::$properties as $property) {
+                $propertyName = $property->getName();
+                // Interesect with only those properties that are in the call response
+                if (array_key_exists($propertyName, $response)) {
+                    $this->{$propertyName} = $response[$propertyName];
+                }
             }
         }
     }

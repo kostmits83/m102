@@ -50,8 +50,6 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'logo_url') ?>
 
-    <?php // echo $form->field($model, 'record_hash') ?>
-
     <?php // echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>

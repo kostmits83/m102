@@ -42,7 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'sector',
             //'tags',
             //'logo_url:url',
-            //'record_hash',
             //'created_at',
             //'updated_at',
 

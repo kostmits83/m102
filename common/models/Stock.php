@@ -7,6 +7,9 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use common\models\activeQuery\StockQuery;
+use common\components\IEXTradingApi\Responses\Stocks\StockCompany;
+use common\components\IEXTradingApi\Responses\Stocks\StockLogo;
+use common\components\IEXTradingApi\Responses\ReferenceData\ReferenceDataSymbol;
 
 /**
  * This is the model class for table "stock".
@@ -27,16 +30,15 @@ use common\models\activeQuery\StockQuery;
  * @property string $sector
  * @property array $tags
  * @property string $logo_url
- * @property string $record_hash
  * @property string $created_at
  * @property string $updated_at
  */
 class Stock extends \yii\db\ActiveRecord
 {
     /**
-     * The attributes that are part of the record_hash
+     * The attributes that are part of the record hash
      */
-    public static $compareAttributes = ['symbol', 'name', 'date', 'isEnabled', 'type', 'iexId', 'exchange', 'industry', 'website', 'description', 'CEO', 'issueType', 'sector', 'logo_url', 'tags'];
+    public static $changeableAttributes = ['symbol', 'name', 'date', 'isEnabled', 'type', 'iexId', 'exchange', 'industry', 'website', 'description', 'CEO', 'issueType', 'sector', 'logo_url', 'tags'];
 
     /**
      * {@inheritdoc}
@@ -57,7 +59,7 @@ class Stock extends \yii\db\ActiveRecord
             }],
             [['symbol', 'name', 'date', 'isEnabled', 'type', 'iexId', 'exchange', 'industry', 'website', 'description', 'CEO', 'issueType', 'sector', 'logo_url'], 'filter', 'filter' => 'trim'],
 
-            [['symbol', 'name', 'date', 'isEnabled', 'type', 'iexId', 'exchange', 'industry', 'website', 'description', 'CEO', 'issueType', 'sector'], 'required'],
+            [['symbol', 'name'], 'required'],
             [['tags'], 'safe'],
             [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['isEnabled'], 'integer'],
@@ -127,20 +129,81 @@ class Stock extends \yii\db\ActiveRecord
      */
     public function getRecordHash(): string
     {
-        foreach (self::$compareAttributes as $property) {
-            $propertiesStr .= $this->{$property};
+        $propertiesStr = '';
+        foreach (self::$changeableAttributes as $property) {
+            if (is_array($this->{$property})) {
+                $propertiesStr .= implode('', $this->{$property});
+            } else {
+                $propertiesStr .= $this->{$property};
+            }
         }
         return sha1($propertiesStr);
     }
 
     /**
      * Checks if the model is different from that in the database
-     * @param Stock $targetModel The model to be compared
+     * @param string $recordHash The hash to be compared
      * @return bool If the model has been modified
      */
-    public function hasBeenModified(self $targetModel): bool
+    public function hasBeenModified(string $recordHash): bool
     {
-        return $this->getRecordHash() === $targetModel->getRecordHash() ? false : true;
+        return $this->getRecordHash() === $recordHash ? false : true;
+    }
+
+    /**
+     * Creates or updates the Stock model depending on if it is a new model or an old one that has been modified
+     * @param ReferenceDataSymbol|null $referenceDataSymbol The ReferenceDataSymbol model to get the values from
+     * @param StockCompany|null $company The StockCompany model to get the values from
+     * @param StockLogo|null $logo The StockLogo model to get the values from
+     * @return bool If the model has been modified
+     */
+    public function store(?ReferenceDataSymbol $referenceDataSymbol, ?StockCompany $company, ?StockLogo $logo): bool
+    {
+        if (empty($referenceDataSymbol) || empty($company) || empty($logo)) {
+            return false;
+        }
+        $flag = false;
+
+        // Symbol parts
+        $this->symbol = $referenceDataSymbol->symbol;
+        $this->name = $referenceDataSymbol->name;
+        $this->date = $referenceDataSymbol->date;
+        $this->isEnabled = $referenceDataSymbol->isEnabled;
+        $this->type = $referenceDataSymbol->type;
+        $this->iexId = $referenceDataSymbol->iex;
+
+        // Logo parts
+        $this->logo_url = $logo->url;
+
+        // Company parts
+        $this->exchange = $company->exchange;
+        $this->industry = $company->industry;
+        $this->website = $company->website;
+        $this->description = $company->description;
+        $this->CEO = $company->CEO;
+        $this->issueType = $company->issueType;
+        $this->sector = $company->sector;
+        $this->tags = $company->tags;
+
+        // Find the stock with this symbol
+        $currentModel = Stock::findOne(['symbol' => $referenceDataSymbol->symbol]);
+
+        // If the specific stock exists
+        if ($currentModel) {
+            // If the specific stock has been modified then update the current model
+            if ($this->hasBeenModified($currentModel->getRecordHash())) {
+                // Copy all the changeable attributes to current model
+                foreach (self::$changeableAttributes as $property) {
+                    $currentModel->{$property} = $this->{$property};
+                }
+                $flag = $currentModel->save();
+            }
+        } else {
+            // If the specific stock does not exist then save it
+            $flag = $this->save();
+        }
+
+        return $flag;
     }
 
 }

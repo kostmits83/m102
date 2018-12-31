@@ -181,6 +181,9 @@ class IEXTradingApi extends Component
      */
     public function makeRequest(string $method = 'get', array $endpointParts = ['/'], array $options = [])
     {
+        $options = array_merge([
+            'http_errors' => false,
+        ], $options);
         // Get the url parameters
         $urlParams = empty($options['urlParams']) ? [] : $options['urlParams'];
         try {
@@ -435,16 +438,18 @@ class IEXTradingApi extends Component
     }
 
     /**
-     * Returns the logo for a specific ticker
+     * Returns an array containing all the reference data symbols
      *
-     * @return array|null The logo for the specific ticker or null if this does not exist
+     * @return array|null The array containing the reference data symbols or null if the call is not successful
      */
     public function getReferenceDataSymbols(): ?array
     {
         $requestCall = $this->makeRequest('get', [self::ENDPOINT_REFERENCE_DATA, self::ENDPOINT_REFERENCE_DATA_SYMBOLS], []);
         $response = Yii::$app->IEXTradingApi->getResponse($requestCall);
 
-        return (new ReferenceDataSymbol($response))->getData() ?? null;
+        $models = ReferenceDataSymbol::initializeModels($response);
+
+        return ReferenceDataSymbol::getData();
     }
 
     /**
