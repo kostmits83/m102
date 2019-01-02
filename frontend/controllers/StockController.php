@@ -68,16 +68,30 @@ class StockController extends Controller
     }
 
     /**
-     * Displays a single Stock model.
+     * Displays the stats for the specific stock.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionStats($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (Yii::$app->request->isAjax) {
+            $model = $this->findModel($id);
+
+            $data = [
+                'stockLogo' => Yii::$app->IEXTradingApi->getStockLogo($model->symbol),
+                'stockPrice' => Yii::$app->IEXTradingApi->getStockPrice($model->symbol),
+                'stockCompany' => Yii::$app->IEXTradingApi->getStockCompany($model->symbol),
+                'stockQuote' => Yii::$app->IEXTradingApi->getStockQuote($model->symbol),
+                'stockPeers' => Yii::$app->IEXTradingApi->getStockPeers($model->symbol),
+                'stockChart' => Yii::$app->IEXTradingApi->getStockChart($model->symbol),
+            ];
+
+            return $this->renderAjax('_showChart', [
+                'model' => $this->findModel($id),
+                'data' => $data,
+            ]);
+        }
     }
 
     /**
