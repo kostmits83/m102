@@ -7,3 +7,70 @@
 }
 
 
+.stats {
+	margin-top: 2*$unit;
+	padding: 4*$unit 0;
+	background-color: $color-secondary;
+	&__identity {
+		text-align: right;
+	}
+	&__movement {
+		padding-left: 2*$unit;
+		border-left: 0.5*$unit solid $color-attention;
+	}
+	&__logo {
+		display: block;
+		float: right;
+	}
+	&__row {
+		margin-bottom: 3*$unit;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	&-info-element {
+		display: inline-block;
+		width: 23%;
+		margin-left: 1.5%;
+		line-height: 1;
+		font-size: 1.8*$unit;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+	&__label {
+		display: block;
+		padding: $unit 0;
+		margin-bottom: 0.5*$unit;
+		font-size: 1.4*$unit;
+		color: #666;
+		border-top: 1px solid $color-fourth;
+	}
+	&__company-info {
+		margin: 0 0 2*$unit $unit;
+		font-size: 2.2*$unit;
+		line-height: 1;
+	}
+	&__symbol, &__company-name {
+		font-weight: bold;
+	}
+	&__additional-info {
+		margin-top: 4*$unit;
+		padding: 2*$unit;
+		background-color: $color-fourth;
+		@include border-radius($border-radius-main);
+	}
+	&__peers {
+		display: inline-block;
+		margin: 0 0 0 $unit;
+		padding: 0;
+	}
+	&__peer {
+		display: inline-block;
+		margin-right: $unit;
+		list-item-style: none;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

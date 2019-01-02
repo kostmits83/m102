@@ -4,14 +4,14 @@ $(function() {
     $('[data-toggle="tooltip"]').tooltip();
 	
 	// Open links in new tab
-	$(".js-external").click(function() {
+	$(document).on('click', '.js-external', function() {
 		let target = $(this).attr('href');
 		window.open(target);
 		return false;
 	});
 	
 	// Animate the scroll duration
-	$('.scroll-to-top').click(function() {
+	$(document).on('click', '.scroll-to-top', function() {
 		$('body, html').animate({
 			scrollTop: 0
 		}, 800);

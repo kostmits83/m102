@@ -80,14 +80,13 @@ class StockController extends Controller
 
             $data = [
                 'stockLogo' => Yii::$app->IEXTradingApi->getStockLogo($model->symbol),
-                'stockPrice' => Yii::$app->IEXTradingApi->getStockPrice($model->symbol),
                 'stockCompany' => Yii::$app->IEXTradingApi->getStockCompany($model->symbol),
                 'stockQuote' => Yii::$app->IEXTradingApi->getStockQuote($model->symbol),
                 'stockPeers' => Yii::$app->IEXTradingApi->getStockPeers($model->symbol),
                 'stockChart' => Yii::$app->IEXTradingApi->getStockChart($model->symbol),
             ];
 
-            return $this->renderAjax('_showChart', [
+            return $this->renderAjax('_showStats', [
                 'model' => $this->findModel($id),
                 'data' => $data,
             ]);
