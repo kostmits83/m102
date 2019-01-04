@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use kartik\password\StrengthValidator;
+use common\models\activeQuery\UserQuery;
 
 /**
  * User model
@@ -28,6 +29,7 @@ use kartik\password\StrengthValidator;
  * @property string $password write-only password
  *
  * @property Country $country
+ * @property UserStockFavors[] $userStockFavors
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -141,7 +143,24 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getCountry()
     {
-        return $this->hasOne(Country::className(), ['id' => 'country_id']);
+        return $this->hasOne(Country::className(), ['id' => 'country_id'])->inverseOf('users');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserStockFavors()
+    {
+        return $this->hasMany(UserStockFavors::className(), ['user_id' => 'id'])->inverseOf('user');
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return UserQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new UserQuery(get_called_class());
     }
 
     /**
@@ -276,7 +295,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @param string $password
      */
-    public function setPassword($password)
+    public function setPassword($password): void
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
@@ -284,7 +303,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Generates "remember me" authentication key
      */
-    public function generateAuthKey()
+    public function generateAuthKey(): void
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
@@ -292,7 +311,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Generates new password reset token
      */
-    public function generatePasswordResetToken()
+    public function generatePasswordResetToken(): void
     {
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
@@ -300,7 +319,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Removes password reset token
      */
-    public function removePasswordResetToken()
+    public function removePasswordResetToken(): void
     {
         $this->password_reset_token = null;
     }
@@ -308,7 +327,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Sets the last_login field
      */
-    public function setLastLogin()
+    public function setLastLogin(): void
     {
         $this->last_login = date(self::LAST_LOGIN_FORMAT);
     }
@@ -317,7 +336,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Sets the last_login field
      * @return bool If profile has been saved or not
      */
-    public function saveProfile()
+    public function saveProfile(): bool
     {
         return $this->save(true, ['firstname', 'lastname', 'birthdate', 'country_id']);
     }
@@ -326,7 +345,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Changes the password to a new one
      * @return bool If password has been changed or not
      */
-    public function changePassword()
+    public function changePassword(): bool
     {
         if ($this->validate()) {
             $this->setPassword($this->newPassword);

@@ -32,6 +32,8 @@ use common\components\IEXTradingApi\Responses\ReferenceData\ReferenceDataSymbol;
  * @property string $logo_url
  * @property string $created_at
  * @property string $updated_at
+ *
+ * @property UserStockFavors[] $userStockFavors
  */
 class Stock extends \yii\db\ActiveRecord
 {
@@ -112,6 +114,14 @@ class Stock extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app/labels', 'Created At'),
             'updated_at' => Yii::t('app/labels', 'Updated At'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserStockFavors()
+    {
+        return $this->hasMany(UserStockFavors::className(), ['stock_id' => 'id'])->inverseOf('stock');
     }
 
     /**
