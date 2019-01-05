@@ -119,7 +119,8 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->registerJsFile('@commonJs/main.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
-<?php $this->registerJsFile('@commonJs//bootstrap-notify/bootstrap-notify.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
+<?php $this->registerJsFile('@commonJs/bootstrap-notify/bootstrap-notify.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
+<?php $this->registerJsFile('@commonJs/highstock/code/highstock.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 
 <?php $this->endBody() ?>
 </body>

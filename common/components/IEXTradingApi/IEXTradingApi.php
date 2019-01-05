@@ -38,6 +38,7 @@ use common\components\IEXTradingApi\Responses\ReferenceData\ReferenceDataSymbol;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\ClientException;
 use \Psr\Http\Message\ResponseInterface as Response;
+use yii\helpers\Json;
 
 /**
  * IEXTrading API Integration
@@ -438,6 +439,25 @@ class IEXTradingApi extends Component
         }
 
         return (new StockChart($response))->getData() ?? null;
+    }
+
+    /**
+     * Returns the highstock chart data for a specific ticker
+     * @param string $ticker The ticker to get the stock chart
+     * @param string $range The range period of the stock chart
+     * @return array The highstock chart data
+     */
+    public function getStockChartData(string $ticker, string $range = '1m'): array
+    {
+        $response = $this->getStockChart($ticker, $range);
+        $data = [];
+        if (!empty($response)) {
+            foreach ($response as $key => $value) {
+                $data[] = [(int)(strtotime($value['date']) . '000'), $value['close']];
+            }
+        }
+
+        return $data;
     }
 
     /**

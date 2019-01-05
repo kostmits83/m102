@@ -109,6 +109,21 @@ class StockController extends Controller
     }
 
     /**
+     * Returns the data for the chart
+     * @return mixed
+     */
+    public function actionChart()
+    {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $symbol = Yii::$app->request->post('symbol');
+            if (Stock::find()->where(['symbol' => $symbol])->one()) {
+                $data = Yii::$app->IEXTradingApi->getStockChartData($symbol, '5y');
+                return $this->asJson($data);
+            }
+        }
+    }
+
+    /**
      * Adds a stock to favorites list.
      * @return mixed
      * @throws NotFoundHttpException if the stock cannot be found
@@ -116,8 +131,8 @@ class StockController extends Controller
     public function actionAddStockToFavors()
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
-            $id = $_POST['id'];
-            $typeId = $_POST['typeId'];
+            $id = Yii::$app->request->post('id');
+            $typeId = Yii::$app->request->post('typeId');
             $stock = $this->findModel($id);
             $flag = 0;
 
