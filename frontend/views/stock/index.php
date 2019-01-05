@@ -152,7 +152,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'template' => '{stats} {favorites} {compare}',
                             'buttons' => [
                                 'stats' => function ($url, $model, $key) {
-                                    return Html::a('<i class="fas fa-chart-bar"></i>', ['#'], ['title' => 'View Stats', 'class' => 'column__action js-show-chart', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id]);
+                                    return Html::a('<i class="fas fa-chart-bar"></i>', ['#'], ['title' => 'View Stats', 'class' => 'column__action js-show-chart', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-symbol' => $model->symbol]);
                                 },
                                 'favorites' => function ($url, $model, $key) {
                                     return Html::a('<i class="fas fa-heart"></i>', ['#'], ['title' => 'Add to Favorites', 'class' => 'column__action js-add-stock-to-favors', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-type_id' => UserStockFavors::FAVOR_FAVORITE]);
@@ -169,8 +169,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-<div class="stock-details">
-    
-</div>
+<div class="stock-details mb-4"></div>
+<div class="js-highstock"></div>
 
 <?= Html::img('@commonImages/loader.gif', ['class' => 'loader-image']); ?>

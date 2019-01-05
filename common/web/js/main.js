@@ -1,5 +1,14 @@
 ﻿
 $(function() {
+	// Show or hide the scroll link
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 100) {
+			$('.scroll-to-top').fadeIn();
+		} else {
+			$('.scroll-to-top').fadeOut();
+		}
+	});
+	
 	// Add boostrap tooltip functionality
     $('[data-toggle="tooltip"]').tooltip();
 	
@@ -18,19 +27,11 @@ $(function() {
 		return false;
 	});
 	
-	// Show or hide the scroll link
-	$(window).scroll(function() {
-		if ($(this).scrollTop() > 100) {
-			$('.scroll-to-top').fadeIn();
-		} else {
-			$('.scroll-to-top').fadeOut();
-		}
-	});
-	
 	// Create stats view
 	$(document).on('click', '.js-show-chart', function() {
 		let self = $(this);
 		let id = self.data('id');
+		let symbol = self.data('symbol');
 		$('.loader-image').show();
 		$.ajax({
 			url: 'stats',
@@ -44,18 +45,55 @@ $(function() {
 				$('.loader-image').hide();
 			},
 			error: function(xhr) {
-				$('.loader-image').hide(); 
+				$('.loader-image').hide();
 			}
 		}).done(function() {
 			let position = $('.stats').offset().top;
 			$('body, html').animate({
 				scrollTop: position
 			}, 800);
+			
+			getChart(symbol);
+			
 		});
 		return false;
 	});
 	
-	// Add to favorites list
+	// Show highstock chart
+	function getChart(symbol) {
+		$('.loader-image').show();
+		$.ajax({
+			type: 'post',
+			data: { 
+				symbol: symbol
+			},
+			dataType: 'json',
+			url: 'chart',
+			success: function(dataStocks) {
+				$('.loader-image').hide();
+				Highcharts.stockChart('js-highstock', {
+					rangeSelector: {
+						selected: 1
+					},
+					title: {
+						text: symbol + ' Stock Price'
+					},
+					series: [{
+						name: symbol,
+						data: dataStocks,
+						tooltip: {
+							valueDecimals: 2
+						}
+					}]
+				});
+			},
+			error: function(xhr) {
+				$('.loader-image').hide();
+			}
+		});
+	}
+	
+	// Add to favorites and comparison lists
 	$(document).on('click', '.js-add-stock-to-favors', function() {
 		let self = $(this);
 		let id = self.data('id');
