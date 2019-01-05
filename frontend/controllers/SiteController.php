@@ -78,6 +78,16 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays stats page.
+     *
+     * @return mixed
+     */
+    public function actionStats()
+    {
+        return $this->render('stats');
+    }
+
+    /**
      * Logs in a user.
      *
      * @return mixed
@@ -131,16 +141,6 @@ class SiteController extends Controller
         return $this->render('contact', [
             'model' => $model,
         ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
     }
 
     /**

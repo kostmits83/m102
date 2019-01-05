@@ -29,7 +29,7 @@ return [
         ],
         'urlManager' => [
             'rules' => [
-                '<alias:index|signup|contact|logout|captcha|login|request-password-reset|reset-password|about>' => 'site/<alias>',
+                '<alias:index|signup|contact|logout|captcha|login|request-password-reset|reset-password|stats>' => 'site/<alias>',
             ],
         ],
         // This cannot moved to common because of console
