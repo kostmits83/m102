@@ -38,8 +38,8 @@ AppAsset::register($this);
 
     $menuItems = [
         ['label' => 'Home', 'url' => ['/'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
-        ['label' => 'About', 'url' => ['/site/about'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
         ['label' => 'Stocks', 'url' => ['/stock/index'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+        ['label' => 'Stats', 'url' => ['/stats'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
     ];
 
     if (!Yii::$app->user->isGuest) {
