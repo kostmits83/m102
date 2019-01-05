@@ -44,6 +44,7 @@ AppAsset::register($this);
 
     if (!Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Favorites', 'url' => ['/user/favorites'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+        $menuItems[] = ['label' => 'Comparison', 'url' => ['/user/comparison'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
         $menuItems[] = ['label' => 'Profile', 'url' => ['/user/profile'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
     }
 

@@ -6,6 +6,7 @@ use common\components\widgets\StockList;
 use common\components\widgets\StockSectorPerformance;
 use common\components\widgets\Markets;
 use common\components\widgets\StatsRecent;
+use common\helpers\VariousHelper;
 ?>
 
 <div class="stats">
@@ -19,7 +20,7 @@ use common\components\widgets\StatsRecent;
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-7 col-md-6">
-                        <div class="stats__movement">
+                        <div class="stats__movement stats__movement--<?= VariousHelper::getUpDown($data['stockQuote']->changePercent); ?>">
                             <h2 class="stats__company-info header-3"><span class="stats__symbol"><?= $data['stockCompany']->symbol; ?></span> | <span class="stats__company-name"><?= $data['stockCompany']->companyName; ?></span></h2>
                             <div class="stats__row">
                                 <p class="stats__price stats-info-element"><span class="stats__label">Latest Price</span><?= $data['stockQuote']->latestPrice . ' USD'; ?></p>

@@ -6,7 +6,6 @@
 	}
 }
 
-
 .stats {
 	margin-top: 2*$unit;
 	padding: 4*$unit 0;
@@ -16,7 +15,13 @@
 	}
 	&__movement {
 		padding-left: 2*$unit;
-		border-left: 0.5*$unit solid $color-attention;
+		border-left: 0.5*$unit solid $color-fourth;
+		&--success {
+			border-left-color: $color-success;
+		}
+		&--danger {
+			border-left-color: $color-attention;
+		}
 	}
 	&__logo {
 		display: block;
