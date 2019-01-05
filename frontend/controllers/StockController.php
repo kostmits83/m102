@@ -27,10 +27,10 @@ class StockController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['add-to-favorites'],
+                'only' => ['add-stock-to-favors'],
                 'rules' => [
                     [
-                        'actions' => ['add-to-favorites'],
+                        'actions' => ['add-stock-to-favors'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -114,24 +114,28 @@ class StockController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the stock cannot be found
      */
-    public function actionAddToFavorites()
+    public function actionAddStockToFavors()
     {
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             $id = $_POST['id'];
+            $typeId = $_POST['typeId'];
             $stock = $this->findModel($id);
             $flag = 0;
 
-            if (!UserStockFavors::find()->where(['user_id' => Yii::$app->user->id, 'stock_id' => $stock->id])->one()) {
+            if (!UserStockFavors::find()->where(['user_id' => Yii::$app->user->id, 'stock_id' => $stock->id, 'type_id' => $typeId])->one()
+                || !in_array($typeId, [UserStockFavors::FAVOR_FAVORITE, UserStockFavors::FAVOR_COMPARISON])
+            ) {
                 $model = new UserStockFavors();
                 $model->user_id = Yii::$app->user->id;
                 $model->stock_id = $stock->id;
-                $model->type_id = $model::FAVOR_FAVORITE;
+                $model->type_id = $typeId;
                 if ($model->save()) {
                     $flag = 1;
                 }
             } else {
                 $flag = 2;
             }
+
             if ($flag === 0) {
                 $growl = [
                     'type' => 'danger',

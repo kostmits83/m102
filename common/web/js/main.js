@@ -56,15 +56,17 @@ $(function() {
 	});
 	
 	// Add to favorites list
-	$(document).on('click', '.js-add-to-favorites', function() {
+	$(document).on('click', '.js-add-stock-to-favors', function() {
 		let self = $(this);
 		let id = self.data('id');
+		let typeId = self.data('type_id');
 		$.ajax({
-			url: 'add-to-favorites',
+			url: 'add-stock-to-favors',
 			type: 'post',
 			dataType: 'json',
 			data: { 
-				id: id
+				id: id,
+				typeId: typeId
 			},
 			cache: false,
 			success: function(response) {
