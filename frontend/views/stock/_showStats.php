@@ -8,7 +8,6 @@ use common\components\widgets\Markets;
 use common\components\widgets\StatsRecent;
 ?>
 
-
 <div class="stats">
     <div class="container-fluid">
         <div class="row">

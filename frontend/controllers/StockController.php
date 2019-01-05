@@ -12,7 +12,6 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\helpers\Html;
-use common\helpers\VariousHelper;
 
 /**
  * StockController implements the CRUD actions for Stock model.
