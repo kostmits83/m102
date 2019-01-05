@@ -92,11 +92,8 @@ return [
                     'forceTranslation' => true,
                     'fileMap' => [
                         'app' => 'app.php',
-                        'app/buttons' => 'buttons.php',
-                        'app/models' => 'models.php',
-                        'app/menu' => 'menu.php',
                         'app/labels' => 'labels.php',
-                        'app/page_titles' => 'page_titles.php',
+                        'app/messages' => 'messages.php',
                     ],
                 ],
                 'yii' => [

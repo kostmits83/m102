@@ -4,7 +4,8 @@ use kartik\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
-//use yii\grid\GridView;
+use common\helpers\VariousHelper;
+use kartik\growl\Growl;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\StockSearch */
@@ -151,13 +152,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             'template' => '{stats} {favorites} {compare}',
                             'buttons' => [
                                 'stats' => function ($url, $model, $key) {
-                                    return Html::a('<i class="fas fa-chart-bar"></i>', ['#', 'id' => $model->id], ['title' => 'View Stats', 'class' => 'column__action column__action--show-chart', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id]);
+                                    return Html::a('<i class="fas fa-chart-bar"></i>', ['#', 'id' => $model->id], ['title' => 'View Stats', 'class' => 'column__action js-show-chart', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id]);
                                 },
                                 'favorites' => function ($url, $model, $key) {
-                                    return Html::a('<i class="fas fa-heart"></i>', ['favorites', 'id' => $model->id], ['title' => 'Add to Favorites', 'class' => 'column__action', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
+                                    return Html::a('<i class="fas fa-heart"></i>', ['#', 'id' => $model->id], ['title' => 'Add to Favorites', 'class' => 'column__action js-add-to-favorites', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id]);
                                 },
                                 'compare' => function ($url, $model, $key) {
-                                    return Html::a('<i class="fas fa-list-ol"></i>', ['compare', 'id' => $model->id], ['title' => 'Add to Compare List', 'class' => 'column__action', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
+                                    return Html::a('<i class="fas fa-list-ol"></i>', ['#', 'id' => $model->id], ['title' => 'Add to Comparison List', 'class' => 'column__action js-add-to-comparison', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id]);
                                 },
                             ],    
                         ],
