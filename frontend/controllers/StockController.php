@@ -5,9 +5,14 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Stock;
 use common\models\search\StockSearch;
+use common\models\UserStockFavors;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\helpers\Json;
+use yii\helpers\Html;
+use common\helpers\VariousHelper;
 
 /**
  * StockController implements the CRUD actions for Stock model.
@@ -20,6 +25,17 @@ class StockController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['add-to-favorites'],
+                'rules' => [
+                    [
+                        'actions' => ['add-to-favorites'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ], // rules
+            ], // access
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -90,6 +106,55 @@ class StockController extends Controller
                 'model' => $this->findModel($id),
                 'data' => $data,
             ]);
+        }
+    }
+
+    /**
+     * Adds a stock to favorites list.
+     * @return mixed
+     * @throws NotFoundHttpException if the stock cannot be found
+     */
+    public function actionAddToFavorites()
+    {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $id = $_POST['id'];
+            $stock = $this->findModel($id);
+            $flag = 0;
+
+            if (!UserStockFavors::find()->where(['user_id' => Yii::$app->user->id, 'stock_id' => $stock->id])->one()) {
+                $model = new UserStockFavors();
+                $model->user_id = Yii::$app->user->id;
+                $model->stock_id = $stock->id;
+                $model->type_id = $model::FAVOR_FAVORITE;
+                if ($model->save()) {
+                    $flag = 1;
+                }
+            } else {
+                $flag = 2;
+            }
+            if ($flag === 0) {
+                $growl = [
+                    'type' => 'danger',
+                    'icon' => 'fas fa-exclamation-triangle',
+                    'title' => Yii::t('app/messages', 'important_notice'),
+                    'message' => Yii::t('app/messages', 'data_not_saved'),
+                ];
+            } elseif ($flag === 1) {
+                $growl = [
+                    'type' => 'success',
+                    'icon' => 'fas fa-check',
+                    'title' => Yii::t('app/messages', 'important_notice'),
+                    'message' => Yii::t('app/messages', 'data_saved'),
+                ];
+            } elseif ($flag === 2) {
+                $growl = [
+                    'type' => 'danger',
+                    'icon' => 'fas fa-exclamation-triangle',
+                    'title' => Yii::t('app/messages', 'important_notice'),
+                    'message' => Yii::t('app/messages', 'data_already_saved'),
+                ];
+            }
+            echo Json::encode($growl);
         }
     }
 

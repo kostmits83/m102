@@ -2,6 +2,7 @@
 namespace common\models;
 
 use Yii;
+use \yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use common\models\activeQuery\UserStockFavorsQuery;
 
@@ -18,7 +19,7 @@ use common\models\activeQuery\UserStockFavorsQuery;
  * @property User $user
  * @property Stock $stock
  */
-class UserStockFavors extends \yii\db\ActiveRecord
+class UserStockFavors extends ActiveRecord
 {
     const FAVOR_FAVORITE = 1;
     const FAVOR_COMPARISON = 2;

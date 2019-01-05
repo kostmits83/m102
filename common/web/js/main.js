@@ -28,20 +28,19 @@ $(function() {
 	});
 	
 	// Create stats view
-	$(document).on('click', '.column__action--show-chart', function() {
+	$(document).on('click', '.js-show-chart', function() {
 		let self = $(this);
 		let id = self.data('id');
-		$('.loader-image').show(); 
+		$('.loader-image').show();
 		$.ajax({
-			url: "stats",
-			type: "get",
+			url: 'stats',
+			type: 'get',
 			data: { 
 				id: id
 			},
 			cache: false,
-			success: function(data) {
-				console.log(data);
-				$('.stock-details').html(data);
+			success: function(response) {
+				$('.stock-details').html(response);
 				$('.loader-image').hide();
 			},
 			error: function(xhr) {
@@ -52,6 +51,35 @@ $(function() {
 			$('body, html').animate({
 				scrollTop: position
 			}, 800);
+		});
+		return false;
+	});
+	
+	// Add to favorites list
+	$(document).on('click', '.js-add-to-favorites', function() {
+		let self = $(this);
+		let id = self.data('id');
+		$.ajax({
+			url: 'add-to-favorites',
+			type: 'post',
+			dataType: 'json',
+			data: { 
+				id: id
+			},
+			cache: false,
+			success: function(response) {
+				$.notify({
+					icon: response.icon,
+					title: response.title,
+					message: response.message,
+				},{
+					type: response.type,
+					delay: 3500,
+					showProgressbar: false
+				});
+			},
+			error: function(xhr) {
+			}
 		});
 		return false;
 	});
