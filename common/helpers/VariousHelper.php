@@ -105,4 +105,20 @@ class VariousHelper
         ]);
     }
 
+    /**
+     * Returns the css class for the stock according to its change
+     * @param mixed $value The value of the change
+     * @return string The css class
+     */
+    public static function getUpDown($value): string
+    {
+        if ($value > 0) {
+            return 'success';
+        } elseif ($value < 0) {
+            return 'danger';
+        } else {
+            return 'default';
+        }
+    }
+
 }

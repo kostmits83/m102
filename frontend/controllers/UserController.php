@@ -24,10 +24,10 @@ class UserController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['favorites'],
+                'only' => ['favorites', 'comparison'],
                 'rules' => [
                     [
-                        'actions' => ['favorites'],
+                        'actions' => ['favorites', 'comparison'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -116,6 +116,35 @@ class UserController extends Controller
         return $this->render('favorites', [
             'stockController' => $stockController,
             'stockFavorites' => $stockFavorites,
+        ]);
+    }
+
+    /**
+     * Shows the comparison list.
+     * @return mixed
+     * @throws NotFoundHttpException if the stock cannot be found
+     */
+    public function actionComparison()
+    {
+        $comparison = UserStockFavors::find()->with('stock')->where(['user_id' => Yii::$app->user->id, 'type_id' => UserStockFavors::FAVOR_COMPARISON])->all();
+        $stockComparison = [];
+
+        if (!empty($comparison)) {
+            $stockController = new StockController('StockController', $this->module);
+            foreach ($comparison as $model) {
+                $stockComparison[] = [
+                    'stockLogo' => Yii::$app->IEXTradingApi->getStockLogo($model->stock->symbol),
+                    'stockCompany' => Yii::$app->IEXTradingApi->getStockCompany($model->stock->symbol),
+                    'stockQuote' => Yii::$app->IEXTradingApi->getStockQuote($model->stock->symbol),
+                    'stockPeers' => Yii::$app->IEXTradingApi->getStockPeers($model->stock->symbol),
+                    'stockChart' => Yii::$app->IEXTradingApi->getStockChart($model->stock->symbol),
+                ];
+            }
+        }
+
+        return $this->render('comparison', [
+            'stockController' => $stockController,
+            'stockComparison' => $stockComparison,
         ]);
     }
 
