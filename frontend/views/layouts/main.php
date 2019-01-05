@@ -35,17 +35,24 @@ AppAsset::register($this);
             'class' => 'navbar-inverse main-header',
         ],
     ]);
+
     $menuItems = [
         ['label' => 'Home', 'url' => ['/'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
-        ['label' => 'Stocks', 'url' => ['/stock/index'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
         ['label' => 'About', 'url' => ['/site/about'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
-        ['label' => 'Contact', 'url' => ['/site/contact'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+        ['label' => 'Stocks', 'url' => ['/stock/index'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
     ];
+
+    if (!Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => 'Favorites', 'url' => ['/user/favorites'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+        $menuItems[] = ['label' => 'Profile', 'url' => ['/user/profile'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+    }
+
+    $menuItems[] = ['label' => 'Contact', 'url' => ['/site/contact'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+    
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
     } else {
-        $menuItems[] = ['label' => 'Profile', 'url' => ['/user/profile'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
