@@ -3,9 +3,9 @@
 namespace common\models\activeQuery;
 
 /**
- * This is the ActiveQuery class for [[Stock]].
+ * This is the ActiveQuery class for [[\common\models\Stock]].
  *
- * @see Stock
+ * @see \common\models\Stock
  */
 class StockQuery extends \yii\db\ActiveQuery
 {

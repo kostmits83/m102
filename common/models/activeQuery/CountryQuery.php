@@ -3,9 +3,9 @@
 namespace common\models\activeQuery;
 
 /**
- * This is the ActiveQuery class for [[Country]].
+ * This is the ActiveQuery class for [[\common\models\Country]].
  *
- * @see Country
+ * @see \common\models\Country
  */
 class CountryQuery extends \yii\db\ActiveQuery
 {

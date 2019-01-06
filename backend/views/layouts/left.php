@@ -6,8 +6,8 @@ use common\models\User;
     <section class="sidebar sidebar--admin">
         <!-- Sidebar user panel -->
         <div class="user-panel">
-            <div class="admin-sidebar__avatar">
-                <?= HTML::img('/themes/project/images/logo-initials.png', ['class' => 'user-image', 'alt' => 'User Image']); ?>
+            <div>
+                <?= Html::img('@commonImages/user.png', ['alt' => 'Admin', 'class' => 'user-image admin-sidebar__avatar']); ?>
             </div>
             <div class="admin-sidebar__info">
                 <p><?= Yii::$app->session['name']; ?></p>

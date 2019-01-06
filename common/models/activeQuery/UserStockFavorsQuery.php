@@ -3,9 +3,9 @@
 namespace common\models\activeQuery;
 
 /**
- * This is the ActiveQuery class for [[UserStockFavors]].
+ * This is the ActiveQuery class for [[\common\models\UserStockFavors]].
  *
- * @see UserStockFavors
+ * @see \common\models\UserStockFavors
  */
 class UserStockFavorsQuery extends \yii\db\ActiveQuery
 {
