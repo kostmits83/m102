@@ -3,4 +3,9 @@
 	padding: $unit;
 	background-color: $color-secondary;
 	@include border-radius(0.5*$unit);
+	&--admin {
+		padding: 0;
+		background-color: transparent;
+		@include border-radius(0);
+	}
 }

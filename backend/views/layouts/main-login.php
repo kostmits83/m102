@@ -30,24 +30,13 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed201
     <?php $this->registerLinkTag(['rel' => 'shortcut icon', 'type' => 'image/x-icon', 'href' => '/favicon.ico']); ?>
     <?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '/favicon.ico']); ?>
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode(Yii::$app->name); ?></title>
+    <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body id="body" class="hold-transition skin-blue sidebar-mini">
     <?php $this->beginBody() ?>
 
     <div class="wrapper wrap">
-
-        <?= $this->render(
-            'header.php',
-            ['directoryAsset' => $directoryAsset]
-        ) ?>
-
-        <?= $this->render(
-            'left.php',
-            ['directoryAsset' => $directoryAsset]
-        )
-        ?>
 
         <?= $this->render(
             'content.php',

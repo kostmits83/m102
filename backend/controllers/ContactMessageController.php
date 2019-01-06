@@ -8,6 +8,11 @@ use common\models\search\ContactMessageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\Response;
+use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\helpers\Url;
 
 /**
  * ContactMessageController implements the CRUD actions for ContactMessage model.
@@ -20,6 +25,16 @@ class ContactMessageController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ], // rules
+            ], // access
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
