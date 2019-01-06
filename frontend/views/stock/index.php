@@ -170,6 +170,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="stock-details mb-4"></div>
-<div class="js-highstock"></div>
+<div id="js-highstock"></div>
 
 <?= Html::img('@commonImages/loader.gif', ['class' => 'loader-image']); ?>

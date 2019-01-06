@@ -38,12 +38,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sector')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'tags')->textInput() ?>
-
     <?= $form->field($model, 'logo_url')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app\labels', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app\labels', 'Save'), ['class' => 'btn button--default button']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
