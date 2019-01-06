@@ -38,6 +38,13 @@
 		}
 	}
 	// Admin
+	.admin-sidebar {
+		&__avatar {
+			margin-top: $unit;
+			max-width: 6.4*$unit;
+			max-height: 6.4*$unit;
+		}
+	}
 	.admin-navbar {
 		padding: 0;
 		border-bottom: 0 solid transparent;

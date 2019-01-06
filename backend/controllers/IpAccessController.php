@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Stock;
-use common\models\search\StockSearch;
+use common\models\IpAccess;
+use common\models\search\IpAccessSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -15,9 +15,9 @@ use yii\helpers\Json;
 use yii\helpers\Url;
 
 /**
- * StockController implements the CRUD actions for Stock model.
+ * IpAccessController implements the CRUD actions for IpAccess model.
  */
-class StockController extends Controller
+class IpAccessController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -45,12 +45,12 @@ class StockController extends Controller
     }
 
     /**
-     * Lists all Stock models.
+     * Lists all IpAccess models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StockSearch();
+        $searchModel = new IpAccessSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +60,7 @@ class StockController extends Controller
     }
 
     /**
-     * Displays a single Stock model.
+     * Displays a single IpAccess model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -73,13 +73,13 @@ class StockController extends Controller
     }
 
     /**
-     * Creates a new Stock model.
+     * Creates a new IpAccess model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Stock();
+        $model = new IpAccess();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -91,7 +91,7 @@ class StockController extends Controller
     }
 
     /**
-     * Updates an existing Stock model.
+     * Updates an existing IpAccess model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -111,7 +111,7 @@ class StockController extends Controller
     }
 
     /**
-     * Deletes an existing Stock model.
+     * Deletes an existing IpAccess model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -125,15 +125,15 @@ class StockController extends Controller
     }
 
     /**
-     * Finds the Stock model based on its primary key value.
+     * Finds the IpAccess model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Stock the loaded model
+     * @return IpAccess the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Stock::findOne($id)) !== null) {
+        if (($model = IpAccess::findOne($id)) !== null) {
             return $model;
         }
 

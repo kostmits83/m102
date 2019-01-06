@@ -6,10 +6,12 @@ use Yii;
 use common\models\Stock;
 use common\models\search\StockSearch;
 use common\models\UserStockFavors;
+use common\models\IpAccess;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\Response;
 use yii\helpers\Json;
 use yii\helpers\Html;
 
@@ -26,12 +28,18 @@ class StockController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['add-stock-to-favors'],
+                'only' => ['add-stock-to-favors', 'copy-to-database'],
                 'rules' => [
                     [
-                        'actions' => ['add-stock-to-favors'],
                         'allow' => true,
+                        'actions' => ['add-stock-to-favors'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return in_array(Yii::$app->request->userIp, IpAccess::validIps());
+                        }
                     ],
                 ], // rules
             ], // access

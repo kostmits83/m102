@@ -3,11 +3,11 @@
 namespace common\models\activeQuery;
 
 /**
- * This is the ActiveQuery class for [[\common\models\User]].
+ * This is the ActiveQuery class for [[\common\models\IpAccess]].
  *
- * @see \common\models\User
+ * @see \common\models\IpAccess
  */
-class UserQuery extends \yii\db\ActiveQuery
+class IpAccessQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class UserQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return \common\models\User[]|array
+     * @return \common\models\IpAccess[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class UserQuery extends \yii\db\ActiveQuery
 
     /**
      * {@inheritdoc}
-     * @return \common\models\User|array|null
+     * @return \common\models\IpAccess|array|null
      */
     public function one($db = null)
     {
