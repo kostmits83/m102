@@ -41,6 +41,7 @@ class UserStockFavors extends ActiveRecord
             [['user_id', 'stock_id', 'type_id'], 'required'],
             [['user_id', 'stock_id'], 'integer'],
             ['type_id', 'integer', 'min' => self::FAVOR_FAVORITE, 'max' => self::FAVOR_COMPARISON],
+            [['user_id', 'stock_id', 'type_id'], 'unique', 'targetAttribute' => ['user_id', 'stock_id', 'type_id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['stock_id'], 'exist', 'skipOnError' => true, 'targetClass' => Stock::className(), 'targetAttribute' => ['stock_id' => 'id']],
         ];
