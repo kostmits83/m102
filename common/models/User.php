@@ -28,6 +28,7 @@ use common\models\activeQuery\UserQuery;
  * @property integer $updated_at
  * @property string $password write-only password
  *
+ * @property Portfolio[] $portfolios
  * @property Country $country
  * @property UserStockFavors[] $userStockFavors
  */
@@ -136,6 +137,14 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at' => Yii::t('app/labels', 'created_at'),
             'updated_at' => Yii::t('app/labels', 'updated_at'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPortfolios()
+    {
+        return $this->hasMany(Portfolio::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 
     /**
