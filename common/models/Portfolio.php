@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
  * @property int $user_id
  * @property int $stock_id
  * @property int $shares
- * @property double $value
+ * @property double $price
  * @property string $created_at
  * @property string $updated_at
  *
@@ -36,10 +36,10 @@ class Portfolio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['stock_id', 'shares', 'value'], 'required'],
+            [['stock_id', 'shares', 'price'], 'required'],
             [['stock_id', 'shares'], 'integer'],
-            [['value', 'shares'], 'number', 'min' => 0, 'max' => 100000000],
-            [['value'], 'match', 'pattern' => '/^[0-9]{1,12}(\.[0-9]{0,2})?$/', 'message' => 'Price should have only 2 digits.'],
+            [['price', 'shares'], 'number', 'min' => 0, 'max' => 100000000],
+            [['price'], 'match', 'pattern' => '/^[0-9]{1,12}(\.[0-9]{0,2})?$/', 'message' => 'Price should have only 2 digits.'],
             [['stock_id'], 'exist', 'skipOnError' => true, 'targetClass' => Stock::className(), 'targetAttribute' => ['stock_id' => 'id']],
         ];
     }
@@ -71,7 +71,7 @@ class Portfolio extends \yii\db\ActiveRecord
             'user_id' => Yii::t('app/labels', 'User ID'),
             'stock_id' => Yii::t('app/labels', 'Stock ID'),
             'shares' => Yii::t('app/labels', 'Shares'),
-            'value' => Yii::t('app/labels', 'Value'),
+            'price' => Yii::t('app/labels', 'Price'),
             'created_at' => Yii::t('app/labels', 'Created At'),
             'updated_at' => Yii::t('app/labels', 'Updated At'),
         ];
