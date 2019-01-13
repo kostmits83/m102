@@ -8,6 +8,9 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use kartik\password\StrengthValidator;
 use common\models\activeQuery\UserQuery;
+use common\models\Stock;
+use common\models\UserStockFavors;
+use common\models\Portfolio;
 
 /**
  * User model
@@ -367,11 +370,17 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * Delete the user account and all the related data
+     * @param int $userId The user to be deleted
      * @return bool|int If account has been deleted or not
      */
-    public function deleteAccount()
+    public function deleteAccount(int $userId)
     {
         if ($this->validate()) {
+            // Delete all related data too
+            Stock::deleteAll(['user_id' => $userId]);
+            Portfolio::deleteAll(['user_id' => $userId]);
+            UserStockFavors::deleteAll(['user_id' => $userId]);
+            // Delete from user table
             return $this->delete();
         }
         return false;

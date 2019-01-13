@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\components\widgets\ModalAddToPortfolio;
+use common\components\widgets\LanguageSelector;
 
 AppAsset::register($this);
 ?>
@@ -74,6 +75,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
+    echo LanguageSelector::widget(['params' => []]);
     NavBar::end();
     ?>
 

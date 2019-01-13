@@ -1,0 +1,21 @@
+
+.language-picker {
+	position: absolute;
+	top: 3*$unit;
+	right: $unit;
+	display: inline-block;
+	@include mq(md-neg) {
+		position: relative;
+		display: block;
+		margin: 0 0 2*$unit $unit;
+	}
+	&__label {
+		display: inline-block;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+	&__input {
+		display: none;
+	}
+}

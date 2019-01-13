@@ -8,10 +8,10 @@ use common\models\search\StockSearch;
 use common\models\UserStockFavors;
 use common\models\Portfolio;
 use common\models\IpAccess;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use frontend\controllers\MyController;
 use yii\bootstrap\ActiveForm;
 use yii\web\Response;
 use yii\helpers\Json;
@@ -20,7 +20,7 @@ use yii\helpers\Html;
 /**
  * StockController implements the CRUD actions for Stock model.
  */
-class StockController extends Controller
+class StockController extends MyController
 {
     /**
      * {@inheritdoc}

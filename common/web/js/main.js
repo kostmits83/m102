@@ -245,4 +245,9 @@ $(function() {
 		$('.js-total-price-value').html(totalPrice);
 	});
 	
+	// This is to trigger language picker
+	$('#body').on('click', '.lang-picker input', function() {
+		document.forms.formLang.submit();
+	});
+	
 });

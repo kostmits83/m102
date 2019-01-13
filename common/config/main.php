@@ -1,8 +1,8 @@
 <?php
 return [
     'name' => 'TradeStock - M102',
-    'language' => 'en-US',
-    'sourceLanguage' => 'en-US',
+    'language' => 'en',
+    'sourceLanguage' => 'en',
     'bootstrap' => ['log'],
     'modules' => [
         'gridview' =>  [
