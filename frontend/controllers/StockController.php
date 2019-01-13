@@ -140,6 +140,18 @@ class StockController extends Controller
      */
     public function actionAddStockToFavors()
     {
+
+        if (Yii::$app->user->isGuest) {
+            $growl = [
+                'type' => 'danger',
+                'icon' => 'fas fa-exclamation-triangle',
+                'title' => Yii::t('app/messages', 'important_notice'),
+                'message' => Yii::t('app/messages', 'you_need_to_login_in_to_perform_this_action'),
+            ];
+            echo Json::encode($growl);
+            return;
+        }
+
         if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
             $id = Yii::$app->request->post('id');
             $typeId = Yii::$app->request->post('typeId');

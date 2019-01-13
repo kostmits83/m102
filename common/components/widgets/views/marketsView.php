@@ -15,8 +15,8 @@ use common\components\IEXTradingApi\Responses\Markets\Market;
 				<?php endforeach; ?>
 			</tr>
 		<?php foreach ($params['response'] as $key => $model): ?>
-			<tr class="<?= VariousHelper::getUpDown($model->marketPercent); ?>">
-				<td><?= $model->mic; ?></td>
+			<tr>
+				<td><?= $model->mic; ?> <?= VariousHelper::getUpDownIndicator($model->marketPercent); ?></td>
 				<td><?= VariousHelper::getEuropeanNumber($model->volume); ?></td>
 				<td><?= VariousHelper::getEuropeanNumber($model->tapeA); ?></td>
 				<td><?= VariousHelper::getEuropeanNumber($model->tapeB); ?></td>

@@ -11,8 +11,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <div class="banner banner--light">
-    	<p class="banner__header">ABOUT US</p>
-		<p class="banner__info">We are a super movivated team!</p>
+    	<p class="banner__header">StockTrade</p>
+		<p class="banner__info">News that make the <span class="bold">difference</span>!</p>
     </div>
 	<?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	    		<p>It is developed by the team of the following students: <span class="bold">Konstantinos Mitsarakis (GR)</span>, <span class="bold">Charis Vairlis (GR)</span> and <span class="bold">Dan Šilhavý (CZ)</span>.</p>
 	    		<p class="spacing-vertical-outer-main">The aim of this project is to build an API application and for that we have chosen the IEX (Investors Exchange) API solution.</p>
 	    		<div class="buttons-row">
-	    			<?= Html::a('GitHub', 'https://github.com/kostmits83/m102', ['class' => 'btn button--attention button buttons-row__button buttons-row__button--first']); ?>
+	    			<?= Html::a('GitHub', 'https://github.com/kostmits83/m102', ['class' => 'btn button--attention button buttons-row__button buttons-row__button--first js-external']); ?>
 	    			<?= Html::a('Contact', ['site/contact'], ['class' => 'btn button--default button buttons-row__button buttons-row__button--last']); ?>
 		    	</div>
 	    	</div>
@@ -45,17 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
 						<div class="team-member">
 							<?= Html::img('@commonImages/team-members/mitsarakis-konstantinos.jpg', ['alt' => 'Konstantinos Mitsarakis', 'class' => 'img-responsive team-member__image']); ?>
 							<p class="team-member__name header-3"><a class="js-external" href="https://www.linkedin.com/in/konstantinos-mitsarakis-a9768350/"><span class="team-member__link link link--state-1">Konstantinos Mitsarakis</span></a></p>
-							<p class="team-member__info">A disciplined self-motivated web developer with strong team spirit and well-rounded experience in both backend and frontend development.</p>
+							<p class="team-member__info">A disciplined self-motivated web developer with strong team spirit and well-rounded experience in both backend and frontend development. Efficient in problem-solving and able to teach myself but also learn from the surrounding environment.</p>
 						</div>
 						<div class="team-member">
 							<?= Html::img('@commonImages/team-members/vairlis-charalampos.jpg', ['alt' => 'Charalampos Vairlis', 'class' => 'img-responsive team-member__image']); ?>
 							<p class="team-member__name header-3"><a class="js-external" href="https://www.linkedin.com/in/charalabos-vairlis/"><span class="team-member__link link link--state-1">Charalampos Vairlis</span></a></p>
-							<p class="team-member__info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, assumenda, dolorem. Corrupti perspiciatis eligendi nobis repellendus et neque.</p>
+							<p class="team-member__info">A junior level full-stack web developer, with exellent ability to learn and implement new concepts of programming. Passionate about teamwork and very confident in his ability to produce.</p>
 						</div>
 						<div class="team-member">
 							<?= Html::img('@commonImages/team-members/silhavy-dan.jpg', ['alt' => 'Dan Šilhavý', 'class' => 'img-responsive team-member__image']); ?>
 							<p class="team-member__name header-3"><a class="js-external" href="https://www.linkedin.com/"><span class="team-member__link link link--state-1">Dan Šilhavý</span></a></p>
-							<p class="team-member__info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab hic harum quae officia in dolorum repudiandae assumenda eius. Quae aut nemo earum, eaque ut est?</p>
+							<p class="team-member__info">A less disciplined motivator who likes to energise people around, be it a vampire or an IT person, Dan doesn’t hold his spirit tight. He knows his JS and PHP and helped with some project management, documentation, texts and graphics.</p>
 						</div>
 					</div>
 				</div>
@@ -175,12 +175,12 @@ $this->params['breadcrumbs'][] = $this->title;
 				<div class="col-xs-12 col-sm-6 col-md-3 project-metric">
 					<span class="project-metric__icon"><i class="fas fa-code-branch"></i></span>
 					<p class="project-metric__header">Branches:</p>
-					<p class="project-metric__number">120</p>
+					<p class="project-metric__number">95</p>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-3 project-metric">
 					<span class="project-metric__icon"><i class="fas fa-code"></i></span>
 					<p class="project-metric__header">Commits:</p>
-					<p class="project-metric__number">85</p>
+					<p class="project-metric__number">173</p>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-3 project-metric">
 					<span class="project-metric__icon"><i class="fas fa-user"></i></span>
@@ -190,7 +190,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<div class="col-xs-12 col-sm-6 col-md-3 project-metric">
 					<span class="project-metric__icon"><i class="fas fa-coffee"></i></span>
 					<p class="project-metric__header">Cups of Coffee:</p>
-					<p class="project-metric__number">450</p>
+					<p class="project-metric__number">250</p>
 				</div>
 			</div>
 		</div>

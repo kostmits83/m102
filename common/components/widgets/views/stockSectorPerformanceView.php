@@ -15,9 +15,9 @@ use common\components\IEXTradingApi\Responses\Stocks\StockSectorPerformance;
 				<?php endforeach; ?>
 			</tr>
 		<?php foreach ($params['response'] as $key => $model): ?>
-			<tr  class="<?= VariousHelper::getUpDown($model['performance']); ?>">
-				<td><?= $model['name']; ?></td>
-				<td><?= VariousHelper::getEuropeanNumber($model['performance'] * 100, 3); ?></td>
+			<tr>
+				<td><?= $model['name']; ?> <?= VariousHelper::getUpDownIndicator($model['performance']); ?></td>
+				<td><?= VariousHelper::percentize($model['performance']); ?></td>
 			</tr>
 		<?php endforeach; ?>
 		</table>

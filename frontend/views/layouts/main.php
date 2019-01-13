@@ -33,20 +33,25 @@ AppAsset::register($this);
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse main-header',
+            'class' => 'navbar navbar-default navbar-fixed-top main-header',
         ],
     ]);
 
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+        ['label' => 'Home', 'url' => ['/'], 'active'=> (Yii::$app->controller->id === 'site' && Yii::$app->controller->action->id === 'index'), 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
         ['label' => 'Stocks', 'url' => ['/stock/index'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
         ['label' => 'Stats', 'url' => ['/stats'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
     ];
 
     if (!Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Portfolio', 'url' => ['/user/portfolio'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
-        $menuItems[] = ['label' => 'Favorites', 'url' => ['/user/favorites'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
-        $menuItems[] = ['label' => 'Comparison', 'url' => ['/user/comparison'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+        $menuItems[] = [
+            'label' => 'Stock Watchlist', 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',], 'url' => ['#'], 'active'=> (Yii::$app->controller->id == 'user' && in_array(Yii::$app->controller->action->id, ['favorites', 'comparison'])), 
+            'items' => [
+                ['label' => 'Favorites', 'url' => ['/user/favorites'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+                ['label' => 'Comparison', 'url' => ['/user/comparison'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+            ]
+        ];
         $menuItems[] = ['label' => 'Profile', 'url' => ['/user/profile'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
     }
 
@@ -82,7 +87,7 @@ AppAsset::register($this);
         <div class="row">
             <div class="col-md-4 page-footer__group">
                 <p class="page-footer__header header-3">MSc in Web Intelligence</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam nobis necessitatibus, neque dolor distinctio totam.</p>
+                <p>A postgraduate program that combines advanced web and Internet technologies with artificial intelligent systems.</p>
             </div>
             <div class="col-md-4 page-footer__group">
                 <p class="page-footer__header header-3">Team Members</p>

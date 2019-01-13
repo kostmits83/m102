@@ -15,16 +15,16 @@ use common\components\IEXTradingApi\Responses\Stocks\StockList;
 				<?php endforeach; ?>
 			</tr>
 		<?php foreach ($params['response'] as $key => $model): ?>
-			<tr  class="<?= VariousHelper::getUpDown($model->change); ?>">
-				<td><?= $model->symbol; ?></td>
+			<tr>
+				<td><?= $model->symbol; ?> <?= VariousHelper::getUpDownIndicator($model->changePercent); ?></td>
 				<td><?= VariousHelper::getEuropeanNumber($model->latestPrice, 4); ?></td>
 				<td><?= VariousHelper::getEuropeanNumber($model->latestVolume); ?></td>
 				<td><?= VariousHelper::getEuropeanNumber($model->previousClose, 4); ?></td>
 				<td><?= VariousHelper::getEuropeanNumber($model->change, 4); ?></td>
-				<td><?= VariousHelper::getEuropeanNumber($model->changePercent * 100, 4); ?></td>
+				<td><?= VariousHelper::percentize($model->changePercent); ?></td>
 				<td><?= VariousHelper::getEuropeanNumber($model->week52High, 4); ?></td>
 				<td><?= VariousHelper::getEuropeanNumber($model->week52Low, 4); ?></td>
-				<td><?= VariousHelper::getEuropeanNumber($model->ytdChange, 4); ?></td>
+				<td><?= VariousHelper::getEuropeanNumber($model->ytdChange * 100, 4) . '%'; ?></td>
 			</tr>
 		<?php endforeach; ?>
 		</table>

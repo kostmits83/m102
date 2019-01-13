@@ -23,28 +23,28 @@ use common\helpers\VariousHelper;
                         <div class="stats__movement stats__movement--<?= VariousHelper::getUpDown($data['stockQuote']->changePercent); ?>">
                             <h2 class="stats__company-info header-3"><span class="stats__symbol"><?= $data['stockCompany']->symbol; ?></span> | <span class="stats__company-name"><?= $data['stockCompany']->companyName; ?></span></h2>
                             <div class="stats__row">
-                                <p class="stats__price stats-info-element"><span class="stats__label">Latest Price</span><?= $data['stockQuote']->latestPrice . ' USD'; ?></p>
-                                <p class="stats__change stats-info-element"><span class="stats__label">Change</span><?= $data['stockQuote']->change; ?></p>
-                                <p class="stats__change-percent stats-info-element"><span class="stats__label">Change Percent</span><?= $data['stockQuote']->changePercent; ?></p>
+                                <p class="stats__price stats-info-element"><span class="stats__label">Latest Price</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->latestPrice) . ' USD'; ?></p>
+                                <p class="stats__change stats-info-element"><span class="stats__label">Change</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->change); ?></p>
+                                <p class="stats__change-percent stats-info-element"><span class="stats__label">Change Percent</span><?= VariousHelper::percentize($data['stockQuote']->changePercent); ?></p>
                                 <p class="stats__latest-volume stats-info-element"><span class="stats__label">Latest Volume</span><?= $data['stockQuote']->latestVolume; ?></p>
                             </div>
                             <div class="stats__row">
-                                <p class="stats__open-price stats-info-element"><span class="stats__label">Open</span><?= $data['stockQuote']->open; ?></p>
-                                <p class="stats__close-price stats-info-element"><span class="stats__label">Close</span><?= $data['stockQuote']->close; ?></p>
-                                <p class="stats__low-price stats-info-element"><span class="stats__label">Low</span><?= $data['stockQuote']->low; ?></p>
-                                <p class="stats__high-price stats-info-element"><span class="stats__label">High</span><?= $data['stockQuote']->high; ?></p>
+                                <p class="stats__open-price stats-info-element"><span class="stats__label">Open</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->open); ?></p>
+                                <p class="stats__close-price stats-info-element"><span class="stats__label">Close</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->close); ?></p>
+                                <p class="stats__low-price stats-info-element"><span class="stats__label">Low</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->low); ?></p>
+                                <p class="stats__high-price stats-info-element"><span class="stats__label">High</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->high); ?></p>
                             </div>
                             <div class="stats__row">
-                                <p class="stats__week-52-high stats-info-element"><span class="stats__label">Week 52 High</span><?= $data['stockQuote']->week52High; ?></p>
-                                <p class="stats__week-52-low stats-info-element"><span class="stats__label">Week 52 Low</span><?= $data['stockQuote']->week52Low; ?></p>
-                                <p class="stats__pe-ration stats-info-element"><span class="stats__label">PE Ration</span><?= $data['stockQuote']->peRatio; ?></p>
-                                <p class="stats__ytd-change stats-info-element"><span class="stats__label">Year Change</span><?= $data['stockQuote']->ytdChange; ?></p>
+                                <p class="stats__week-52-high stats-info-element"><span class="stats__label">Week 52 High</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->week52High); ?></p>
+                                <p class="stats__week-52-low stats-info-element"><span class="stats__label">Week 52 Low</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->week52Low); ?></p>
+                                <p class="stats__pe-ration stats-info-element"><span class="stats__label">PE Ration</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->peRatio); ?></p>
+                                <p class="stats__ytd-change stats-info-element"><span class="stats__label">Year Change</span><?= VariousHelper::percentize($data['stockQuote']->ytdChange); ?></p>
                             </div>
                             <div class="stats__row">
-                                <p class="stats__avg-total-volume stats-info-element"><span class="stats__label">AVG Total Volume</span><?= $data['stockQuote']->avgTotalVolume; ?></p>
-                                <p class="stats__iex-bid-price stats-info-element"><span class="stats__label">IEX Bid Price</span><?= $data['stockQuote']->iexBidPrice; ?></p>
-                                <p class="stats__iex-bid-size stats-info-element"><span class="stats__label">IEX Bid Size</span><?= $data['stockQuote']->iexBidSize; ?></p>
-                                <p class="stats__market-cap stats-info-element"><span class="stats__label">Market Cap</span><?= $data['stockQuote']->marketCap; ?></p>
+                                <p class="stats__avg-total-volume stats-info-element"><span class="stats__label">AVG Total Volume</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->avgTotalVolume); ?></p>
+                                <p class="stats__iex-bid-price stats-info-element"><span class="stats__label">IEX Bid Price</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->iexBidPrice); ?></p>
+                                <p class="stats__iex-bid-size stats-info-element"><span class="stats__label">IEX Bid Size</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->iexBidSize); ?></p>
+                                <p class="stats__market-cap stats-info-element"><span class="stats__label">Market Cap</span><?= VariousHelper::getEuropeanNumber($data['stockQuote']->marketCap); ?></p>
                             </div>
                         </div>
                     </div>
