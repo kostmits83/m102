@@ -11,24 +11,19 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to login:</p>
-
+    <h1 class="header-1"><?= Html::encode($this->title) ?></h1>
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-xs-5">
+            <div class="panel panel-info">
+                <p class="panel-heading mb-0">Please fill out the following fields to login:</p>
+            </div>
+            
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
                 <?= $form->field($model, 'email')->textInput([]) ?>
-
                 <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <div class="form-group text-right">
+                    <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn button--default button', 'name' => 'login-button']) ?>
                 </div>
-
             <?php ActiveForm::end(); ?>
         </div>
     </div>
