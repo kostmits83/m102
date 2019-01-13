@@ -6,11 +6,13 @@ use Yii;
 use common\models\Stock;
 use common\models\search\StockSearch;
 use common\models\UserStockFavors;
+use common\models\Portfolio;
 use common\models\IpAccess;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\bootstrap\ActiveForm;
 use yii\web\Response;
 use yii\helpers\Json;
 use yii\helpers\Html;
@@ -28,7 +30,7 @@ class StockController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['add-stock-to-favors', 'copy-to-database'],
+                'only' => ['add-stock-to-favors', 'copy-to-database', 'add-stock-to-portfolio'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -181,6 +183,57 @@ class StockController extends Controller
                 ];
             }
             echo Json::encode($growl);
+        }
+    }
+
+    /**
+     * Adds a stock to portfolio list.
+     * @param integer $stock_id The stock_id to be inserted
+     * @return mixed
+     * @throws NotFoundHttpException if the stock cannot be found
+     */
+    public function actionAddStockToPortfolio($stock_id)
+    {
+        $stock = $this->findModel($stock_id);
+
+        $model = new Portfolio();
+        $model->user_id = Yii::$app->user->id;
+        $model->stock_id = $stock_id;
+
+        if (Yii::$app->request->isAjax 
+            && $model->load(Yii::$app->request->post()) 
+            && !isset($_POST['add-stock-to-portfolio-button'])
+        ) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if (Yii::$app->request->isPost
+            && $model->load(Yii::$app->request->post())
+            && isset($_POST['add-stock-to-portfolio-button']) 
+        ) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            if ($model->save()) {
+                $growl = [
+                    'type' => 'success',
+                    'icon' => 'fas fa-check',
+                    'title' => Yii::t('app/messages', 'important_notice'),
+                    'message' => Yii::t('app/messages', 'data_saved'),
+                ];
+            } else {
+                $growl = [
+                    'type' => 'danger',
+                    'icon' => 'fas fa-exclamation-triangle',
+                    'title' => Yii::t('app/messages', 'important_notice'),
+                    'message' => Yii::t('app/messages', 'data_not_saved'),
+                ];
+            }
+            echo Json::encode($growl);
+        } else {
+            return $this->renderAjax('_add_stock_to_portfolio', [
+                'model' => $model,
+                'stock' => $stock,
+            ]);
         }
     }
 

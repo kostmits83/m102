@@ -1,0 +1,15 @@
+
+.add-stock-to-portfolio {
+	&__symbol {
+		margin-bottom: 2*$unit;
+	}
+	&__price {
+		margin-bottom: 2*$unit;
+	}
+	&__total-price {
+		margin-bottom: 2*$unit;
+		font-size: 1.8*$unit;
+		font-weight: bold;
+		text-align: right;
+	}
+}

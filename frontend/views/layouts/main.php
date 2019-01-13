@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
+use common\components\widgets\ModalAddToPortfolio;
 
 AppAsset::register($this);
 ?>
@@ -118,10 +119,13 @@ AppAsset::register($this);
     <a class="scroll-to-top" href="#top"><span class="scroll-to-top__icon"><i class="fa fa-chevron-up"></i></span></a>
 </footer>
 
-<?php $this->registerJsFile('@commonJs/main.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 <?php $this->registerJsFile('@commonJs/bootstrap-notify/bootstrap-notify.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 <?php $this->registerJsFile('@commonJs/highstock/code/highstock.js', ['depends' => [\yii\web\JqueryAsset::className()]]); ?>
 
+<?php if (!Yii::$app->user->isGuest) : ?>
+    <?= ModalAddToPortfolio::widget(['params' => []]); ?>
+<?php endif; ?>
+    
 <?php $this->endBody() ?>
 </body>
 </html>

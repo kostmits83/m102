@@ -149,8 +149,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'class' => 'kartik\grid\ActionColumn',
                             'headerOptions' => ['class' => 'column column--actions', 'style' => 'width:12%'],
-                            'template' => '{stats} {favorites} {compare}',
+                            'template' => '{add-to-portfolio} {stats} {favorites} {compare}',
                             'buttons' => [
+                                'add-to-portfolio' => function ($url, $model, $key) {
+                                    return Html::a('<i class="fas fa-dollar-sign"></i>', ['add-stock-to-portfolio', 'stock_id' => $model->id], ['title' => 'Add to Portfolio', 'class' => 'column__action js-add-stock-to-portfolio', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
+                                },
                                 'stats' => function ($url, $model, $key) {
                                     return Html::a('<i class="fas fa-chart-bar"></i>', ['#'], ['title' => 'View Stats', 'class' => 'column__action js-show-chart', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-symbol' => $model->symbol]);
                                 },
