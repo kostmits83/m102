@@ -33,7 +33,7 @@ class StockController extends MyController
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['add-stock-to-favors', 'delete-stock-from-favors', 'add-stock-to-portfolio'],
+                        'actions' => ['delete-stock-from-favors', 'add-stock-to-portfolio'],
                         'roles' => ['@'],
                     ],
                     [
@@ -45,7 +45,7 @@ class StockController extends MyController
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'stats', 'chart'],
+                        'actions' => ['index', 'stats', 'chart', 'add-stock-to-favors'],
                     ],
                 ], // rules
             ], // access
@@ -150,7 +150,7 @@ class StockController extends MyController
                 'type' => 'danger',
                 'icon' => 'fas fa-exclamation-triangle',
                 'title' => Yii::t('app/messages', 'important_notice'),
-                'message' => Yii::t('app/messages', 'you_need_to_login_in_to_perform_this_action'),
+                'message' => Yii::t('app/messages', 'you_need_to_login_to_perform_this_action'),
             ];
             echo Json::encode($growl);
             return;
