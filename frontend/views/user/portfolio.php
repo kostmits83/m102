@@ -10,7 +10,7 @@ use common\helpers\VariousHelper;
 $this->title = Yii::t('app', 'Portfolio');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-favorites">
+<div class="user-portfolio">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
@@ -27,24 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
                         <tr>
                             <th>Symbol</th>
                             <th>Name</th>
-                            <th>Shares Acquired</th>
-                            <th>Price Acquired</th>
+                            <th>Shares</th>
+                            <th>Price</th>
                             <th>Latest Price</th>
                             <th>Difference</th>
-                            <th>Difference Percent</th>
-                            <th>Year Change</th>
+                            <th>Difference %</th>
+                            <th>Initial Capital</th>
+                            <th>Profit/Loss</th>
                             <th>Date Added</th>
                         </tr>
                     <?php foreach ($stockPortfolio as $data): ?>
-                        <tr class="<?= VariousHelper::getUpDown($data['model']->price - $data['stockQuote']->latestPrice); ?>">
-                            <td><?= $data['stockCompany']->symbol; ?></td>
+                        <?php $difference = $data['model']->price - $data['stockQuote']->latestPrice; ?>
+                        <tr>
+                            <td><?= $data['stockCompany']->symbol; ?> <?= VariousHelper::getUpDownIndicator($difference); ?></td>
                             <td><?= $data['model']->stock->name; ?></td>
-                            <td><?= $data['model']->shares; ?></td>
-                            <td><?= $data['model']->price; ?></td>
-                            <td><?= $data['stockQuote']->latestPrice; ?></td>
-                            <td><?= $data['model']->price - $data['stockQuote']->latestPrice; ?></td>
-                            <td><?= number_format((($data['model']->price - $data['stockQuote']->latestPrice) / $data['stockQuote']->latestPrice) * 100, 2); ?></td>
-                            <td><?= $data['stockQuote']->ytdChange; ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['model']->shares, 0); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['model']->price); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->latestPrice); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($difference, 2); ?></td>
+                            <td><?= VariousHelper::percentize($difference / $data['stockQuote']->latestPrice); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber( ($data['model']->shares * $data['model']->price) , 2); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber( ($data['model']->shares * $data['model']->price) - ($data['model']->shares * $data['stockQuote']->latestPrice) , 2); ?></td>
                             <td><?= $data['model']->created_at; ?></td>
                         </tr>
                     <?php endforeach; ?>

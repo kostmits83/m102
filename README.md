@@ -1,6 +1,6 @@
 <h1 id="stockexchangewebapi">Stock Exchange Web API</h1>
 
-<h3 id="schoolprojectforsoftwareengineeringofwebapplicationshttpswwwteithegr">School project for Software Engineering of Web Applications | <a href="https://www.teithe.gr">Α.Τ.Ε.Ι. Θεσσαλονίκης</a></h3>
+<h3 id="iextradingapiintegrationforsoftwareengineeringofwebapplicationshttpswwwteithegr">IEXtrading API Integration for Software Engineering of Web Applications project | <a href="https://www.teithe.gr">Α.Τ.Ε.Ι. Θεσσαλονίκης</a></h3>
 
 <p><img src="https://img.shields.io/scrutinizer/build/g/filp/whoops.svg" alt="Build" />
 <img src="https://poser.pugx.org/pugx/badge-poser/license?format=flat" alt="License" /></p>
@@ -8,6 +8,8 @@
 <p><em>This project is for the graduate course in MSc. under the supervision of Dr. Michaelis Salampasis. It is developed by a team of 3: <strong>Konstantinos Mitsarakis</strong> (GR), <strong>Charis Vairlis</strong> (GR) and <strong>Dan Šilhavý</strong> (CZ).</em> </p>
 
 <p>The aim of this project is to build an API application and for that we have chosen the IEX (<a href="https://iextrading.com/developer/">Investors Exchange</a>) API solution.</p>
+
+<p>You can find the project <a href="http://www.382235420.linuxzone118.grserver.gr/m102/">online here</a>.</p>
 
 <hr />
 

@@ -26,13 +26,22 @@ p {
 	display: inline-block;
 }
 
-$class: mb-;
+$classMb: mb-;
 
 // loops through 4 times
 @for $i from 0 through 4 {
-	.#{$class}#{$i} {
+	.#{$classMb}#{$i} {
 		margin-bottom: $i * $unit;
 	}
+}
+
+.main-content {
+	// This should be the navbar min-height plus its paddings
+	margin-top: 8*$unit;
+}
+
+.site-stats, .stock-index, .user-portfolio, .user-favorites, .user-comparison {
+	padding-top: 4*$unit;
 }
 
 #modalAddStockToPortfolioLink {
@@ -55,4 +64,17 @@ $class: mb-;
 .stock-favorite {
 	position: relative;
 	margin-bottom: 4*$unit;
+}
+
+.movement-indicator {
+	display: inline-block;
+	margin-left: 0.5*$unit;
+	font-size: 1.5*$unit;
+	line-height: 1;
+	&--success {
+		color: $color-success-dark;
+	}
+	&--danger {
+		color: $color-attention;
+	}
 }

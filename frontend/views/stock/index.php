@@ -15,10 +15,10 @@ $this->title = Yii::t('app\labels', 'Stocks');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid stock-index">
     <div class="row">
         <div class="col-xs-12">
-            <div class="stock-index">
+            <div class="">
                 
                 <?= GridView::widget([
                     'dataProvider'=> $dataProvider,
@@ -152,7 +152,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'template' => '{add-to-portfolio} {stats} {favorites} {compare}',
                             'buttons' => [
                                 'add-to-portfolio' => function ($url, $model, $key) {
-                                    return Html::a('<i class="fas fa-dollar-sign"></i>', ['add-stock-to-portfolio', 'stock_id' => $model->id], ['title' => 'Add to Portfolio', 'class' => 'column__action js-add-stock-to-portfolio', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
+                                    return Yii::$app->user->isGuest ? '' : Html::a('<i class="fas fa-dollar-sign"></i>', ['add-stock-to-portfolio', 'stock_id' => $model->id], ['title' => 'Add to Portfolio', 'class' => 'column__action js-add-stock-to-portfolio', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
                                 },
                                 'stats' => function ($url, $model, $key) {
                                     return Html::a('<i class="fas fa-chart-bar"></i>', ['#'], ['title' => 'View Stats', 'class' => 'column__action js-show-chart', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-symbol' => $model->symbol]);

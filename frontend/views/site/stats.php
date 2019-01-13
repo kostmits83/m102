@@ -7,7 +7,7 @@ use common\components\widgets\StatsRecent;
 
 /* @var $this yii\web\View */
 ?>
-<div class="site-index">
+<div class="site-stats">
 	<div class="container">
     	<div class="row">
     		<div class="col-xs-12 col-lg-9">

@@ -35,6 +35,20 @@ class VariousHelper
     }
 
     /**
+     * Returns the percent of a raw pecent e.g. 0,072 becomes 7,2
+     * @param mixed $value The number being formatted
+     * @param bool $addPercentSymbol If the percent symbol is going to be concatenated
+     * @param bool $europeanFormat If the percent should be in european format
+     * @return mixed The formatted number
+     */
+    public static function percentize($value, bool $addPercentSymbol = true, bool $europeanFormat = true)
+    {
+        $number = number_format($value * 100, 2);
+        $number = $europeanFormat ? self::getEuropeanNumber($number, 2) : $number;
+        return $addPercentSymbol ? $number . '%' : $number;
+    }
+
+    /**
      * Echoes the growl flash messages
      * @return void
      */
@@ -118,6 +132,22 @@ class VariousHelper
             return 'danger';
         } else {
             return 'default';
+        }
+    }
+
+    /**
+     * Returns the indicator for the stock according to its change
+     * @param mixed $value The value of the change
+     * @return string The indicator
+     */
+    public static function getUpDownIndicator($value): string
+    {
+        if ($value > 0) {
+            return '<span class="movement-indicator movement-indicator--success"><i class="fas fa-angle-up"></i></span>';
+        } elseif ($value < 0) {
+            return '<span class="movement-indicator movement-indicator--danger"><i class="fas fa-angle-down"></i></span>';
+        } else {
+            return '<span class="movement-indicator movement-indicator--default"><i class="fas fa-minus"></i></span>';
         }
     }
 

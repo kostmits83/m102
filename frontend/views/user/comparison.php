@@ -12,7 +12,7 @@ use common\helpers\VariousHelper;
 $this->title = Yii::t('app', 'Comparison');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-favorites">
+<div class="user-comparison">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
@@ -38,30 +38,30 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>High</th>
                             <th>Week 52 High</th>
                             <th>Week 52 Low</th>
-                            <th>PE Ration</th>
+                            <th>PE Ratio</th>
                             <th>Year Change</th>
                             <th>AVG Total Volume</th>
                             <th>Market Cap</th>
                             <th> </th>
                         </tr>
                     <?php foreach ($stockComparison as $data): ?>
-                        <tr class="<?= VariousHelper::getUpDown($data['stockQuote']->change); ?> <?= VariousHelper::getStockFavorsDeleteCssClass($data['stock_id'], UserStockFavors::FAVOR_COMPARISON); ?>">
-                            <td><?= $data['stockCompany']->symbol; ?></td>
-                            <td><?= $data['stockQuote']->latestPrice; ?></td>
-                            <td><?= $data['stockQuote']->change; ?></td>
-                            <td><?= $data['stockQuote']->changePercent; ?></td>
-                            <td><?= $data['stockQuote']->latestVolume; ?></td>
-                            <td><?= $data['stockQuote']->open; ?></td>
-                            <td><?= $data['stockQuote']->close; ?></td>
-                            <td><?= $data['stockQuote']->low; ?></td>
-                            <td><?= $data['stockQuote']->high; ?></td>
-                            <td><?= $data['stockQuote']->week52High; ?></td>
-                            <td><?= $data['stockQuote']->week52Low; ?></td>
-                            <td><?= $data['stockQuote']->peRatio; ?></td>
-                            <td><?= $data['stockQuote']->ytdChange; ?></td>
-                            <td><?= $data['stockQuote']->avgTotalVolume; ?></td>
-                            <td><?= $data['stockQuote']->marketCap; ?></td>
-                            <td><a href="<?= Url::to(['stock/delete-stock-from-favors']); ?>" class="icon-delete icon-delete--comparison js-delete-stock-from-favors" data-id="<?= $data['stock_id']; ?>" data-type_id="<?= UserStockFavors::FAVOR_COMPARISON; ?>" data-toggle="tooltip" data-container="body" title="Delete from Comparison List"><i class="far fa-times-circle"></i></a></td>
+                        <tr class="<?= VariousHelper::getStockFavorsDeleteCssClass($data['stock_id'], UserStockFavors::FAVOR_COMPARISON); ?>">
+                            <td><?= $data['stockCompany']->symbol; ?> <?= VariousHelper::getUpDownIndicator($data['stockQuote']->change); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->latestPrice); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->change); ?></td>
+                            <td><?= VariousHelper::percentize($data['stockQuote']->changePercent); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->latestVolume, 0); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->open); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->close); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->low); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->high); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->week52High); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->week52Low); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->peRatio); ?></td>
+                            <td><?= VariousHelper::percentize($data['stockQuote']->ytdChange); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->avgTotalVolume, 0); ?></td>
+                            <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->marketCap, 0); ?></td>
+                            <td><a href="<?= Url::to(['stock/delete-stock-from-favors']); ?>" class="icon-delete icon-delete--comparison js-delete-stock-from-favors" data-id="<?= $data['stock_id']; ?>" data-type_id="<?= UserStockFavors::FAVOR_COMPARISON; ?>" data-toggle="tooltip" data-container="body" title="Delete from Comparison List"><i class="fas fa-times"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
                     </table>
