@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use common\helpers\VariousHelper;
@@ -35,10 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Initial Capital</th>
                             <th>Profit/Loss</th>
                             <th>Date Added</th>
+                            <th> </th>
                         </tr>
                     <?php foreach ($stockPortfolio as $data): ?>
                         <?php $difference = $data['model']->price - $data['stockQuote']->latestPrice; ?>
-                        <tr>
+                        <tr class="portfolio-<?= $data['model']->id; ?>">
                             <td><?= $data['stockCompany']->symbol; ?> <?= VariousHelper::getUpDownIndicator($difference); ?></td>
                             <td><?= $data['model']->stock->name; ?></td>
                             <td><?= VariousHelper::getEuropeanNumber($data['model']->shares, 0); ?></td>
@@ -49,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td><?= VariousHelper::getEuropeanNumber( ($data['model']->shares * $data['model']->price) , 2); ?></td>
                             <td><?= VariousHelper::getEuropeanNumber( ($data['model']->shares * $data['model']->price) - ($data['model']->shares * $data['stockQuote']->latestPrice) , 2); ?></td>
                             <td><?= $data['model']->created_at; ?></td>
+                            <td><a href="<?= Url::to(['user/delete-stock-from-portfolio']); ?>" class="icon-delete icon-delete--portfolio js-delete-stock-from-portfolio" data-id="<?= $data['model']->id; ?>" data-toggle="tooltip" data-container="body" title="<?= Yii::t('app/buttons', 'delete_from_portfolio'); ?>"><i class="fas fa-times"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
                     </table>
