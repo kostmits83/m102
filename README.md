@@ -9,7 +9,17 @@
 
 <p>The aim of this project is to build an API application and for that we have chosen the IEX (<a href="https://iextrading.com/developer/">Investors Exchange</a>) API solution.</p>
 
-<p>You can find the project <a href="http://www.382235420.linuxzone118.grserver.gr/m102/">online here</a>.</p>
+<hr />
+
+<h2 id="projecturl">Project URL</h2>
+
+<p>You can find the <a href="http://www.382235420.linuxzone118.grserver.gr/m102/">project online here</a>.</p>
+
+<hr />
+
+<h2 id="projectdocumentation">Project Documentation</h2>
+
+<p>You can find <a href="https://docs.google.com/document/d/1zoHeVy3oKuG-4UezR6bOgWElgrPEIpvrsMJgqf8iXM0/edit">project ducumentation online here</a>.</p>
 
 <hr />
 

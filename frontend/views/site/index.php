@@ -175,12 +175,12 @@ $this->params['breadcrumbs'][] = $this->title;
 				<div class="col-xs-12 col-sm-6 col-md-3 project-metric">
 					<span class="project-metric__icon"><i class="fas fa-code-branch"></i></span>
 					<p class="project-metric__header">Branches:</p>
-					<p class="project-metric__number">95</p>
+					<p class="project-metric__number">94</p>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-3 project-metric">
 					<span class="project-metric__icon"><i class="fas fa-code"></i></span>
 					<p class="project-metric__header">Commits:</p>
-					<p class="project-metric__number">173</p>
+					<p class="project-metric__number">185</p>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-3 project-metric">
 					<span class="project-metric__icon"><i class="fas fa-user"></i></span>
