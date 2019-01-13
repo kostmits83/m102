@@ -40,6 +40,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     const LAST_LOGIN_FORMAT = 'Y-m-d H:i:s';
 
+    const ADMIN_STATUS_YES = 1;
+
     // The current password field
     public $currentPassword;
 

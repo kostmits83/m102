@@ -3,6 +3,7 @@ namespace common\models;
 
 use Yii;
 use yii\base\Model;
+use common\models\User;
 
 /**
  * Login form
@@ -14,7 +15,6 @@ class LoginForm extends Model
     public $rememberMe = true;
 
     private $_user;
-
 
     /**
      * {@inheritdoc}
@@ -39,7 +39,6 @@ class LoginForm extends Model
     /**
      * Validates the password.
      * This method serves as the inline validation for password.
-     *
      * @param string $attribute the attribute currently being validated
      * @param array $params the additional name-value pairs given in the rule
      */
@@ -55,13 +54,17 @@ class LoginForm extends Model
 
     /**
      * Logs in a user using the provided email and password.
-     *
+     * @param bool $admin If the login is from frontend or backend
      * @return bool whether the user is logged in successfully
      */
-    public function login()
+    public function login(bool $admin = false)
     {
         if ($this->validate()) {
             $user = $this->getUser();
+            // if this is a backend login then the user should be an administrator
+            if ($admin && $user && $user->is_admin !== User::ADMIN_STATUS_YES) {
+                return false;
+            }
             $user->setLastLogin();
             $user->save();
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
@@ -72,7 +75,6 @@ class LoginForm extends Model
 
     /**
      * Finds user by [[email]]
-     *
      * @return User|null
      */
     protected function getUser()
