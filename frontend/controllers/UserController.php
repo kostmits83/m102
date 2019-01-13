@@ -11,6 +11,7 @@ use yii\filters\AccessControl;
 use common\models\UserStockFavors;
 use common\models\Portfolio;
 use frontend\controllers\StockController;
+use yii\helpers\Json;
 
 /**
  * UserController implements the CRUD actions for ContactMessage model.
@@ -27,7 +28,7 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['favorites', 'comparison', 'portfolio'],
+                        'actions' => ['favorites', 'comparison', 'portfolio', 'delete-stock-from-portfolio'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -167,6 +168,35 @@ class UserController extends Controller
         return $this->render('comparison', [
             'stockComparison' => $stockComparison,
         ]);
+    }
+
+    /**
+     * Deletes a stock from portfolio.
+     * @return mixed
+     * @throws NotFoundHttpException if the stock cannot be found
+     */
+    public function actionDeleteStockFromPortfolio()
+    {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $id = Yii::$app->request->post('id');
+            $portfolio = Portfolio::find()->where(['user_id' => Yii::$app->user->id, 'id' => $id])->one();
+            if ($portfolio && $portfolio->delete()) {
+                $growl = [
+                    'type' => 'success',
+                    'icon' => 'fas fa-check',
+                    'title' => Yii::t('app/messages', 'important_notice'),
+                    'message' => Yii::t('app/messages', 'data_deleted'),
+                ];
+            } else {
+                $growl = [
+                    'type' => 'danger',
+                    'icon' => 'fas fa-exclamation-triangle',
+                    'title' => Yii::t('app/messages', 'important_notice'),
+                    'message' => Yii::t('app/messages', 'data_not_deleted'),
+                ];
+            }
+            echo Json::encode($growl);
+        }
     }
 
     /**
