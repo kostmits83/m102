@@ -38,3 +38,21 @@ $class: mb-;
 #modalAddStockToPortfolioLink {
 	display: none;
 }
+
+.icon-delete {
+	font-size: 2*$unit;
+	&:hover {
+		cursor: pointer;
+		@include opacity(0.75);
+	}
+	&--favorites {
+		position: absolute;
+		top: 2*$unit;
+		right: 2*$unit;
+	}
+}
+
+.stock-favorite {
+	position: relative;
+	margin-bottom: 4*$unit;
+}

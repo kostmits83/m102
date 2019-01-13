@@ -45,7 +45,6 @@ class UserController extends Controller
 
     /**
      * Updates an existing User model.
-     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -132,6 +131,7 @@ class UserController extends Controller
             $stockController = new StockController('StockController', $this->module);
             foreach ($favorites as $model) {
                 $stockFavorites[] = [
+                    'stock_id' => $model->stock_id,
                     'stockLogo' => Yii::$app->IEXTradingApi->getStockLogo($model->stock->symbol),
                     'stockCompany' => Yii::$app->IEXTradingApi->getStockCompany($model->stock->symbol),
                     'stockQuote' => Yii::$app->IEXTradingApi->getStockQuote($model->stock->symbol),
@@ -158,6 +158,7 @@ class UserController extends Controller
         if (!empty($comparison)) {
             foreach ($comparison as $model) {
                 $stockComparison[] = [
+                    'stock_id' => $model->stock_id,
                     'stockCompany' => Yii::$app->IEXTradingApi->getStockCompany($model->stock->symbol),
                     'stockQuote' => Yii::$app->IEXTradingApi->getStockQuote($model->stock->symbol),
                 ];

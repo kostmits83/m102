@@ -3,8 +3,10 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\Breadcrumbs;
+use common\models\UserStockFavors;
 use common\helpers\VariousHelper;
 
 $this->title = Yii::t('app', 'Comparison');
@@ -40,9 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Year Change</th>
                             <th>AVG Total Volume</th>
                             <th>Market Cap</th>
+                            <th> </th>
                         </tr>
                     <?php foreach ($stockComparison as $data): ?>
-                        <tr class="<?= VariousHelper::getUpDown($data['stockQuote']->change); ?>">
+                        <tr class="<?= VariousHelper::getUpDown($data['stockQuote']->change); ?> <?= VariousHelper::getStockFavorsDeleteCssClass($data['stock_id'], UserStockFavors::FAVOR_COMPARISON); ?>">
                             <td><?= $data['stockCompany']->symbol; ?></td>
                             <td><?= $data['stockQuote']->latestPrice; ?></td>
                             <td><?= $data['stockQuote']->change; ?></td>
@@ -58,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td><?= $data['stockQuote']->ytdChange; ?></td>
                             <td><?= $data['stockQuote']->avgTotalVolume; ?></td>
                             <td><?= $data['stockQuote']->marketCap; ?></td>
+                            <td><a href="<?= Url::to(['stock/delete-stock-from-favors']); ?>" class="icon-delete icon-delete--comparison js-delete-stock-from-favors" data-id="<?= $data['stock_id']; ?>" data-type_id="<?= UserStockFavors::FAVOR_COMPARISON; ?>" data-toggle="tooltip" data-container="body" title="Delete from Comparison List"><i class="far fa-times-circle"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
                     </table>

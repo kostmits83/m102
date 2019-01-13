@@ -121,4 +121,15 @@ class VariousHelper
         }
     }
 
+    /**
+     * Returns the css class for the stock according to its stock_id and type_id
+     * @param int $stockId The stock id
+     * @param int $typeId The id of the favorite or comparison type
+     * @return string The css class
+     */
+    public static function getStockFavorsDeleteCssClass(int $stockId, int $typeId): string
+    {
+        return 'stock-favors-' . $typeId . '-' . $stockId;
+    }
+
 }
