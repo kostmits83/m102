@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     'toolbar' => [
                         [
-                            'content' => Html::a('<i class="fas fa-redo-alt"></i> Reset Grid', ['index'], ['class' => 'btn button button--info']),
+                            'content' => Html::a('<i class="fas fa-redo-alt"></i> ' . Yii::t('app/buttons', 'reset_grid'), ['index'], ['class' => 'btn button button--default']),
                         ],
                         '{export}',
                         '{toggleData}',
@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns' => [
                         [
                             'attribute' => 'logo_url',
-                            'label' => 'Logo',
+                            'label' => Yii::t('app/labels', 'logo'),
                             'contentOptions' => ['class' => 'column column--logo-url'],
                             'headerOptions' => ['class' => 'column column--logo-url', 'style' => 'width:5%'],
                             'format' => 'raw',
@@ -152,16 +152,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             'template' => '{add-to-portfolio} {stats} {favorites} {compare}',
                             'buttons' => [
                                 'add-to-portfolio' => function ($url, $model, $key) {
-                                    return Yii::$app->user->isGuest ? '' : Html::a('<i class="fas fa-dollar-sign"></i>', ['add-stock-to-portfolio', 'stock_id' => $model->id], ['title' => 'Add to Portfolio', 'class' => 'column__action js-add-stock-to-portfolio', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
+                                    return Yii::$app->user->isGuest ? '' : Html::a('<i class="fas fa-dollar-sign"></i>', ['add-stock-to-portfolio', 'stock_id' => $model->id], ['title' => Yii::t('app/labels', 'add_to_portfolio'), 'class' => 'column__action js-add-stock-to-portfolio', 'data-toggle' => 'tooltip', 'data-container' => 'body']);
                                 },
                                 'stats' => function ($url, $model, $key) {
-                                    return Html::a('<i class="fas fa-chart-bar"></i>', ['#'], ['title' => 'View Stats', 'class' => 'column__action js-show-chart', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-symbol' => $model->symbol]);
+                                    return Html::a('<i class="fas fa-chart-bar"></i>', ['#'], ['title' => Yii::t('app/labels', 'view_stats'), 'class' => 'column__action js-show-chart', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-symbol' => $model->symbol]);
                                 },
                                 'favorites' => function ($url, $model, $key) {
-                                    return Html::a('<i class="fas fa-heart"></i>', ['#'], ['title' => 'Add to Favorites', 'class' => 'column__action js-add-stock-to-favors', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-type_id' => UserStockFavors::FAVOR_FAVORITE]);
+                                    return Html::a('<i class="fas fa-heart"></i>', ['#'], ['title' => Yii::t('app/labels', 'add_to_favorites'), 'class' => 'column__action js-add-stock-to-favors', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-type_id' => UserStockFavors::FAVOR_FAVORITE]);
                                 },
                                 'compare' => function ($url, $model, $key) {
-                                    return Html::a('<i class="fas fa-list-ol"></i>', ['#'], ['title' => 'Add to Comparison List', 'class' => 'column__action js-add-stock-to-favors', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-type_id' => UserStockFavors::FAVOR_COMPARISON]);
+                                    return Html::a('<i class="fas fa-list-ol"></i>', ['#'], ['title' => Yii::t('app/labels', 'add_to_comparison_list'), 'class' => 'column__action js-add-stock-to-favors', 'data-toggle' => 'tooltip', 'data-container' => 'body', 'data-id' => $model->id, 'data-type_id' => UserStockFavors::FAVOR_COMPARISON]);
                                 },
                             ],    
                         ],

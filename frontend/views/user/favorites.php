@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container-fluid">
         <?php foreach ($stockFavorites as $data): ?>
         <div class="stock-favorite <?= VariousHelper::getStockFavorsDeleteCssClass($data['stock_id'], UserStockFavors::FAVOR_FAVORITE); ?>">
-            <a href="<?= Url::to(['stock/delete-stock-from-favors']); ?>" class="icon-delete icon-delete--favorites js-delete-stock-from-favors" data-id="<?= $data['stock_id']; ?>" data-type_id="<?= UserStockFavors::FAVOR_FAVORITE; ?>" data-toggle="tooltip" data-container="body" title="Delete from Favorites"><i class="far fa-times-circle"></i></a>
+            <a href="<?= Url::to(['stock/delete-stock-from-favors']); ?>" class="icon-delete icon-delete--favorites js-delete-stock-from-favors" data-id="<?= $data['stock_id']; ?>" data-type_id="<?= UserStockFavors::FAVOR_FAVORITE; ?>" data-toggle="tooltip" data-container="body" title="<?= Yii::t('app/buttons', 'delete_from_favorites'); ?>"><i class="far fa-times-circle"></i></a>
             <?= $stockController->renderPartial('/stock/_showStats', ['data' => $data]); ?>
         </div>
         <?php endforeach; ?>

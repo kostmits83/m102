@@ -38,33 +38,33 @@ AppAsset::register($this);
     ]);
 
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/'], 'active'=> (Yii::$app->controller->id === 'site' && Yii::$app->controller->action->id === 'index'), 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
-        ['label' => 'Stocks', 'url' => ['/stock/index'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
-        ['label' => 'Stats', 'url' => ['/stats'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+        ['label' => Yii::t('app/menu', 'home'), 'url' => ['/'], 'active'=> (Yii::$app->controller->id === 'site' && Yii::$app->controller->action->id === 'index'), 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+        ['label' => Yii::t('app/menu', 'stocks'), 'url' => ['/stock/index'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+        ['label' => Yii::t('app/menu', 'stats'), 'url' => ['/stats'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
     ];
 
     if (!Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Portfolio', 'url' => ['/user/portfolio'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+        $menuItems[] = ['label' => Yii::t('app/menu', 'portfolio'), 'url' => ['/user/portfolio'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
         $menuItems[] = [
-            'label' => 'Stock Watchlist', 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',], 'url' => ['#'], 'active'=> (Yii::$app->controller->id == 'user' && in_array(Yii::$app->controller->action->id, ['favorites', 'comparison'])), 
+            'label' => Yii::t('app/menu', 'stock_watchlist'), 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',], 'url' => ['#'], 'active'=> (Yii::$app->controller->id == 'user' && in_array(Yii::$app->controller->action->id, ['favorites', 'comparison'])), 
             'items' => [
-                ['label' => 'Favorites', 'url' => ['/user/favorites'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
-                ['label' => 'Comparison', 'url' => ['/user/comparison'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+                ['label' => Yii::t('app/menu', 'favorites'), 'url' => ['/user/favorites'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
+                ['label' => Yii::t('app/menu', 'comparison'), 'url' => ['/user/comparison'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],],
             ]
         ];
-        $menuItems[] = ['label' => 'Profile', 'url' => ['/user/profile'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+        $menuItems[] = ['label' => Yii::t('app/menu', 'profile'), 'url' => ['/user/profile'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
     }
 
-    $menuItems[] = ['label' => 'Contact', 'url' => ['/site/contact'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+    $menuItems[] = ['label' => Yii::t('app/menu', 'contact'), 'url' => ['/site/contact'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
     
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+        $menuItems[] = ['label' => Yii::t('app/menu', 'login'), 'url' => ['/site/login'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
+        $menuItems[] = ['label' => Yii::t('app/menu', 'signup'), 'url' => ['/site/signup'], 'options' => ['class' => 'main-header__item'], 'linkOptions' => ['class' => 'main-header__link link link--state-1',],];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout <i class="fas fa-sign-out-alt"></i>',
+                Yii::t('app/menu', 'logout') . ' <i class="fas fa-sign-out-alt"></i>',
                 ['class' => 'btn logout button button--attention button--logout']
             )
             . Html::endForm()

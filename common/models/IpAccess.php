@@ -63,10 +63,10 @@ class IpAccess extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app/labels', 'ID'),
-            'ip' => Yii::t('app/labels', 'Ip'),
-            'created_at' => Yii::t('app/labels', 'Created At'),
-            'updated_at' => Yii::t('app/labels', 'Updated At'),
+            'id' => Yii::t('app/labels', 'id'),
+            'ip' => Yii::t('app/labels', 'ip'),
+            'created_at' => Yii::t('app/labels', 'created_at'),
+            'updated_at' => Yii::t('app/labels', 'updated_at'),
         ];
     }
 

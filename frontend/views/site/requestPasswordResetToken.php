@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php $form = ActiveForm::begin(['id' => 'form-request-password-reset']); ?>
                         <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Your Email']) ?>
                         <div class="request-password-reset-form__button">
-                            <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn button button--attention']) ?>
+                            <?= Html::submitButton(Yii::t('app/buttons', 'send'), ['class' => 'btn button button--attention']) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                 </div>

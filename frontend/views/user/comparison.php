@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td><?= VariousHelper::percentize($data['stockQuote']->ytdChange); ?></td>
                             <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->avgTotalVolume, 0); ?></td>
                             <td><?= VariousHelper::getEuropeanNumber($data['stockQuote']->marketCap, 0); ?></td>
-                            <td><a href="<?= Url::to(['stock/delete-stock-from-favors']); ?>" class="icon-delete icon-delete--comparison js-delete-stock-from-favors" data-id="<?= $data['stock_id']; ?>" data-type_id="<?= UserStockFavors::FAVOR_COMPARISON; ?>" data-toggle="tooltip" data-container="body" title="Delete from Comparison List"><i class="fas fa-times"></i></a></td>
+                            <td><a href="<?= Url::to(['stock/delete-stock-from-favors']); ?>" class="icon-delete icon-delete--comparison js-delete-stock-from-favors" data-id="<?= $data['stock_id']; ?>" data-type_id="<?= UserStockFavors::FAVOR_COMPARISON; ?>" data-toggle="tooltip" data-container="body" title="<?= Yii::t('app/buttons', 'delete_from_comparison_list'); ?>"><i class="fas fa-times"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
                     </table>

@@ -25,7 +25,6 @@ class UserController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['favorites', 'comparison'],
                 'rules' => [
                     [
                         'actions' => ['favorites', 'comparison', 'portfolio'],
@@ -57,10 +56,10 @@ class UserController extends Controller
             // This is the default scenario
             $model->load(Yii::$app->request->post());
             if ($model->saveProfile()) {
-                Yii::$app->session->setFlash('success', 'Data have been saved successfully!');
+                Yii::$app->session->setFlash('success', Yii::t('app/messages', 'data_saved'));
                 return Yii::$app->getResponse()->redirect(['user/profile']);
             } else {
-                Yii::$app->session->setFlash('danger', 'Data could not been saved. Please check your input values.');
+                Yii::$app->session->setFlash('danger', Yii::t('app/messages', 'data_not_saved_check_values'));
             }
             
         } elseif (isset($_POST['change-password-button'])) {
@@ -68,10 +67,10 @@ class UserController extends Controller
             // Load only the attributes for the specific scenario
             $model->load(Yii::$app->request->post());
             if ($model->changePassword()) {
-                Yii::$app->session->setFlash('success', 'Data have been saved successfully!');
+                Yii::$app->session->setFlash('success', Yii::t('app/messages', 'data_saved'));
                 return $this->redirect(['profile']);
             } else {
-                Yii::$app->session->setFlash('danger', 'Data could not been saved. Please check your input values.');
+                Yii::$app->session->setFlash('danger', Yii::t('app/messages', 'data_not_saved_check_values'));
             }
         } elseif (isset($_POST['delete-account-button'])) {
             $model->scenario = 'deleteAccount';
@@ -81,7 +80,7 @@ class UserController extends Controller
                 Yii::$app->user->logout();
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('danger', 'Data could not been saved. Please check your input values.');
+                Yii::$app->session->setFlash('danger', Yii::t('app/messages', 'data_not_saved_check_values'));
             }
         }
 
@@ -183,6 +182,6 @@ class UserController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('app/messages', 'page_404'));
     }
 }

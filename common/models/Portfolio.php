@@ -67,13 +67,13 @@ class Portfolio extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app/labels', 'ID'),
-            'user_id' => Yii::t('app/labels', 'User ID'),
-            'stock_id' => Yii::t('app/labels', 'Stock ID'),
-            'shares' => Yii::t('app/labels', 'Shares'),
-            'price' => Yii::t('app/labels', 'Price'),
-            'created_at' => Yii::t('app/labels', 'Created At'),
-            'updated_at' => Yii::t('app/labels', 'Updated At'),
+            'id' => Yii::t('app/labels', 'id'),
+            'user_id' => Yii::t('app/labels', 'user_id'),
+            'stock_id' => Yii::t('app/labels', 'stock_id'),
+            'shares' => Yii::t('app/labels', 'shares'),
+            'price' => Yii::t('app/labels', 'price'),
+            'created_at' => Yii::t('app/labels', 'created_at'),
+            'updated_at' => Yii::t('app/labels', 'updated_at'),
         ];
     }
 

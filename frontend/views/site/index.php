@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	    		<p class="spacing-vertical-outer-main">The aim of this project is to build an API application and for that we have chosen the IEX (Investors Exchange) API solution.</p>
 	    		<div class="buttons-row">
 	    			<?= Html::a('GitHub', 'https://github.com/kostmits83/m102', ['class' => 'btn button--attention button buttons-row__button buttons-row__button--first js-external']); ?>
-	    			<?= Html::a('Contact', ['site/contact'], ['class' => 'btn button--default button buttons-row__button buttons-row__button--last']); ?>
+	    			<?= Html::a(Yii::t('app/buttons', 'contact'), ['site/contact'], ['class' => 'btn button--default button buttons-row__button buttons-row__button--last']); ?>
 		    	</div>
 	    	</div>
 	    </div>

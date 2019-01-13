@@ -49,12 +49,12 @@ class Country extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app/labels', 'ID'),
-            'abbr' => Yii::t('app/labels', 'Abbr'),
-            'name' => Yii::t('app/labels', 'Name'),
-            'long_name' => Yii::t('app/labels', 'Long Name'),
-            'phone_code' => Yii::t('app/labels', 'Phone Code'),
-            'is_active' => Yii::t('app/labels', 'Is Active'),
+            'id' => Yii::t('app/labels', 'id'),
+            'abbr' => Yii::t('app/labels', 'abbr'),
+            'name' => Yii::t('app/labels', 'name'),
+            'long_name' => Yii::t('app/labels', 'long_name'),
+            'phone_code' => Yii::t('app/labels', 'phone_code'),
+            'is_active' => Yii::t('app/labels', 'is_active'),
         ];
     }
 
