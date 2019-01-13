@@ -85,7 +85,7 @@ class UserController extends MyController
             }
         }
 
-        return $this->render('profile', [
+        return $this->render((Yii::$app->user->id % 2 === 1) ? 'profile' : 'profileB', [
             'model' => $model,
         ]);
     }
