@@ -19,7 +19,7 @@
 
 <h2 id="projectdocumentation">Project Documentation</h2>
 
-<p>You can find <a href="https://docs.google.com/document/d/1zoHeVy3oKuG-4UezR6bOgWElgrPEIpvrsMJgqf8iXM0/edit">project ducumentation online here</a>.</p>
+<p>You can find <a href="https://docs.google.com/document/d/1zoHeVy3oKuG-4UezR6bOgWElgrPEIpvrsMJgqf8iXM0/edit">project Final ducumentation online here</a>.</p>
 
 <hr />
 
