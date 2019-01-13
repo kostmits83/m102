@@ -21,6 +21,8 @@
 
 <p>You can find <a href="https://docs.google.com/document/d/1zoHeVy3oKuG-4UezR6bOgWElgrPEIpvrsMJgqf8iXM0/edit">project Final ducumentation online here</a>.</p>
 
+<p>Also you can find the documentation file at the root of this project as documentation.pdf</p>
+
 <hr />
 
 <h3 id="tableofcontents">Table of Contents</h3>
