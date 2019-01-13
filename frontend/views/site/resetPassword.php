@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Your Password']) ?>
                         <?= $form->field($model, 'confirm_password')->passwordInput(['placeholder' => 'Retype Your Password']) ?>
                         <div class="reset-password-form__button">
-                            <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn button button--attention']) ?>
+                            <?= Html::submitButton(Yii::t('app', 'save'), ['class' => 'btn button button--attention']) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                 </div>

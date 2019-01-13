@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'rememberMe')->checkbox() ?>
                         <p>If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset'], ['class' => 'inline-block link link--state-1']) ?>.</p>
                         <div class="login-form__button">
-                            <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn button--attention button', 'name' => 'login-button']) ?>
+                            <?= Html::submitButton(Yii::t('app/buttons', 'login'), ['class' => 'btn button--attention button', 'name' => 'login-button']) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                 </div>

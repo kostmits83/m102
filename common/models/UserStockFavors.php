@@ -70,12 +70,12 @@ class UserStockFavors extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app/labels', 'ID'),
-            'user_id' => Yii::t('app/labels', 'User ID'),
-            'stock_id' => Yii::t('app/labels', 'Stock ID'),
-            'type_id' => Yii::t('app/labels', 'Type ID'),
-            'created_at' => Yii::t('app/labels', 'Created At'),
-            'updated_at' => Yii::t('app/labels', 'Updated At'),
+            'id' => Yii::t('app/labels', 'id'),
+            'user_id' => Yii::t('app/labels', 'user_id'),
+            'stock_id' => Yii::t('app/labels', 'stock_id'),
+            'type_id' => Yii::t('app/labels', 'type_id'),
+            'created_at' => Yii::t('app/labels', 'created_at'),
+            'updated_at' => Yii::t('app/labels', 'updated_at'),
         ];
     }
 

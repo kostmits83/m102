@@ -94,6 +94,8 @@ return [
                         'app' => 'app.php',
                         'app/labels' => 'labels.php',
                         'app/messages' => 'messages.php',
+                        'app/menu' => 'menu.php',
+                        'app/buttons' => 'buttons.php',
                     ],
                 ],
                 'yii' => [

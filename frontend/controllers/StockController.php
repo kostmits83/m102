@@ -30,7 +30,6 @@ class StockController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['add-stock-to-favors', 'delete-stock-from-favors', 'add-stock-to-portfolio', 'copy-to-database'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -39,9 +38,14 @@ class StockController extends Controller
                     ],
                     [
                         'allow' => true,
+                        'actions' => ['copy-to-database'],
                         'matchCallback' => function ($rule, $action) {
                             return in_array(Yii::$app->request->userIp, IpAccess::validIps());
                         }
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'stats', 'chart'],
                     ],
                 ], // rules
             ], // access
@@ -292,7 +296,7 @@ class StockController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app\labels', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('app/messages', 'page_404'));
     }
     
 }

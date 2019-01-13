@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'options' => ['class' => 'form-control', 'placeholder' => 'Write the characters of the image'],
                          ]) ?>
                         <div class="signup-form__button">
-                            <?= Html::submitButton(Yii::t('app', 'Signup'), ['class' => 'btn button button--attention', 'name' => 'signup-button']) ?>
+                            <?= Html::submitButton(Yii::t('app/buttons', 'signup'), ['class' => 'btn button button--attention', 'name' => 'signup-button']) ?>
                         </div>
                     <?php ActiveForm::end(); ?>
                 </div>
