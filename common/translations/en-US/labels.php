@@ -31,7 +31,7 @@ return [
     'isEnabled' => 'Is Enabled',
     'type' => 'Type',
     'iexId' => 'IEX ID',
-    'exchange' => 'Wxchange',
+    'exchange' => 'Exchange',
     'industry' => 'Industry',
     'website' => 'Website',
     'description' => 'Description',

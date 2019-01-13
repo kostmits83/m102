@@ -4,19 +4,19 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\User;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\UserStockFavors;
 use common\models\Portfolio;
+use frontend\controllers\MyController;
 use frontend\controllers\StockController;
 use yii\helpers\Json;
 
 /**
- * UserController implements the CRUD actions for ContactMessage model.
+ * UserController implements the CRUD actions for User model.
  */
-class UserController extends Controller
+class UserController extends MyController
 {
     /**
      * {@inheritdoc}
@@ -28,7 +28,7 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['favorites', 'comparison', 'portfolio', 'delete-stock-from-portfolio'],
+                        'actions' => ['favorites', 'comparison', 'portfolio', 'delete-stock-from-portfolio', 'profile'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -77,7 +77,7 @@ class UserController extends Controller
             $model->scenario = 'deleteAccount';
             // Load only the attributes for the specific scenario
             $model->load(Yii::$app->request->post());
-            if ($model->deleteAccount()) {
+            if ($model->deleteAccount($model->id)) {
                 Yii::$app->user->logout();
                 return $this->goHome();
             } else {
