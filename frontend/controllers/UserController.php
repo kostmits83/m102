@@ -9,6 +9,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\UserStockFavors;
+use common\models\Portfolio;
 use frontend\controllers\StockController;
 
 /**
@@ -95,6 +96,33 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the stock cannot be found
      */
+    public function actionPortfolio()
+    {
+        $portfolio = Portfolio::find()->with('stock')->where(['user_id' => Yii::$app->user->id])->orderBy('created_at DESC')->all();
+        $stockPortfolio = [];
+
+        if (!empty($portfolio)) {
+            foreach ($portfolio as $model) {
+                $timestamp = strtotime($model->created_at);
+                $model->created_at = date('d-m-Y H:i:s', $timestamp);
+                $stockPortfolio[] = [
+                    'model' => $model,
+                    'stockCompany' => Yii::$app->IEXTradingApi->getStockCompany($model->stock->symbol),
+                    'stockQuote' => Yii::$app->IEXTradingApi->getStockQuote($model->stock->symbol),
+                ];
+            }
+        }
+
+        return $this->render('portfolio', [
+            'stockPortfolio' => $stockPortfolio,
+        ]);
+    }
+
+    /**
+     * Shows the favorites list.
+     * @return mixed
+     * @throws NotFoundHttpException if the stock cannot be found
+     */
     public function actionFavorites()
     {
         $favorites = UserStockFavors::find()->with('stock')->where(['user_id' => Yii::$app->user->id, 'type_id' => UserStockFavors::FAVOR_FAVORITE])->all();
@@ -107,8 +135,6 @@ class UserController extends Controller
                     'stockLogo' => Yii::$app->IEXTradingApi->getStockLogo($model->stock->symbol),
                     'stockCompany' => Yii::$app->IEXTradingApi->getStockCompany($model->stock->symbol),
                     'stockQuote' => Yii::$app->IEXTradingApi->getStockQuote($model->stock->symbol),
-                    'stockPeers' => Yii::$app->IEXTradingApi->getStockPeers($model->stock->symbol),
-                    'stockChart' => Yii::$app->IEXTradingApi->getStockChart($model->stock->symbol),
                 ];
             }
         }
@@ -130,20 +156,15 @@ class UserController extends Controller
         $stockComparison = [];
 
         if (!empty($comparison)) {
-            $stockController = new StockController('StockController', $this->module);
             foreach ($comparison as $model) {
                 $stockComparison[] = [
-                    'stockLogo' => Yii::$app->IEXTradingApi->getStockLogo($model->stock->symbol),
                     'stockCompany' => Yii::$app->IEXTradingApi->getStockCompany($model->stock->symbol),
                     'stockQuote' => Yii::$app->IEXTradingApi->getStockQuote($model->stock->symbol),
-                    'stockPeers' => Yii::$app->IEXTradingApi->getStockPeers($model->stock->symbol),
-                    'stockChart' => Yii::$app->IEXTradingApi->getStockChart($model->stock->symbol),
                 ];
             }
         }
 
         return $this->render('comparison', [
-            'stockController' => $stockController,
             'stockComparison' => $stockComparison,
         ]);
     }

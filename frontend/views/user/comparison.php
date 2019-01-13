@@ -1,8 +1,6 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\models\SignupForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -30,12 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Symbol</th>
                             <th>Latest Price</th>
                             <th>Change</th>
-                            <th>CHange Percent</th>
+                            <th>Change Percent</th>
                             <th>Latest Volume</th>
                             <th>Open</th>
                             <th>Close</th>
                             <th>Low</th>
-                            <th>Hight</th>
+                            <th>High</th>
                             <th>Week 52 High</th>
                             <th>Week 52 Low</th>
                             <th>PE Ration</th>
