@@ -30,11 +30,11 @@ class StockController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['add-stock-to-favors', 'copy-to-database', 'add-stock-to-portfolio'],
+                'only' => ['add-stock-to-favors', 'delete-stock-from-favors', 'add-stock-to-portfolio', 'copy-to-database'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['add-stock-to-favors'],
+                        'actions' => ['add-stock-to-favors', 'delete-stock-from-favors', 'add-stock-to-portfolio'],
                         'roles' => ['@'],
                     ],
                     [
@@ -180,6 +180,36 @@ class StockController extends Controller
                     'icon' => 'fas fa-exclamation-triangle',
                     'title' => Yii::t('app/messages', 'important_notice'),
                     'message' => Yii::t('app/messages', 'data_already_saved'),
+                ];
+            }
+            echo Json::encode($growl);
+        }
+    }
+
+    /**
+     * Deletes a stock from favorites and comparison list.
+     * @return mixed
+     * @throws NotFoundHttpException if the stock cannot be found
+     */
+    public function actionDeleteStockFromFavors()
+    {
+        if (Yii::$app->request->isAjax && Yii::$app->request->isPost) {
+            $stockId = Yii::$app->request->post('id');
+            $typeId = Yii::$app->request->post('typeId');
+            $stockFavors = UserStockFavors::find()->where(['user_id' => Yii::$app->user->id, 'stock_id' => $stockId, 'type_id' => $typeId])->one();
+            if ($stockFavors && $stockFavors->delete()) {
+                $growl = [
+                    'type' => 'success',
+                    'icon' => 'fas fa-check',
+                    'title' => Yii::t('app/messages', 'important_notice'),
+                    'message' => Yii::t('app/messages', 'data_deleted'),
+                ];
+            } else {
+                $growl = [
+                    'type' => 'danger',
+                    'icon' => 'fas fa-exclamation-triangle',
+                    'title' => Yii::t('app/messages', 'important_notice'),
+                    'message' => Yii::t('app/messages', 'data_not_deleted'),
                 ];
             }
             echo Json::encode($growl);

@@ -3,8 +3,11 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\Breadcrumbs;
+use common\models\UserStockFavors;
+use common\helpers\VariousHelper;
 
 $this->title = Yii::t('app', 'Favorites');
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,7 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if (!empty($stockFavorites)): ?>
     <div class="container-fluid">
         <?php foreach ($stockFavorites as $data): ?>
-        <div class="mb-4">
+        <div class="stock-favorite <?= VariousHelper::getStockFavorsDeleteCssClass($data['stock_id'], UserStockFavors::FAVOR_FAVORITE); ?>">
+            <a href="<?= Url::to(['stock/delete-stock-from-favors']); ?>" class="icon-delete icon-delete--favorites js-delete-stock-from-favors" data-id="<?= $data['stock_id']; ?>" data-type_id="<?= UserStockFavors::FAVOR_FAVORITE; ?>" data-toggle="tooltip" data-container="body" title="Delete from Favorites"><i class="far fa-times-circle"></i></a>
             <?= $stockController->renderPartial('/stock/_showStats', ['data' => $data]); ?>
         </div>
         <?php endforeach; ?>

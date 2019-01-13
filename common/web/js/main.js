@@ -124,6 +124,38 @@ $(function() {
 		return false;
 	});
 	
+	// Delete from favorites and comparison lists
+	$(document).on('click', '.js-delete-stock-from-favors', function() {
+		var self = $(this);
+		var id = self.data('id');
+		var typeId = self.data('type_id');
+		$.ajax({
+			url: self[0].href,
+			type: 'post',
+			dataType: 'json',
+			data: { 
+				id: id,
+				typeId: typeId
+			},
+			cache: false,
+			success: function(response) {
+				$('.stock-favors-' + typeId + '-' + id).slideUp();
+				$.notify({
+					icon: response.icon,
+					title: response.title,
+					message: response.message,
+				},{
+					type: response.type,
+					delay: 3500,
+					showProgressbar: false
+				});
+			},
+			error: function(xhr) {
+			}
+		});
+		return false;
+	});
+	
 	// Open modal to add stock to portfolio list
 	$('#body').on('click', '.js-add-stock-to-portfolio', function(e) {
 		e.preventDefault();
