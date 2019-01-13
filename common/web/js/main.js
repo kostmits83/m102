@@ -124,4 +124,63 @@ $(function() {
 		return false;
 	});
 	
+	// Open modal to add stock to portfolio list
+	$('#body').on('click', '.js-add-stock-to-portfolio', function(e) {
+		e.preventDefault();
+		$('#modalAddStockToPortfolio').modal('show')
+			.find('.modal-body')
+			.load($(this).attr('href'));
+
+		return false;
+	});
+	
+	// Add stock to portfolio list
+	$('#body').on('submit', '#form-add-stock-to-portfolio', function(e) {
+		e.preventDefault();
+		let self = $(this);
+		$.ajax({
+			url: self.attr('action'),
+			type: self.attr('method'),
+			data: new FormData(self[0]),
+			mimeType: 'multipart/form-data',
+			contentType: false,
+			cache: false,
+			processData: false,
+			dataType: 'json',
+			success: function (response) {
+				$('#modalAddStockToPortfolio').modal('hide');
+				$.notify({
+					icon: response.icon,
+					title: response.title,
+					message: response.message,
+				},{
+					type: response.type,
+					delay: 3500,
+					showProgressbar: false
+				});
+			}
+		});
+		return false;
+	});
+	
+	// Update the total price
+	$('#body').on('keyup, blur', '.js-stock-add-to-portfolio-shares, .js-stock-add-to-portfolio-price', function() {
+		let shares = $('.js-stock-add-to-portfolio-shares');
+		let price = $('.js-stock-add-to-portfolio-price');
+		
+		let sharesValue = parseInt(shares.val());
+		let priceValue = parseFloat(price.val());
+		
+		if (isNaN(sharesValue) || sharesValue < 0) {
+			shares.val('');
+			sharesValue = 0;
+		}
+		if (isNaN(priceValue) || priceValue < 0) {
+			price.val('');
+			priceValue = 0;
+		}
+		let totalPrice = parseFloat(sharesValue * priceValue).toFixed(2);
+		$('.js-total-price-value').html(totalPrice);
+	});
+	
 });

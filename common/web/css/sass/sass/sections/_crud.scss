@@ -38,7 +38,7 @@ $temp-color-success: #D6E9C6;
 	border-top: 1px solid $temp-color-success;
 	.column {
 		&__action {
-			margin-right: 0.5*$unit;
+			margin-right: $unit;
 			&:last-child {
 				margin-right: 0;
 			}

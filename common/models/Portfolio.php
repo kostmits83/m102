@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "portfolio".
@@ -35,12 +36,11 @@ class Portfolio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'stock_id', 'shares', 'value'], 'required'],
-            [['user_id', 'stock_id', 'shares'], 'integer'],
+            [['stock_id', 'shares', 'value'], 'required'],
+            [['stock_id', 'shares'], 'integer'],
             [['value', 'shares'], 'number', 'min' => 0, 'max' => 100000000],
-            [['user_id', 'stock_id'], 'unique', 'targetAttribute' => ['user_id', 'stock_id']],
+            [['value'], 'match', 'pattern' => '/^[0-9]{1,12}(\.[0-9]{0,2})?$/', 'message' => 'Price should have only 2 digits.'],
             [['stock_id'], 'exist', 'skipOnError' => true, 'targetClass' => Stock::className(), 'targetAttribute' => ['stock_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 

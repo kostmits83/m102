@@ -27,7 +27,7 @@ class UserController extends Controller
                 'only' => ['favorites', 'comparison'],
                 'rules' => [
                     [
-                        'actions' => ['favorites', 'comparison'],
+                        'actions' => ['favorites', 'comparison', 'portfolio'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
