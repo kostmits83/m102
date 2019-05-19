@@ -16,8 +16,10 @@
 <p>You can find the <a href="http://www.382235420.linuxzone118.grserver.gr/m102/">project online here</a>.</p>
 
 The main folders you need to check are:
-common/components/IEXTradingApi/
-m102/common/web/css/sass/sass/
+<ul>
+    <li>common/components/IEXTradingApi/</li>
+    <li>m102/common/web/css/sass/sass/</li>
+</ul>
 
 <hr />
 
